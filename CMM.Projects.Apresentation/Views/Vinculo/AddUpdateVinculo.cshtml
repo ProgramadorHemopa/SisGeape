@@ -1,0 +1,253 @@
+﻿@model CMM.Projects.Apresentation.Models.VinculoModelView
+
+<div class="modal-header">
+    <h3 class="modal-title"><span class="fa fa-edit"></span> @ViewBag.Title</h3>
+
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+
+</div>
+@using (Html.BeginForm("AddUpdateVinculo", "Vinculo", FormMethod.Post, new { id = "formCrud" }))
+{<div class="modal-body">
+
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.VNC_ID)
+        @Html.HiddenFor(model => model.FUN_ID)
+
+
+
+        <div class="row ">
+            <div class="form-group col-md-2">
+                @Html.LabelFor(model => model.VNC_QTD, htmlAttributes: new { @class = "control-label" })
+
+                @Html.EditorFor(model => model.VNC_QTD, new { htmlAttributes = new { @class = "form-control form-control-sm", @placeholder = "" } })
+                @Html.ValidationMessageFor(model => model.VNC_QTD, "", new { @class = "text-danger" })
+
+            </div>
+
+            <div class="form-group col-md-3">
+                @Html.LabelFor(model => model.VNC_ADMISSAO, htmlAttributes: new { @class = "control-label" })
+
+                @Html.EditorFor(model => model.VNC_ADMISSAO, new { htmlAttributes = new { @class = "form-control form-control-sm", @placeholder = "" } })
+                @Html.ValidationMessageFor(model => model.VNC_ADMISSAO, "", new { @class = "text-danger" })
+
+            </div>
+
+            <div class="form-group col-md-3">
+                @Html.LabelFor(model => model.VNC_DEMISSAO, htmlAttributes: new { @class = "control-label" })
+
+                @Html.EditorFor(model => model.VNC_DEMISSAO, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                @Html.ValidationMessageFor(model => model.VNC_DEMISSAO, "", new { @class = "text-danger" })
+
+            </div>
+            <div class="form-group col-md-4">
+                @Html.LabelFor(model => model.VNCST_ID, "SITUAÇÃO", htmlAttributes: new { @class = "control-label" })
+
+                @Html.DropDownListFor(model => model.VNCST_ID, null, "Selecione", htmlAttributes: new { @class = "form-control form-control-sm" })
+                @Html.ValidationMessageFor(model => model.VNCST_ID, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+        <div class="row" id="divAposentadoria" style="display:none">
+            <div class="form-group col-md-8">
+                @Html.LabelFor(model => model.VNC_ENTRADA_APOSENT, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.VNC_ENTRADA_APOSENT, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                @Html.ValidationMessageFor(model => model.VNC_ENTRADA_APOSENT, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-md-4">
+                @{
+                    List<SelectListItem>
+                        listTipoAposent = new List<SelectListItem>
+                            ();
+                    listTipoAposent.Add(new SelectListItem { Text = "Antecipada", Value = "1" });
+                    listTipoAposent.Add(new SelectListItem { Text = "Compulsória", Value = "2" });
+                    listTipoAposent.Add(new SelectListItem { Text = "Especial", Value = "3" });
+                    listTipoAposent.Add(new SelectListItem { Text = "Invalidez", Value = "4" });
+                    listTipoAposent.Add(new SelectListItem { Text = "Vonluntária", Value = "5" });
+
+
+                }
+                @Html.LabelFor(model => model.VNC_TIPO_APOSENT, htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownListFor(model => model.VNC_TIPO_APOSENT, listTipoAposent, "-- Selecione --", htmlAttributes: new { @class = "form-control form-control-sm" })
+                @Html.ValidationMessageFor(model => model.VNC_TIPO_APOSENT, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row" id="divCessao" style="display:none">
+
+            <div class="form-group col-md-4">
+                @Html.LabelFor(model => model.VNC_DATACESSAO, htmlAttributes: new { @class = "control-label" })
+
+                @Html.EditorFor(model => model.VNC_DATACESSAO, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                @Html.ValidationMessageFor(model => model.VNC_DATACESSAO, "", new { @class = "text-danger" })
+
+            </div>
+            <div class="form-group col-md-6" id="divCessaoOrigem" style="display:none">
+                @Html.LabelFor(model => model.VNC_ORGAO_ORIGEM, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.VNC_ORGAO_ORIGEM, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                @Html.ValidationMessageFor(model => model.VNC_ORGAO_ORIGEM, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-md-6" id="divCessaoDestino" style="display:none">
+
+
+                @Html.LabelFor(model => model.VNC_ORGAO_DESTINO, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.VNC_ORGAO_DESTINO, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                @Html.ValidationMessageFor(model => model.VNC_ORGAO_DESTINO, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group col-md-2">
+                @{
+                    List<SelectListItem>
+                        listOnus = new List<SelectListItem>
+                            ();
+
+                    listOnus.Add(new SelectListItem { Text = "ORIGEM", Value = "O" });
+                    listOnus.Add(new SelectListItem { Text = "DESTINO", Value = "D" });
+
+
+                }
+                @Html.LabelFor(model => model.VNC_ONUS, htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownListFor(model => model.VNC_ONUS, listOnus, "Selecione", htmlAttributes: new { @class = "form-control form-control-sm" })
+                @Html.ValidationMessageFor(model => model.VNC_ONUS, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row ">
+            <div class="form-group col-md-4">
+                @Html.LabelFor(model => model.VNCTP_ID, "TIPO", htmlAttributes: new { @class = "control-label" })
+
+                @Html.DropDownListFor(model => model.VNCTP_ID, null, "Selecione", htmlAttributes: new { @class = "form-control form-control-sm", required = true })
+                @Html.ValidationMessageFor(model => model.VNCTP_ID, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group col-md-6">
+                @Html.LabelFor(model => model.CRG_ID, "CARGO", htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownListFor(model => model.CRG_ID, null, "Selecione", htmlAttributes: new { @class = "form-control form-control-sm" })
+                @Html.ValidationMessageFor(model => model.CRG_ID, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group col-md-2">
+                @Html.LabelFor(model => model.VNC_AREA, htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownListFor(model => model.VNC_AREA, null, "Selecione", htmlAttributes: new { @class = "form-control form-control-sm" })
+                @Html.ValidationMessageFor(model => model.VNC_AREA, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+
+        <div class="row ">
+
+            <div class="form-group col-md-8">
+                @Html.LabelFor(model => model.VNC_CONCURSO, htmlAttributes: new { @class = "control-label" })
+
+                @Html.EditorFor(model => model.VNC_CONCURSO, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                @Html.ValidationMessageFor(model => model.VNC_CONCURSO, "", new { @class = "text-danger" })
+
+            </div>
+            <div class="form-group col-md-4">
+                @Html.LabelFor(model => model.VNC_CARGAHORARIA, htmlAttributes: new { @class = "control-label" })
+
+                @Html.EditorFor(model => model.VNC_CARGAHORARIA, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                @Html.ValidationMessageFor(model => model.VNC_CARGAHORARIA, "", new { @class = "text-danger" })
+
+            </div>
+        </div>
+        <div class="row ">
+            <div class="form-group col-md-12">
+                @Html.LabelFor(model => model.VNC_HISTORICO, htmlAttributes: new { @class = "control-label" })
+
+                @Html.TextAreaFor(model => model.VNC_HISTORICO, htmlAttributes: new { @class = "form-control form-control-sm", @rows = 4 })
+                @Html.ValidationMessageFor(model => model.VNC_HISTORICO, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @if (Model.VNC_ID == 0)
+        {
+            <div class="row ">
+                <div class="form-group col-md-12">
+                    <div class="icheck-primary">
+                        <input type="checkbox" value="true" id="cracha" name="cracha">
+                        <label for="cracha">Solicitar crachá de identificação</label>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="modal-footer">
+        <a data-dismiss="modal" class="btn btn-sm btn-outline-secondary">Voltar</a>
+        <input type="button" value="Salvar" class="btn btn-secondary" />
+    </div>
+}
+
+@Scripts.Render("~/bundles/jqueryval")
+<script src="~/Scripts/ccm.projects/EnviaFormCad.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        if ($('#VNCST_ID').val() == '6') {
+            $("#divCessao").show();
+            $("#divCessaoDestino").show();
+            $("#divCessaoOrigem").hide();
+
+        } else if ($('#VNCST_ID').val() == '1' || $('#VNCST_ID').val() == '2' || $('#VNCST_ID').val() == '3') {
+            $("#divAposentadoria").show();
+        } else if ($('#VNCTP_ID').val() == '1' || $('#VNCTP_ID').val() == '3' || $('#VNCTP_ID').val() == '5' || $('#VNCTP_ID').val() == '7' || $('#VNCTP_ID').val() == '10' || $('#VNCTP_ID').val() == '12' || $('#VNCTP_ID').val() == '14') {
+            $("#divCessao").show();
+            $("#divCessaoDestino").show();
+        }
+        $('#VNCST_ID').on('change', function () {
+            if (this.value == '6') {
+                $("#divCessao").show();
+                $("#divCessaoDestino").show();
+                $("#divCessaoOrigem").hide();
+                $("#divAposentadoria").hide();
+                $("#VNC_ENTRADA_APOSENT").val('');
+                $("#VNC_ORGAO_ORIGEM").val('');
+
+            }
+            else if (this.value == '1' && $("#divCessao").hide() || this.value == '2' && $("#divCessao").hide() || this.value == '3' && $("#divCessao").hide()) {
+                $("#divAposentadoria").show();
+                $("#divCessao").hide();
+                $("#VNC_ORGAO_DESTINO").val('');
+                $("#VNC_ORGAO_ORIGEM").val('');
+                $("#VNC_ONUS").val('');
+                $("#VNC_DATACESSAO").val('');
+            }
+            else {
+                $("#VNC_ENTRADA_APOSENT").val('');
+                $("#VNC_ORGAO_ORIGEM").val('');
+                $("#VNC_ONUS").val('');
+                $("#VNC_DATACESSAO").val('');
+                $("#VNC_ORGAO_DESTINO").val('');
+                $("#divAposentadoria").hide();
+                $("#divCessao").hide();
+
+            }
+
+
+        });
+
+
+        $('#VNCTP_ID').on('change', function () {
+            if (this.value == '1' || this.value == '3' || this.value == '5' || this.value == '7' || this.value == '10' || this.value == '12' || this.value == '14') {
+                $("#divCessao").show();
+                $("#divCedidoOrigem").show();
+                $("#divCedidoDestino").hide();
+                $("#divAposentadoria").hide();
+                $("#VNC_ENTRADA_APOSENT").val('');
+                $("#VNC_ORGAO_DESTINO").val('');
+            } else {
+                $("#VNC_ENTRADA_APOSENT").val('');
+                $("#VNC_ORGAO_ORIGEM").val('');
+                $("#VNC_ONUS").val('');
+                $("#VNC_DATACESSAO").val('');
+                $("#VNC_ORGAO_DESTINO").val('');
+                $("#divAposentadoria").hide();
+                $("#divCessao").hide();
+
+            }
+        });
+
+    });
+
+</script>

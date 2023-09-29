@@ -1,0 +1,361 @@
+﻿@using CMM.Projects.Apresentation.Utils
+@using System.Collections.Generic
+@{
+    Layout = null;
+    var relatorioServidor = TempData["RelatorioServidor"] as List<CMM.Projects.Apresentation.Models.FuncionarioRelatorioModelView>;
+    var CamposPesquisa = TempData["Cfunc"] as CMM.Projects.Apresentation.Models.CamposFuncionarioBuscaRelatorioModelView;
+    var Idd = "";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="icon" href="@Url.Content("~/icone-hemopa1.ico")" />
+    <title>Relatório de Servidores</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/assets/js/jquery.min.js"></script>
+    <style TYPE="text/css">
+
+        .page-breaker {
+            display: block;
+            clear: both;
+            page-break-after: always;
+        }
+
+
+        table tbody tr td:before,
+        table tbody tr td:after {
+            content: "";
+            height: 4px;
+            display: block;
+        }
+    </style>
+</head>
+<body class="container" style="background-color:white;font-size:10px;font-weight:500">
+
+    <div class="container-fluid">
+        <div class="header" style="text-align:center">
+            <img src="~/Imagem/cabecalho.png" style="width:100%; height:120px;align-content:center" />
+            <label style="TEXT-ALIGN:center; font-size:25px; font-weight:bold" id="txtheader">
+                Relatório de Servidores
+            </label>
+            <br />
+        </div>
+        <hr />
+        <div class="row">
+            <label class="control-label" style="font-size:15px; font-weight:bold">
+                Servidores por:
+            </label>
+            <br />
+        </div>
+        <div class="row mt mb-3">
+
+            @if (CamposPesquisa.MATRICULA != "")
+            {
+                <div class="col-sm-12">
+                    <label class="control-label" style="font-size:14px">
+                        Matricula:
+                    </label>
+                    <span class="form-group" style="font-size:14px">@CamposPesquisa.MATRICULA</span>
+                </div>
+            }
+
+            @if (CamposPesquisa.NOME != "")
+            {
+                <div class="col-sm-12">
+                    <label class="control-label" style="font-size:14px">
+                        Nome:
+                    </label>
+                    <span class="form-group" style="font-size:14px">@CamposPesquisa.NOME</span>
+                </div>
+            }
+
+            @if (CamposPesquisa.TEXTO_CARGO != null)
+            {
+                <div class="col-sm-12">
+                    <label class="control-label" style="font-size:14px">
+                        Cargo:
+                    </label>
+                    @foreach (var item in CamposPesquisa.TEXTO_CARGO)
+                    {
+                        <span class="form-group" style="font-size:14px">@item</span>
+                    }
+                </div>
+            }
+
+            @if (CamposPesquisa.TEXTO_UNIDADE != null)
+            {
+                <div class="col-sm-12">
+                    <label class="control-label" style="font-size:14px">
+                        Unidades:
+                    </label>
+
+                    @for (var i = 0; i < CamposPesquisa.TEXTO_UNIDADE.Count(); i++)
+                    {
+
+                        if (CamposPesquisa.TEXTO_UNIDADE.Count() > 1 && i != (CamposPesquisa.TEXTO_UNIDADE.Count() - 1))
+                        {
+                            <span class="form-group" style="font-size:14px">@CamposPesquisa.TEXTO_UNIDADE[i], </span>
+                        }
+                        else
+                        {
+                            <span class="form-group" style="font-size:14px">@CamposPesquisa.TEXTO_UNIDADE[i]</span>
+                        }
+                    }
+                </div>
+            }
+
+            @if (CamposPesquisa.TEXTO_TIPO_VINCULO != null)
+            {
+                <div class="col-sm-12">
+                    <label class="control-label" style="font-size:14px">
+                        Tipo de Vinculo:
+                    </label>
+
+                    @foreach (var item in CamposPesquisa.TEXTO_TIPO_VINCULO)
+                    {
+                        <span class="form-group" style="font-size:14px">@item</span>
+                    }
+                </div>
+            }
+
+            @if (CamposPesquisa.TEXTO_SITUACAO_VINCULO != null)
+            {
+                <div class="col-sm-12">
+                    <label class="control-label" style="font-size:14px">
+                        Situação:
+                    </label>
+
+                    @for (var i = 0; i < CamposPesquisa.TEXTO_SITUACAO_VINCULO.Count(); i++)
+                    {
+                        if (CamposPesquisa.TEXTO_SITUACAO_VINCULO.Count() > 1 && i != (CamposPesquisa.TEXTO_SITUACAO_VINCULO.Count() - 1))
+                        {
+                            <span class="form-group" style="font-size:14px">@CamposPesquisa.TEXTO_SITUACAO_VINCULO[i], </span>
+                        }
+                        else
+                        {
+                            <span class="form-group" style="font-size:14px">@CamposPesquisa.TEXTO_SITUACAO_VINCULO[i]</span>
+                        }
+                    }
+                </div>
+            }
+
+            @if (CamposPesquisa.TEXTO_BENEFICIO != null)
+            {
+                <div class="col-sm-12">
+                    <label class="control-label" style="font-size:14px">
+                        Benefício:
+                    </label>
+                    @foreach (var item in CamposPesquisa.TEXTO_BENEFICIO)
+                    {
+                        <span class="form-group" style="font-size:14px">@item</span>
+                    }
+                </div>
+            }
+
+            @if (CamposPesquisa.SEXO != "")
+            {
+                <div class="col-sm-12">
+                    <label class="control-label" style="font-size:14px">
+                        Sexo:
+                    </label>
+                    @if (CamposPesquisa.SEXO.Trim() == "M")
+                    {
+                        <span class="form-group" style="font-size:14px">Masculino</span>
+                    }
+                    else
+                    {
+                        <span class="form-group" style="font-size:14px">Feminino</span>
+                    }
+
+                </div>
+            }
+
+            @if (CamposPesquisa.IDADE != null)
+            {
+                <div class="col-sm-12">
+                    <label class="control-label" style="font-size:14px">
+                        Idade:
+                    </label>
+                    @switch (CamposPesquisa.IDADE)
+                    {
+                        case 1:
+                            Idd = "Até 25 Anos";
+                            break;
+                        case 2:
+                            Idd = "De 25 à 40 Anos";
+                            break;
+                        case 3:
+                            Idd = "De 40 à 55 Anos";
+                            break;
+                        case 4:
+                            Idd = "De 55 à 70 Anos";
+                            break;
+                        case 5:
+                            Idd = "Acima de 70 Anos";
+                            break;
+                    }
+                    <span class="form-group" style="font-size:14px">@Idd</span>
+                </div>
+            }
+
+            @if (CamposPesquisa.TEXTO_FUNCAO != null)
+            {
+                <div class="col-sm-12">
+                    <label class="control-label" style="font-size:14px">
+                        Função:
+                    </label>
+                    @foreach (var item in CamposPesquisa.TEXTO_FUNCAO)
+                    {
+                        <span class="form-group" style="font-size:14px">@item</span>
+                    }
+                </div>
+            }
+
+            @if (CamposPesquisa.INICIO_PERIODO_ADMISSAO != null)
+            {
+                <div class="col-sm-12">
+                    <label class="control-label" style="font-size:14px">
+                        Inicio Período Admissão:
+                    </label>
+                    <span class="form-group" style="font-size:14px">@CamposPesquisa.INICIO_PERIODO_ADMISSAO.Value.ToShortDateString()</span>
+                </div>
+            }
+
+            @if (CamposPesquisa.FIM_PERIODO_ADMISSAO != null)
+            {
+                <div class="col-sm-12">
+                    <label class="control-label" style="font-size:14px">
+                        Fim Período Admissão:
+                    </label>
+                    <span class="form-group" style="font-size:14px">@CamposPesquisa.FIM_PERIODO_ADMISSAO.Value.ToShortDateString()</span>
+                </div>
+            }
+
+            @if (CamposPesquisa.INICIO_PERIODO_DEMISSAO != null)
+            {
+                <div class="col-sm-12">
+                    <label class="control-label" style="font-size:14px">
+                        Inicio Período Demissão:
+                    </label>
+                    <span class="form-group" style="font-size:14px">@CamposPesquisa.INICIO_PERIODO_DEMISSAO.Value.ToShortDateString()</span>
+                </div>
+            }
+
+            @if (CamposPesquisa.FIM_PERIODO_DEMISSAO != null)
+            {
+                <div class="col-sm-12">
+                    <label class="control-label" style="font-size:14px">
+                        Fim Período Demissão:
+                    </label>
+                    <span class="form-group" style="font-size:14px">@CamposPesquisa.FIM_PERIODO_DEMISSAO.Value.ToShortDateString()</span>
+                </div>
+            }
+
+        </div>
+
+        <div class="row mt form-group">
+            <div class="col-xs-12">
+                <table class=" table-sm  dtr-inline table-bordered" width="100%">
+                    <thead style="text-align:center; font-weight:bold;font-size:small;">
+                        <tr>
+                            <td>MATRICULA</td>
+                            <td>
+                                NOME
+                            </td>
+                            <td>
+                                UNIDADE
+                            </td>
+                            <td>
+                                CARGO
+                            </td>
+                            <td>
+                                ADMISSÃO
+                            </td>
+                            <td>
+                                DEMISSÃO
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody style="text-align:center;font-size:12px">
+                        @foreach (var item in relatorioServidor.OrderBy(x => x.FUN_NOME).ToList())
+                        {
+
+                            var bgColor = "";
+                            if (item.SITUACAO == 4)
+                            {
+                                bgColor = "#FFF0F5";
+                            }else if(item.SITUACAO == 1){
+                                bgColor = "#E0FFFF";
+                            }
+                            else if(item.SITUACAO == 5 || item.SITUACAO == 6)
+                            {
+                                bgColor = "#E6E6FA";
+                            }
+                            else if(item.SITUACAO == 7 || item.SITUACAO == 8){
+                                bgColor = "#FFDEAD";
+                            }
+                            else if(item.SITUACAO == 7){
+                                bgColor = "#DCDCDC";
+                            }else{
+                                bgColor = "#F5F5F5";
+                            }
+
+                        <tr style="background-color:@bgColor">
+                            <td style="width:10%;">
+                                @item.FUN_MATRICULA
+                            </td>
+                            <td class="fixed" style="width:33%; text-align: left">
+                                @item.FUN_NOME
+                            </td>
+                            <td class="fixed" style="width:17%;">
+                                @item.FUN_UNIDADE
+                            </td>
+                            <td class="fixed" style="width:19%;">
+                                @item.CARGO
+                            </td>
+                            <td class="fixed" style="width:10%;">
+                                @if (item.FUN_DATA_ADMISSAO != null)
+                                {
+                                    @item.FUN_DATA_ADMISSAO.Value.ToShortDateString()
+                                }
+                            </td>
+                            <td class="fixed" style="width:10%;">
+                                @if (item.FUN_DATA_DEMISSAO != null)
+                                {
+                                    @item.FUN_DATA_DEMISSAO.Value.ToShortDateString()
+                                }
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                   
+                </table>
+
+            </div>
+        </div>
+        <hr />
+        <!-- <div class="page-breaker"></div> -->
+    </div>
+
+
+
+
+
+
+
+
+ @*   
+    @foreach(var item in relatorioServidor)
+    {
+        @item.FUN_MATRICULA
+        <br />
+        @item.FUN_NOME
+        <br />
+    }
+*@
+</body>
+</html>
+

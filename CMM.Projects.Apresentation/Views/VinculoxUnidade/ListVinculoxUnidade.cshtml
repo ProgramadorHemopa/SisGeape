@@ -1,0 +1,82 @@
+﻿@model IEnumerable<CMM.Projects.Apresentation.Models.VinculoUnidadeModelView>
+
+<div class="col-sm-12 col-lg-12  col-xs-12">
+    <table class="table table-sm display responsive  table-responsive-lg dataTable" cellspacing="0" width="100%" id="grdVinculoxUnidade">
+        <thead class="text-center">
+            <tr>
+                <th>
+                    VÍNCULO
+                </th>
+                <th>
+                    SIGLA
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.VNCU_DATAINICIO)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.VNCU_DATAFIM)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.VNCU_ATRIBUICAO)
+                </th>
+                <th>Ações</th>
+            </tr>
+
+        </thead>
+    </table>
+</div>
+<br />
+<br />
+
+<a class=" btn btn-sm btn-primary waves-effect waves-light text-white m-1" style="margin-left:15px" onclick=abrirModal('@Url.Action("AddUpdateVncUnd", "VinculoxUnidade" , new { @id=0,@func =@ViewBag.FUN_ID})')>
+    <i class="fa fa-plus"></i> Nova Lotação
+</a>
+
+<link href="~/Scripts/Grid/DataTables-1.10.16/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+
+@section scripts{
+    @Scripts.Render("~/bundles/Grid")
+    <script type="text/javascript">
+        var dataTable;
+
+        $(document).ready(function() {
+            dataTable= $('#grdMain').DataTable({
+                "processing": "true",
+                "serverSide": "true",
+                "ajax": {
+                    "url": "@Url.Action("GetLotacao_Funcionario")",
+                    "type": "POST",
+                    "datatype": "json"
+                },
+                "columns":
+                [
+                    { "data": "BNF_ID", "width": "100px"},
+                    { "data": "BNC_DESCRICAO"},
+                    {
+                        "data": "BNF_ID",
+                        "render": function(data) {
+                            return "<a class='badge badge-pill btn-outline-primary btn-sm waves-effect waves-light sm-1' data-toggle='tooltip' data-placement='top' title='Editar'onclick=abrirModal('@Url.Action("AddUpdateBanco","Banco")/" +
+                                data +
+                                "')>" +
+                                "<i class='fa fa-edit fa-sm'></i></a>    <a class=' badge badge-pill btn-outline-danger btn-sm waves-effect waves-light m-1 ' data-toggle='tooltip' data-placement='top' title='Excluir' onclick=abrirModal('@Url.Action("Delete","Banco")/" +
+                                data +
+                                "') >" +
+                                "<i class='fa fa-trash'></i></a>";
+                        },
+                        "orderable": false,
+                        "searchable": false, "width": "40px"
+
+
+                    }
+                ],
+                "order":
+                    [0, "asc"]
+                ,"dom":
+                    "Bfrtip", "deferRender": true
+            });
+        });
+
+
+    </script>
+}
+

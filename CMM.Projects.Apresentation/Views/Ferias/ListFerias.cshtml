@@ -1,0 +1,42 @@
+﻿@model IEnumerable<CMM.Projects.Apresentation.Models.FeriasModelView>
+
+
+
+
+        <table class="table  display responsive  table-responsive-lg " role="grid" cellspacing="0" id="grdFerias">
+            <thead class="text-center">
+                <tr>
+                    <th>
+                        FÉRIAS
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.VNC_ID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FRS_PERIODOAQUISITIVO)
+                    </th>
+
+                    <th>
+                        @Html.DisplayNameFor(model => model.FRS_DATA_INICIOGOZO)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FRS_DATA_FIMGOZO)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FRS_DATA_RETORNO)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FRS_DATAPORTARIA)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FRS_NUMPORTARIA)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FRS_OBSERVACAO)
+                    </th>
+                    <th class="text-center">Ações</th>
+                </tr>
+
+            </thead>
+
+        </table>

@@ -1,0 +1,297 @@
+﻿@model CMM.Projects.Apresentation.Models.FuncionarioCartaoPontoModelView
+
+@{
+                /**/
+
+                ViewBag.Title = "Details";
+}
+
+<div class="row m-b-15">
+    <div class="col-sm-3">
+        <div class="card m-b-20">
+            <div class="card-body">
+
+
+
+
+                <div class="col-9">
+                    <div class="profile-card-2">
+                        <div class="user-fullimage">
+                            <img id="fotoservidor" src="data:image/jpg;base64,@(Convert.ToBase64String(Model.FUN_FOTO))" alt="user avatar" class="card-img-top">
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+            <div class="col-sm-12">
+                <dl class="dl-horizontal">
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.MATRICULA)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.MATRICULA)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.NOME)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.NOME)
+                    </dd>
+
+                </dl>
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <div class="col-sm-9">
+        <div class="card">
+            <div class="card-body">
+                @using (Html.BeginForm("GerarCartaoPonto", "CartaoPonto", FormMethod.Post, new { @id = "formPesquisa", @autocomplete = "off" }))
+                {
+
+                    <div class="row">
+
+                        @Html.HiddenFor(model => model.FUN_ID)
+
+                        <div class="form-group col-md-6">
+                            @Html.Label("INICIO", htmlAttributes: new { @class = "" })
+                            @Html.Editor("INICIO", new { htmlAttributes = new { @class = "form-control form-control-sm", @id = "INICIO", @required = "true" } })
+
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            @Html.Label("FIM", htmlAttributes: new { @class = "" })
+                            @Html.Editor("FIM", new { htmlAttributes = new { @class = "form-control form-control-sm", @id = "FIM", @required = "true" } })
+
+
+                        </div>
+
+                        @*<div class="form-group col-md-6">
+
+                                @Html.Label("VÍNCULO", htmlAttributes: new { @class = "" })
+                                @Html.DropDownList("VINCULO", (SelectList)ViewBag.Vinculo, htmlAttributes: new { @class = "form-control form-control-sm", @id = "Vinculo" })
+
+
+                            </div>*@
+
+                    </div>
+                    <hr />
+                    <div class="float-sm-right">
+                        <a href="@Request.UrlReferrer" class="btn btn-outline-secondary waves-effect waves-light sm-1"><i class="fa fa-reply-all"></i> Voltar</a>
+                        <button type="submit" id="enviar" formtarget="_blank" class="btn btn-gradient-scooter waves-effect waves-light sm-1"><i class="fa fa-check-square-o"></i> Gerar Relatório</button>
+
+                    </div>
+
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+@*@if (TempData["FuncionarioCartaoPonto"] != null)
+{
+    <div class="row">
+
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-header">
+                    Cartão de Ponto
+                    <div class=" card-action">
+
+                        <a class="btn btn-outline-warning btn-sm waves-effect" target="_blank" data-placement="top" data-toggle="tooltip" title="Imprimir Cartão de Ponto" href='@Url.Action("ImprimirCartao","CartaoPonto")'>
+                            <i class="fa fa-print"></i>
+                            Imprimir Cartão
+                        </a>
+                    </div>
+                </div>
+
+                <div class="card-body">
+                    <div class="row-sm-12">
+                        <table class="table table-sm table-bordered display-responsive nowrap dtr-inline" id="datatable">
+                            <thead class="text-center">
+                                <tr>
+                                    <th>
+                                        DIA
+                                    </th>
+
+                                    <th>
+                                        ENTRADA
+                                    </th>
+                                    <th>
+                                        SAÍDA
+                                    </th>
+
+                                    <th>
+                                        DIFERENÇA
+                                    </th>
+                                    <th>
+                                        FALTA
+                                    </th>
+
+                                    <th>
+                                        JUSTIFICATIVA
+                                    </th>
+                                    <th>AÇÕES</th>
+                                </tr>
+                            </thead>
+                            <tbody class="text-center">
+
+                                @foreach (var item in ((CMM.Projects.Apresentation.Models.FuncionarioCartaoPontoModelView)TempData["FuncionarioCartaoPonto"]).CartaoPonto)
+                                {
+                                    if ((int)item.DATA.DayOfWeek == 6 || (int)item.DATA.DayOfWeek == 0)
+                                    {
+
+                                        <tr class="table-active">
+                                            <td class="text-left">
+                                                @if (item.DATA != null)
+                                                {
+                                                    @item.DATA.ToString("dd/MM/yyyy")
+                                                }
+                                                - @Html.DisplayFor(modelItem => item.DIA)
+                                            </td>
+
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.ENTRADA1)
+
+                                            </td>
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.SAIDA1)
+                                            </td>
+
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.DIFERENCA)
+                                            </td>
+                                            <td>
+                                                <b> @Html.DisplayFor(modelItem => item.FALTA)</b>
+                                            </td>
+
+
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.JUSTIFICATIVA)
+                                            </td>
+
+                                            <td>
+                                                @if ((item.FALTA == "X" && item.JUSTIFICATIVA == "" && item.DIA != "DOM" && item.DIA != "SÁB") || (item.ATRASO != "" && item.JUSTIFICATIVA == ""))
+                                                {
+                                                    <a class='badge badge-pill btn-outline-primary btn-sm waves-effect waves-light sm-1' data-toggle='tooltip' data-placement='top' title='Justificar' onclick=abrirModal('@Url.Action("AddUpdateJusCartao", "JustificativaPonto" , new { @inicio=item.DATA.Date, @func=item.FUN_ID })')> <i class='fa fa-edit fa-sm'></i>Justificar</a>
+                                                }
+
+                                            </td>
+                                        </tr>
+                                    }
+                                    else
+                                    {
+                                        <tr class="table-light">
+                                            <td class="text-left">
+                                                @if (item.DATA != null)
+                                                {
+                                                    @item.DATA.ToString("dd/MM/yyyy")
+                                                }
+                                                - @Html.DisplayFor(modelItem => item.DIA)
+                                            </td>
+
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.ENTRADA1)
+
+                                            </td>
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.SAIDA1)
+                                            </td>
+
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.DIFERENCA)
+                                            </td>
+                                            <td>
+                                                <b> @Html.DisplayFor(modelItem => item.FALTA)</b>
+                                            </td>
+
+
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.JUSTIFICATIVA)
+                                            </td>
+
+                                            <td>
+                                                @if ((item.FALTA == "X" && item.JUSTIFICATIVA == "" && item.DIA != "DOM" && item.DIA != "SÁB") || (item.ATRASO != "" && item.JUSTIFICATIVA == ""))
+                                                {
+                                                    <a class='badge badge-pill btn-outline-primary btn-sm waves-effect waves-light sm-1' data-toggle='tooltip' data-placement='top' title='Justificar' onclick=abrirModal('@Url.Action("AddUpdateJusCartao", "JustificativaPonto" , new { @inicio=item.DATA.Date, @func=item.FUN_ID })')> <i class='fa fa-edit fa-sm'></i>Justificar</a>
+                                                }
+
+                                            </td>
+                                        </tr>
+                                    }
+
+
+
+
+                                }
+                            </tbody>
+                            <tfoot class="table-active">
+                                <tr class="text-center">
+                                    <td colspan="3"><h6>TOTAL: </h6></td>
+                                    <td class="text-center"><h6>@TempData["TotalDiferenca"]</h6> </td>
+                                    <td class="text-center"><h6>@TempData["TotalFaltas"]</h6>  </td>
+                                    <td class="text-center" colspan="2">--</td>
+
+                                </tr>
+
+                            </tfoot>
+
+
+                        </table>
+
+
+
+
+
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}*@
+
+<link href="~/assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css">
+
+<script src="~/assets/js/popper.min.js"></script>
+@section scripts{
+
+    @Scripts.Render("~/bundles/Grid")
+    <script src="~/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#INICIO').datepicker({
+                autoclose: true,
+                todayHighlight: true
+            });
+            $('#FIM').datepicker({
+                autoclose: true,
+                todayHighlight: true
+            });
+
+
+        });
+        
+    </script>
+}

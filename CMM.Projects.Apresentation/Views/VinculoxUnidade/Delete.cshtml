@@ -1,0 +1,75 @@
+﻿@model CMM.Projects.Apresentation.Models.VinculoUnidadeModelView
+
+<div class="modal-header">
+    <h4>Você tem certeza que deseja excluir este registro?</h4>
+    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+</div>
+<div class="row">
+    <div class="modal-body">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.VNC_ID)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.VNC_NOME)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.UND_ID)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UND_NOME)
+            </dd>
+
+
+            <dt>
+                @Html.DisplayNameFor(model => model.VNCU_DATAINICIO)
+            </dt>
+
+            <dd>
+                @if (Model.VNCU_DATAINICIO.HasValue)
+                {
+                    @Model.VNCU_DATAINICIO.Value.ToString("dd/MM/yyyy")
+                }
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.VNCU_DATAFIM)
+            </dt>
+
+            <dd>
+                @if (Model.VNCU_DATAFIM.HasValue)
+                {
+                    @Model.VNCU_DATAFIM.Value.ToString("dd/MM/yyyy")
+                }
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.VNCU_ATRIBUICAO)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.VNCU_ATRIBUICAO)
+            </dd>
+
+        </dl>
+    </div>
+</div>
+
+@using (Html.BeginForm("Delete", "VinculoxUnidade", FormMethod.Post, new { id = "formCrud" }))
+{
+    @Html.AntiForgeryToken()
+
+
+    <div class="modal-footer">
+        <a data-dismiss="modal" class="btn btn-sm btn-outline-secondary">Voltar</a>
+        <input type="button" value="Excluir" class="btn btn-outline-danger" />
+    </div>
+}
+
+
+<script src="~/Scripts/ccm.projects/EnviaFormCad.js"></script>
+@Scripts.Render("~/bundles/jqueryval")
+

@@ -1,0 +1,134 @@
+﻿
+@{
+    ViewBag.Title = "RelatorioConsulta";
+}
+
+@{
+    List<SelectListItem>
+        listN_A = new List<SelectListItem>
+            ();
+
+    listN_A.Add(new SelectListItem { Text = "Normal", Value = "0" });
+    listN_A.Add(new SelectListItem { Text = "Alterado", Value = "1" });
+
+
+}
+
+@{
+    List<SelectListItem>
+        listIMC = new List<SelectListItem>
+            ();
+
+    listIMC.Add(new SelectListItem { Text = "Abaixo do Peso", Value = "1" });
+    listIMC.Add(new SelectListItem { Text = "Normal", Value = "2" });
+    listIMC.Add(new SelectListItem { Text = "Sobrepeso", Value = "3" });
+    listIMC.Add(new SelectListItem { Text = "Obesidade Grau I", Value = "4" });
+    listIMC.Add(new SelectListItem { Text = "Obesidade Grau II", Value = "5" });
+    listIMC.Add(new SelectListItem { Text = "Obesidade Grau III", Value = "6" });
+
+
+}
+
+<div class="row m-b-15">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    <div class="row form-group">
+                        <div class="col-md-2">
+
+                            @Html.Label("MATRICULA", htmlAttributes: new { @class = "control-label" })
+                            @Html.Editor("MATRICULA", new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                        </div>
+                        <div class="col-md-6">
+
+                            @Html.Label("NOME", htmlAttributes: new { @class = "control-label " })
+                            @Html.Editor("NOME", new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                        </div>
+                        <div class="col-md-4">
+
+                            @Html.Label("UNIDADE", htmlAttributes: new { @class = "control-label" })
+                            @Html.Editor("UNIDADE", new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                        </div>
+                    </div>
+                    <div class="row form-group">
+
+                        <div class="col-md-2">
+                            @Html.Label("COLESTEROL", htmlAttributes: new { @class = "control-label" })
+                            @Html.DropDownList("COLESTEROL", listN_A, "Todos", htmlAttributes: new { @class = "form-control form-control-sm" })
+                        </div>
+
+                        <div class="col-md-2">
+                            @Html.Label("TRIGLICERIDEOS", htmlAttributes: new { @class = "control-label" })
+                            @Html.DropDownList("TRIGLICERIDEOS", listN_A, "Todos", htmlAttributes: new { @class = "form-control form-control-sm" })
+                        </div>
+                        <div class="col-md-2">
+                            @Html.Label("IMC", htmlAttributes: new { @class = "control-label" })
+                            @Html.DropDownList("IMC", listIMC, "Todos", htmlAttributes: new { @class = "form-control form-control-sm" })
+                        </div>
+
+
+                        <div class="col-md-2">
+                            @Html.Label("PRESSAOMAX", htmlAttributes: new { @class = "control-label" })
+                            @Html.DropDownList("PRESSAOMAX", listN_A, "Todos", htmlAttributes: new { @class = "form-control form-control-sm" })
+                        </div>
+                        <div class="col-md-2">
+                            @Html.Label("PRESSAOMIN", htmlAttributes: new { @class = "control-label" })
+                            @Html.DropDownList("PRESSAOMIN", listN_A, "Todos", htmlAttributes: new { @class = "form-control form-control-sm" })
+                        </div>
+                        <div class="col-md-2">
+                            @Html.Label("GLICEMIA", htmlAttributes: new { @class = "control-label" })
+                            @Html.DropDownList("GLICEMIA", listN_A, "Todos", htmlAttributes: new { @class = "form-control form-control-sm" })
+                        </div>
+                    </div>
+                    <div class="row form-group">
+
+                        <div class="col-md-6">
+                            @Html.Label("DATAINICIO", htmlAttributes: new { @class = "control-label" })
+                            @Html.Editor("DATAINICIO", new { htmlAttributes = new { @class = "form-control form-control-sm data" } })
+                        </div>
+
+
+                        <div class="col-md-6">
+                            @Html.Label("DATAFIM", htmlAttributes: new { @class = "control-label" })
+                            @Html.Editor("DATAFIM", new { htmlAttributes = new { @class = "form-control form-control-sm data" } })
+                        </div>
+
+                    </div>
+
+
+                    <hr />
+                    <div class="float-sm-right">
+                        <button type="submit" class="btn btn-sm btn-gradient-scooter waves-effect waves-light sm-1"> Pesquisar <i class="fa fa-search"></i></button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<link href="~/assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css">
+
+@section Scripts {
+    <script src="~/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+
+    <script type="text/javascript">
+
+        $(function () {
+            $(".data").datepicker({
+                autoclose: true,                
+                language: "pt-BR",
+                format: "dd/mm/yyyy",
+                calendarWeeks: false,
+                defaultViewDate: "today"
+            });
+        })
+    </script>
+}

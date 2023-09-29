@@ -1,0 +1,92 @@
+﻿@model CMM.Projects.Apresentation.Models.FuncaoVinculoModelView
+<div class="modal-header">
+    <h4>Você tem certeza que deseja excluir este registro?</h4>
+    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+</div>
+
+<div class="row">
+
+    <div class="modal-body">
+        <dl class="dl-horizontal">
+
+
+            <dt>
+                @Html.DisplayNameFor(model => model.VNC_ID)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.VNC_NOME)
+
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FNC_ID)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FNC_NOME)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.FNCVNC_DATAINICIO)
+            </dt>
+
+            <dd>
+                @if (Model.FNCVNC_DATAINICIO.HasValue)
+        {
+            @Model.FNCVNC_DATAINICIO.Value.ToString("dd/MM/yyyy")
+}
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FNCVNC_DATAFIM)
+            </dt>
+
+            <dd>
+                @if (Model.FNCVNC_DATAFIM.HasValue)
+        {
+            @Model.FNCVNC_DATAFIM.Value.ToString("dd/MM/yyyy")
+}
+            </dd>
+
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FNCVNC_NUMPORTARIA)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FNCVNC_NUMPORTARIA)
+
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FNCVNC_DATAPORTARIA)
+            </dt>
+
+            <dd>
+                @if (Model.FNCVNC_DATAPORTARIA.HasValue)
+        {
+            @Model.FNCVNC_DATAPORTARIA.Value.ToString("dd/MM/yyyy")
+}
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm("Delete", "FuncaoVinculo", FormMethod.Post, new { id = "formFuncao" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="modal-footer">
+                <a data-dismiss="modal" class="btn btn-sm btn-outline-secondary">Voltar</a>
+                <input type="submit" value="Excluir" class="btn btn-outline-danger" />
+            </div>
+        }
+    </div>
+</div>
+<script src="~/Scripts/ccm.projects/Cadastro_Funcao.js"></script>
+<script type="text/javascript">
+    function atualizarGrid() {
+        dataTableFuncao.ajax.reload();
+        $('#minhaModal').modal('hide');
+    };
+
+</script>

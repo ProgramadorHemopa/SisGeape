@@ -1,0 +1,282 @@
+﻿@using CMM.Projects.Apresentation.Utils
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="icon" href="@Url.Content("~/icone-hemopa1.ico")" />
+    <title>Relatório de Ponto Servidor</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+    <script src="~/assets/js/jquery.min.js"></script>
+    <style TYPE="text/css">
+        .page-breaker {
+            display: block;
+            clear: both;
+            page-break-after: always;
+        }
+
+
+        table tbody tr td:before,
+        table tbody tr td:after {
+            content: "";
+            height: 4px;
+            display: block;
+        }
+    </style>
+</head>
+<body class="container" style="background-color:white;font-size:12px;font-weight:500">
+    @{ var modelItem = TempData["FuncionarioCartaoPonto"] as CMM.Projects.Apresentation.Models.FuncionarioCartaoPontoModelView;
+    }
+
+    @foreach (var batidasMes in modelItem.CartaoPonto.GroupBy(x => x.DATA.Month).ToList())
+    {
+
+
+        <div class="container-fluid">
+            <div class="header">
+                <img src="~/Imagem/cabecalho.png" style="width:100%; height:100px;align-content:center" />
+
+                <h3 style="TEXT-ALIGN:center; font-weight:bold" id="txtheader">
+                    Relatório de Ponto Servidor
+                </h3>
+                <h4 style="TEXT-ALIGN:center;font-weight:bold">Período:  @TempData["Inicio"] a  @TempData["Fim"]  - Ref.: @System.Globalization.DateTimeFormatInfo.CurrentInfo.GetMonthName(batidasMes.FirstOrDefault().DATA.Month).ToUpper()</h4>
+
+            </div>
+            <hr />
+
+            <div class="row mt">
+                <div class="col-xs-3">
+                    <h5>
+                        @Html.LabelFor(model => modelItem.MATRICULA, htmlAttributes: new { @class = "control-label" })
+
+                    </h5>
+                    <h4> @Html.DisplayFor(model => modelItem.MATRICULA, new { htmlAttributes = new { @class = "form-control" } }) </h4>
+
+                </div>
+                <div class="col-xs-7">
+                    <h5>
+                        @Html.LabelFor(model => modelItem.NOME, htmlAttributes: new { @class = "control-label" })
+                    </h5>
+                    <h4>
+                        @Html.DisplayFor(model => modelItem.NOME, new { htmlAttributes = new { @class = "form-control" } })
+                    </h4>
+
+
+                </div>
+
+                <div class="col-xs-2">
+                    <h5>
+                        @Html.LabelFor(model => modelItem.TIPAGEM, htmlAttributes: new { @class = "control-label" })
+                    </h5>
+                    <h4>
+                        @modelItem.TIPAGEM.Descricao()
+
+                    </h4>
+
+
+                </div>
+
+
+            </div>
+            <div class="row mt form-group">
+                <div class="col-xs-12">
+
+                    <table class=" table-sm  dtr-inline table-bordered" width="100%">
+                        <thead style="text-align:center; font-weight:bold;font-size:small;">
+                            <tr>
+                                <td>DATA</td>
+                                <td>
+                                    ENTRADA
+                                </td>
+                                <td>
+                                    SAÍDA
+                                </td>
+                                <td>
+                                    DIFERENÇA
+                                </td>
+                                <td>
+                                    FALTA
+                                </td>
+                                <td>
+                                    JUSTIFICATIVA
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody style="text-align:center;font-size:12px">
+                            @foreach (var item in batidasMes.OrderBy(x => x.DATA).ToList())
+                            {
+
+                                var bgColor = "";
+                                if ((int)item.DATA.DayOfWeek != 6 && (int)item.DATA.DayOfWeek != 0)
+                                {
+                                    bgColor = "Transparent";
+                                }
+                                else
+                                {
+                                    bgColor = "#F5F5F5";
+                                }
+
+
+
+                                <tr style="background-color:@bgColor">
+                                    <td>
+                                        @item.DATA.ToShortDateString() - @System.Globalization.DateTimeFormatInfo.CurrentInfo.GetAbbreviatedDayName(item.DATA.DayOfWeek).ToUpper()
+                                    </td>
+                                    <td class="fixed" style="width:100px;">
+                                        @if (item.ENTRADA1.HasValue)
+                                        {
+                                            @item.ENTRADA1
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted"> - - -</span>
+
+                                        }
+                                    </td>
+                                    <td class="fixed" style="width:100px;">
+                                        @if (item.SAIDA1.HasValue)
+                                        {
+                                            @item.SAIDA1
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted"> - - - </span>
+
+                                        }
+                                    </td>
+                                    <td class="fixed" style="width:120px;">
+                                        @if (item.Diferenca().HasValue)
+                                        {@item.Diferenca().Value}
+                                    else
+                                    {
+                                        <span class="text-muted"> - - -</span>
+
+                                    }
+                                    </td>
+                                    @if (@item.FALTA())
+                                    {
+                                        <td style="font-weight:bold;width:80px">
+                                            X
+                                        </td>
+                                    }
+                                    else
+                                    {
+                                        <td style="font-weight:bold;width:80px"></td>
+                                    }
+                                    <td class="fixed" style="font-size:x-small;text-align:start;width:300px">
+                                        @item.Justificativa()
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                        <tfoot>
+                            <tr style="font-weight:bold;font-size:14px">
+                                <td colspan="3">
+                                    TOTAL
+                                </td>
+                                <td class="text-center">
+                                    @{
+
+                                        var totalMinutes = @batidasMes.Where(x => x.Diferenca().HasValue).Select(x => x.Diferenca().Value).Sum(x => x.TotalMinutes);
+                                        TimeSpan? tot = new TimeSpan?();
+                                        var t = "";
+                                        if (totalMinutes.ToString() != null)
+                                            tot = new TimeSpan(0, Convert.ToInt32(totalMinutes), 0);
+
+
+                                    }
+                                    @if (tot != null)
+                                    {
+                                        t = string.Format("{0}:{1}:{2}",
+                                                        (tot.Value.Days > 0 ? (tot.Value.Days * 24) + tot.Value.Hours : tot.Value.Hours),
+                                                        (tot.Value.Minutes <= 9 ? ("0" + tot.Value.Minutes) : tot.Value.Minutes.ToString()),
+                                                        (tot.Value.Seconds <= 9 ? ("0" + tot.Value.Seconds) : tot.Value.Seconds.ToString()));
+                                    }
+
+                                    @t
+                                </td>
+                                <td style="text-align:center">
+                                    @batidasMes.Where(x => x.FALTA()).Count()
+                                </td>
+                                <td></td>
+                            </tr>
+                        </tfoot>
+                    </table>
+
+
+
+                </div>
+
+            </div>
+            <hr />
+            @if (batidasMes.Any(x => x.Justificativa() != ""))
+            {
+                <h6 style="font-weight:bold">Informações Adicionais:</h6>
+                <ul style="list-style-type:circle;">
+
+
+                    @foreach (var item in batidasMes.OrderBy(x => x.DATA).GroupBy(x => x.FRS_ID))
+                    {
+                        if (item.FirstOrDefault().FERIAS_OBS != null)
+                        {
+                            <li>@item.FirstOrDefault().FERIAS_OBS</li>
+                        }
+                    }
+                    @foreach (var item in batidasMes.OrderBy(x => x.DATA).GroupBy(x => x.JUSTP_ID))
+                    {
+                        if (item.FirstOrDefault().JUSTIFICATIVA != null)
+                        {
+                            <li>@item.FirstOrDefault().JUSTIFICATIVAPONTO_OBS</li>
+                        }
+                    }
+
+                </ul>
+            }
+            <div class="page-breaker"></div>
+        </div>
+
+    }
+</body>
+</html>
+
+@*<body>
+        <div>
+            <h4>FuncionarioCartaoPontoModelView</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.MATRICULA)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.MATRICULA)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.NOME)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.NOME)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.TIPAGEM)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.TIPAGEM)
+                </dd>
+
+            </dl>
+        </div>
+
+    </body>
+    </html>*@

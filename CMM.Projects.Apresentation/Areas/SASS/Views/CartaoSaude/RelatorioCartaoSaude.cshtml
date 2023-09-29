@@ -1,0 +1,710 @@
+﻿@model CMM.Projects.Apresentation.Areas.SASS.Models.FuncionarioCartaoSaudeModelView
+@using CMM.Projects.Apresentation.Utils
+
+@{
+                /**/
+
+                Layout = null;
+
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8" />
+    <title>Cartão Saúde Servidor</title>
+    <!-- animate CSS-->
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body style="background-color:white;font-size: medium;">
+
+
+
+
+    <div class="header text-center">
+        <img src="~/Imagem/cabecalho.png" style="width:90%; height:100px;align-items:center" />
+
+        <h1 style="font-weight:bold" id="txtheader">
+            Cartão Saúde Servidor
+        </h1>
+
+
+    </div>
+
+    <div class="container">
+        <div class="row mt form-group">
+            <div class="col-xs-3">
+
+                <h6>@Html.LabelFor(model => model.FUN_MATRICULA)</h6>
+                @Html.DisplayFor(model => model.FUN_MATRICULA)
+
+            </div>
+
+            <div class="col-xs-5">
+                <h6>
+                    @Html.LabelFor(model => model.FUN_NOME, htmlAttributes: new { @class = "control-label" })
+                </h6>
+                @Html.DisplayFor(model => model.FUN_NOME, new { htmlAttributes = new { @class = "form-control" } })
+
+            </div>
+            <div class="col-xs-3">
+                <h6>
+                    @Html.LabelFor(model => model.FUN_SEXO, htmlAttributes: new { @class = "control-label" })
+                </h6>
+                @Html.DisplayFor(model => model.SEXO, new { htmlAttributes = new { @class = "form-control" } })
+
+            </div>
+            <div class="col-xs-1">
+                <h6>
+                    @Html.LabelFor(model => model.FUN_TIPOSANGUINEO, htmlAttributes: new { @class = "control-label" })
+                </h6>
+                @Html.DisplayFor(model => model.TIPAGEM, new { htmlAttributes = new { @class = "form-control" } })
+
+            </div>
+
+        </div>
+        <div class="row mt form-group">
+            <div class="col-xs-3">
+                <h6>
+                    @Html.LabelFor(model => model.FUN_BAIRRO, htmlAttributes: new { @class = "control-label" })
+
+                </h6>
+                @Html.DisplayFor(model => model.FUN_BAIRRO, new { htmlAttributes = new { @class = "form-control" } })
+
+            </div>
+            <div class="col-xs-8">
+                <h6>
+                    @Html.LabelFor(model => model.FUN_ENDERECO, htmlAttributes: new { @class = "control-label" })
+                </h6>
+                @Html.DisplayFor(model => model.FUN_ENDERECO, new { htmlAttributes = new { @class = "form-control" } })
+
+
+            </div>
+
+            <div class="col-xs-1">
+                <h6>
+                    @Html.LabelFor(model => model.FUN_NUMEROEND, htmlAttributes: new { @class = "control-label" })
+                </h6>
+                @Html.DisplayFor(model => model.FUN_NUMEROEND)
+
+
+            </div>
+
+
+        </div>
+        <div class="row mt form-group">
+
+            <div class="col-xs-12">
+                <h6>
+                    @Html.LabelFor(model => model.FUN_COMPLEMENTO, htmlAttributes: new { @class = "control-label" })
+                </h6>
+                @Html.DisplayFor(model => model.FUN_COMPLEMENTO, new { htmlAttributes = new { @class = "form-control" } })
+
+            </div>
+        </div>
+
+        <hr />
+        @foreach (var item in (List<CMM.Projects.Apresentation.Areas.SASS.Models.ConsultaModelView>)TempData["List"])
+        {
+
+            <div class="row mt ">
+                <div class="col-xs-2">
+
+                    <h6>@Html.LabelFor(model => item.CON_DATA)</h6>
+                    @item.CON_DATA.Value.ToShortDateString()
+
+                </div>
+                <div class="col-xs-1">
+
+                    <h6>@Html.LabelFor(model => item.CON_FUMA)</h6>
+                    @item.CON_FUMA.Value.Descricao()
+
+                </div>
+                <div class="col-xs-1">
+
+                    <h6>@Html.LabelFor(model => item.CON_ETILISMO)</h6>
+                    @item.CON_ETILISMO.Value.Descricao()
+
+                </div>
+                <div class="col-xs-2">
+
+                    <h6>@Html.LabelFor(model => item.CON_SEDENTARISMO)    </h6>
+                    @item.CON_SEDENTARISMO.Value.Descricao()
+
+                </div>
+
+
+                <div class="col-xs-2">
+
+
+                    <h6>@Html.LabelFor(model => item.CON_HIPERTENSO)</h6>
+                    @item.CON_HIPERTENSO.Value.Descricao()
+
+                </div>
+                <div class="col-xs-1">
+
+
+                    <h6>@Html.LabelFor(model => item.CON_DIABETICO)</h6>
+                    @item.CON_DIABETICO.Value.Descricao()
+
+                </div>
+
+                <div class="col-xs-1">
+
+                    <h6>@Html.LabelFor(model => item.CON_ALTURA)</h6>
+                    @Html.DisplayFor(model => item.CON_ALTURA)
+                </div>
+                <div class="col-xs-1">
+
+                    <h6>@Html.LabelFor(model => item.CON_PESO)</h6>
+                    @Html.DisplayFor(model => item.CON_PESO)
+                </div>
+                <div class="col-xs-1">
+
+                    <h6>@Html.LabelFor(model => item.CON_IMC)</h6>
+                    @Html.DisplayFor(model => item.CON_IMC.Value)
+                </div>
+
+            </div>
+            <div class="row mt">
+                <div class="col-xs-2">
+
+                    <h6>@Html.LabelFor(model => item.CON_PRESSAOARTERIALMAX)</h6>
+                    @Html.DisplayFor(model => item.CON_PRESSAOARTERIALMAX)
+                </div>
+                <div class="col-xs-2">
+
+                    <h6>@Html.LabelFor(model => item.CON_PRESSAOARTERIALMIN)</h6>
+                    @Html.DisplayFor(model => item.CON_PRESSAOARTERIALMIN)
+                </div>
+
+                <div class="col-xs-1">
+
+                    <h6>@Html.LabelFor(model => item.CON_GLICEMIA)</h6>
+                    @Html.DisplayFor(model => item.CON_GLICEMIA)
+                </div>
+                <div class="col-xs-2">
+
+                    <h6>@Html.LabelFor(model => item.CON_COLESTEROLTOTAL)</h6>
+                    @Html.DisplayFor(model => item.CON_COLESTEROLTOTAL)
+                </div>
+                <div class="col-xs-2">
+
+                    <h6>@Html.LabelFor(model => item.CON_TRIGLICERIDEOS)</h6>
+                    @Html.DisplayFor(model => item.CON_TRIGLICERIDEOS)
+                </div>
+                <div class="col-xs-1">
+
+                    <h6>@Html.LabelFor(model => item.CON_HDL)</h6>
+                    @Html.DisplayFor(model => item.CON_HDL)
+                </div>
+
+                <div class="col-xs-1">
+
+                    <h6>@Html.LabelFor(model => item.CON_LDL)</h6>
+                    @Html.DisplayFor(model => item.CON_LDL)
+                </div>
+                <div class="col-xs-1">
+
+                    <h6>@Html.LabelFor(model => item.CON_ANTIHBS)</h6>
+                    @Html.DisplayFor(model => item.AntiHBS)
+                </div>
+
+
+            </div>
+            <hr />
+        }
+
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+
+        <div class="row mt">
+            <div class="col-xs-4">
+
+                <div id="canvas-holder" style="width: 400px; height:200px">
+                    <canvas id="charIMC" width="300" height="150"></canvas>
+                </div>
+                <script>
+
+            var jsonTrigli = @Html.Raw(TempData["IMC"]);
+            var labels = jsonTrigli.map(function (e) {
+                return ("ANO - " +e.label);            });
+            var data = jsonTrigli.map(function (e) {
+                return e.data;
+            });
+                        var ctx = document.getElementById("charIMC").getContext("2d");
+            // draw bar chart
+            window.myBar = new Chart(ctx, {
+                type: "bar",
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            data: data,
+                            backgroundColor:
+                                '#FA8072',
+                            borderColor: "#000000",
+                            borderWidth: 1
+
+                        }
+                    ]
+                },
+                options: {
+                    animation: false,
+                    scales: {
+
+                        yAxes: [{
+                            display: true,
+                            ticks: {
+                                beginAtZero: true,
+                                min: 0
+                            }
+                        }]
+                    },
+                    legend: {
+                        display: false,
+
+                    },
+                    title: {
+                        display: true,
+                        text: 'IMC',
+                        fontSize: 18
+                    },
+                    animation: {
+                        duration: 1,
+                        onComplete: function () {
+                            var chartInstance = this.chart,
+                                ctx = chartInstance.ctx;
+                            ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'bottom';
+
+                            this.data.datasets.forEach(function (dataset, i) {
+                                var meta = chartInstance.controller.getDatasetMeta(i);
+                                meta.data.forEach(function (bar, index) {
+                                    var data = dataset.data[index];
+                                    ctx.fillText(data, bar._model.x, bar._model.y - 5);
+                                });
+                            });
+                        }
+                    }
+
+
+                }
+            });
+                </script>
+            </div>
+            <div class="col-xs-4">
+
+                <div id="canvas-holder" style="width: 400px; height: 200px;">
+                    <canvas id="charTriglicerideos" width="300" height="150"></canvas>
+                </div>
+                <script>
+
+                    var jsonTrigli = @Html.Raw(TempData["Trigli"]);
+                    console.log(jsonTrigli);
+            var labels = jsonTrigli.map(function (e) {
+                return ("ANO - " +e.label);            });
+            var data = jsonTrigli.map(function (e) {
+                return e.data;
+            });
+          var ctx = document.getElementById("charTriglicerideos").getContext("2d");
+            // draw bar chart
+            window.myBar = new Chart(ctx, {
+                type: "bar",
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            data: data,
+                            backgroundColor:
+                                '#FA8072',
+                            borderColor: "#000000",
+                            borderWidth: 1
+
+                        }
+                    ]
+                },
+                options: {
+                    animation: false,
+                    scales: {
+
+                        yAxes: [{
+                            display: true,
+                            ticks: {
+                                beginAtZero: true,
+                                min: 0
+                            }
+                        }]
+                    },
+                    legend: {
+                        display: false,
+
+                    },
+                    title: {
+                        display: true,
+                        text: 'Triglicerídeos',
+                        fontSize: 18
+                    },
+                    animation: {
+                        duration: 1,
+                        onComplete: function () {
+                            var chartInstance = this.chart,
+                                ctx = chartInstance.ctx;
+                            ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'bottom';
+
+                            this.data.datasets.forEach(function (dataset, i) {
+                                var meta = chartInstance.controller.getDatasetMeta(i);
+                                meta.data.forEach(function (bar, index) {
+                                    var data = dataset.data[index];
+                                    ctx.fillText(data, bar._model.x, bar._model.y - 5);
+                                });
+                            });
+                        }
+                    }
+
+
+                }
+            });
+                </script>
+            </div>
+            <div class="col-xs-4">
+
+                <div id="canvas-holder" style="width:400px; height: 200px;">
+                    <canvas id="charGlicemia" width="300" height="150"></canvas>
+                </div>
+                <script>
+
+            var jsonTrigli = @Html.Raw(TempData["Glicemia"]);
+            var labels = jsonTrigli.map(function (e) {
+                return ("ANO - " +e.label);            });
+            var data = jsonTrigli.map(function (e) {
+                return e.data;
+            });
+                    var ctx = document.getElementById("charGlicemia").getContext("2d");
+            // draw bar chart
+            window.myBar = new Chart(ctx, {
+                type: "bar",
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            data: data,
+                            backgroundColor:
+                                '#FA8072',
+                            borderColor: "#000000",
+                            borderWidth: 1
+
+                        }
+                    ]
+                },
+                options: {
+                    animation: false,
+                    scales: {
+
+                        yAxes: [{
+                            display: true,
+                            ticks: {
+                                beginAtZero: true,
+                                min: 0
+                            }
+                        }]
+                    },
+                    legend: {
+                        display: false,
+
+                    },
+                    title: {
+                        display: true,
+                        text: 'Glicemia',
+                        fontSize: 18
+                    },
+                    animation: {
+                        duration: 1,
+                        onComplete: function () {
+                            var chartInstance = this.chart,
+                                ctx = chartInstance.ctx;
+                            ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'bottom';
+
+                            this.data.datasets.forEach(function (dataset, i) {
+                                var meta = chartInstance.controller.getDatasetMeta(i);
+                                meta.data.forEach(function (bar, index) {
+                                    var data = dataset.data[index];
+                                    ctx.fillText(data, bar._model.x, bar._model.y - 5);
+                                });
+                            });
+                        }
+                    }
+
+
+                }
+            });
+                </script>
+            </div>
+
+
+        </div>
+        <hr />
+        <div class="row mt">
+            <div class="col-xs-4">
+
+                <div id="canvas-holder" style="width: 400px; height: 200px;">
+                    <canvas id="charColesterol" width="300" height="150"></canvas>
+                </div>
+                <script>
+
+            var jsonTrigli = @Html.Raw(TempData["Colesterol"]);
+            var labels = jsonTrigli.map(function (e) {
+                return ("ANO - " +e.label);            });
+            var data = jsonTrigli.map(function (e) {
+                return e.data;
+            });
+                        var ctx = document.getElementById("charColesterol").getContext("2d");
+            // draw bar chart
+            window.myBar = new Chart(ctx, {
+                type: "bar",
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            data: data,
+                            backgroundColor:
+                                '#FA8072',
+                            borderColor: "#000000",
+                            borderWidth: 1
+
+                        }
+                    ]
+                },
+                options: {
+                    animation: false,
+                    scales: {
+
+                        yAxes: [{
+                            display: true,
+                            ticks: {
+                                beginAtZero: true,
+                                min: 0
+                            }
+                        }]
+                    },
+                    legend: {
+                        display: false,
+
+                    },
+                    title: {
+                        display: true,
+                        text: 'Colesterol',
+                        fontSize: 18
+                    },
+                    animation: {
+                        duration: 1,
+                        onComplete: function () {
+                            var chartInstance = this.chart,
+                                ctx = chartInstance.ctx;
+                            ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'bottom';
+
+                            this.data.datasets.forEach(function (dataset, i) {
+                                var meta = chartInstance.controller.getDatasetMeta(i);
+                                meta.data.forEach(function (bar, index) {
+                                    var data = dataset.data[index];
+                                    ctx.fillText(data, bar._model.x, bar._model.y - 5);
+                                });
+                            });
+                        }
+                    }
+
+
+                }
+            });
+                </script>
+            </div>
+
+            <div class="col-xs-4">
+
+                <div id="canvas-holder" style="width:400px; height: 200px;">
+                    <canvas id="charHDL" width="300" height="150"></canvas>
+                </div>
+                <script>
+
+            var jsonTrigli = @Html.Raw(TempData["HDL"]);
+            var labels = jsonTrigli.map(function (e) {
+                return ("ANO - " +e.label);            });
+            var data = jsonTrigli.map(function (e) {
+                return e.data;
+            });
+                    var ctx = document.getElementById("charHDL").getContext("2d");
+            // draw bar chart
+            window.myBar = new Chart(ctx, {
+                type: "bar",
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            data: data,
+                            backgroundColor:
+                                '#FA8072',
+                            borderColor: "#000000",
+                            borderWidth: 1
+
+                        }
+                    ]
+                },
+                options: {
+                    animation: false,
+                    scales: {
+
+                        yAxes: [{
+                            display: true,
+                            ticks: {
+                                beginAtZero: true,
+                                min: 0
+                            }
+                        }]
+                    },
+                    legend: {
+                        display: false,
+
+                    },
+                    title: {
+                        display: true,
+                        text: 'HDL',
+                        fontSize: 18
+                    },
+                    animation: {
+                        duration: 1,
+                        onComplete: function () {
+                            var chartInstance = this.chart,
+                                ctx = chartInstance.ctx;
+                            ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'bottom';
+
+                            this.data.datasets.forEach(function (dataset, i) {
+                                var meta = chartInstance.controller.getDatasetMeta(i);
+                                meta.data.forEach(function (bar, index) {
+                                    var data = dataset.data[index];
+                                    ctx.fillText(data, bar._model.x, bar._model.y - 5);
+                                });
+                            });
+                        }
+                    }
+
+
+                }
+            });
+                </script>
+            </div>
+            <div class="col-xs-4">
+
+                <div id="canvas-holder" style="width:400px; height: 200px;">
+                    <canvas id="charLDL" width="300" height="150"></canvas>
+                </div>
+                <script>
+
+            var jsonTrigli = @Html.Raw(TempData["LDL"]);
+            var labels = jsonTrigli.map(function (e) {
+                return ("ANO - " +e.label);            });
+            var data = jsonTrigli.map(function (e) {
+                return e.data;
+            });
+                    var ctx = document.getElementById("charLDL").getContext("2d");
+            // draw bar chart
+            window.myBar = new Chart(ctx, {
+                type: "bar",
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            data: data,
+                            backgroundColor:
+                                '#FA8072',
+                            borderColor: "#000000",
+                            borderWidth: 1
+
+                        }
+                    ]
+                },
+                options: {
+                    animation: false,
+                    scales: {
+
+                        yAxes: [{
+                            display: true,
+                            ticks: {
+                                beginAtZero: true,
+                                min: 0
+                            }
+                        }]
+                    },
+                    legend: {
+                        display: false,
+
+                    },
+                    title: {
+                        display: true,
+                        text: 'LDL',
+                        fontSize: 18
+                    },
+                    animation: {
+                        duration: 1,
+                        onComplete: function () {
+                            var chartInstance = this.chart,
+                                ctx = chartInstance.ctx;
+                            ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontSize, Chart.defaults.global.defaultFontStyle, Chart.defaults.global.defaultFontFamily);
+                            ctx.textAlign = 'center';
+                            ctx.textBaseline = 'bottom';
+
+                            this.data.datasets.forEach(function (dataset, i) {
+                                var meta = chartInstance.controller.getDatasetMeta(i);
+                                meta.data.forEach(function (bar, index) {
+                                    var data = dataset.data[index];
+                                    ctx.fillText(data, bar._model.x, bar._model.y - 5);
+                                });
+                            });
+                        }
+                    }
+
+
+                }
+            });
+                </script>
+            </div>
+
+        </div>
+
+
+        <br />
+        <div class="row mt text-center">
+
+            <div class="col-xs-6">
+                <img src="~/Imagem/SASS/cartaosaudeOrientacao.png" style="width:100%; height:220px;align-content:flex-start" />
+
+            </div>
+            <div class="col-xs-6">
+
+                <img src="~/Imagem/SASS/SaudeIntegral.png" style="width:60%; height:220px;align-items:flex-end" />
+
+            </div>
+
+        </div>
+
+
+
+
+
+    </div>
+
+
+
+</body>
+</html>

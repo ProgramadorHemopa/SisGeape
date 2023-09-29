@@ -1,0 +1,55 @@
+﻿<header class="topbar-nav">
+    <nav class="navbar navbar-expand fixed-top gradient-royal">
+        <ul class="navbar-nav mr-auto align-items-center">  
+            <li class="nav-item">
+                <a class="nav-link toggle-menu" href="javascript:void();">
+                    <i class="icon-menu menu-icon"></i>
+                </a>
+            </li>
+            <li class="nav-item">                
+            </li>
+        </ul>
+
+        <ul class="navbar-nav align-items-center right-nav-link">
+
+            <li class="nav-item">
+                <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown" href="index.html#">
+                    <i class="icon-user"></i><span class="user-profile"></span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li class="dropdown-item user-details">
+                        <div class="media">
+                            <div class="avatar"><img class="align-self-start mr-2" src="~/Imagem/LogoHemopa.png" alt="user avatar"></div>
+                            <div class="media-body">
+                                <h6 class="mt-2 user-title">@HttpContext.Current.User.Identity.Name</h6>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="dropdown-divider"></li>
+                    <li class="dropdown-divider"></li>
+
+
+
+                    @using (Html.BeginForm("Logout", "Usuario",new {area="" }, FormMethod.Post, new { id = "logoutForm" }))
+                    {
+                        <li class="dropdown-item">
+                            <a href="javaScript:void();" class="text-dark" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif" onclick="javascript:document.getElementById('logoutForm').submit()">
+                                <div class="media">
+
+                                    <i class="icon-power mr-2">     Sair</i>
+                                </div>
+                            </a>
+                        </li>
+                    }
+
+
+
+
+                </ul>
+            </li>
+        </ul>
+
+
+    </nav>
+</header>
+

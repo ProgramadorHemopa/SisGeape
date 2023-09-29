@@ -1,0 +1,65 @@
+﻿@model CMM.Projects.Apresentation.Models.ControleCNHModelView
+
+<div class="modal-header">
+<h4>Você tem certeza que deseja excluir este registro?</h4>
+<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+</div>
+
+<div class="modal-body">
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CNH_NREG)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CNH_NREG)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CNHA_CATEGORIA)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CNHA_CATEGORIA)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CNHA_DATARECEBIMENTO)
+        </dt>
+        <dd>
+            @if (Model.CNHA_DATARECEBIMENTO != null)
+            {
+                @Model.CNHA_DATARECEBIMENTO.Value.ToShortDateString()
+            }
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CNHA_EMISSAO)
+        </dt>
+        <dd>
+            @if (Model.CNHA_EMISSAO != null)
+            {
+                @Model.CNHA_EMISSAO.Value.ToShortDateString()
+            }
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CNHA_VALIDADE)
+        </dt>
+        <dd>
+            @if (Model.CNHA_VALIDADE != null)
+            {
+                @Model.CNHA_VALIDADE.Value.ToShortDateString()
+            }
+        </dd>
+
+
+    </dl>
+</div>
+<div class="modal-footer">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="button" data-dismiss="modal" value="Voltar" class="btn btn-sm btn-default  waves-effect waves-light sm-1" />
+            <input type="submit" value="Excluir" class="btn btn-sm btn-danger" />
+        </div>
+    }
+
+</div>
+

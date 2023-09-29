@@ -1,0 +1,375 @@
+﻿@model CMM.Projects.Apresentation.Areas.SASS.Models.FuncionarioCartaoSaudeModelView
+@using CMM.Projects.Apresentation.Utils
+@{
+    ViewData["TituloPagina"] = "Detalhes Cartão Saúde";
+
+
+
+}
+<div class="row">
+    <div class="col-12">
+        <div class="card m-b-20">
+            <div class="card-header text-uppercase">
+                <span class="fa fa-user"></span> Dados Pessoais
+            </div>
+            <div class="card-body">
+                <div class="row mt">
+                    <div class="col-lg-2 col-sm-12 col-xl-2">
+                        <div class="profile-card-4">
+                            <div class="user-fullimage">
+                                <img id="fotoservidor" src="data:image/jpg;base64,@(Convert.ToBase64String(Model.FUN_FOTO))" alt="user avatar" class="card-img-top">
+
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="col-lg-10 col-sm-12 col-xl-10">
+                        <div class="row mt">
+                            <div class="col-lg-3 col-sm-12 col-xl-3">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.FUN_MATRICULA, htmlAttributes: new { @class = "control-label" })
+                                    @Html.DisplayFor(model => model.FUN_MATRICULA, new { htmlAttributes = new { @class = "form-control" } })
+
+                                </div>
+                            </div>
+
+                            <div class="col-lg-4 col-sm-12 col-xl-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.FUN_NOME, htmlAttributes: new { @class = "control-label" })
+                                    @Html.DisplayFor(model => model.FUN_NOME, new { htmlAttributes = new { @class = "form-control" } })
+
+                                </div>
+                            </div>
+                            <div class="col-lg-3 col-sm-12 col-xl-3">
+                                @Html.LabelFor(model => model.FUN_SEXO, htmlAttributes: new { @class = "control-label" })
+                                @Html.DisplayFor(model => model.SEXO, new { htmlAttributes = new { @class = "form-control" } })
+
+                            </div>
+
+                        </div>
+                        <div class="row mt">
+                            <div class="col-lg-3 col-sm-12 col-xl-3">
+                                @Html.LabelFor(model => model.FUN_TIPOSANGUINEO, htmlAttributes: new { @class = "control-label" })
+                                @Html.DisplayFor(model => model.TIPAGEM, new { htmlAttributes = new { @class = "form-control" } })
+
+                            </div>
+                            <div class="col-lg-4 col-sm-12 col-xl-6">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.FUN_ENDERECO, htmlAttributes: new { @class = "control-label" })
+                                    @Html.DisplayFor(model => model.FUN_ENDERECO, new { htmlAttributes = new { @class = "form-control" } })
+
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-sm-12 col-xl-3">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.FUN_NUMEROEND, htmlAttributes: new { @class = "control-label" })
+                                    @Html.DisplayFor(model => model.FUN_NUMEROEND, new { htmlAttributes = new { @class = "form-control" } })
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div class="row mt">
+                            <div class="col-lg-4 col-sm-12 col-xl-3">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.FUN_BAIRRO, htmlAttributes: new { @class = "control-label" })
+                                    @Html.DisplayFor(model => model.FUN_BAIRRO, new { htmlAttributes = new { @class = "form-control" } })
+
+                                </div>
+                            </div>
+                            <div class="col-lg-8 col-sm-12 col-xl-9">
+                                <div class="form-group">
+                                    @Html.LabelFor(model => model.FUN_COMPLEMENTO, htmlAttributes: new { @class = "control-label" })
+                                    @Html.DisplayFor(model => model.FUN_COMPLEMENTO, new { htmlAttributes = new { @class = "form-control" } })
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="pull-right m-t-15">
+                    <a href="@Url.Action("GerarCartaoSaude", new { area="SASS", id=Model.FUN_ID})" class="btn btn-sm btn-outline-success  waves-light m-1" target="_blank"><i class="fa fa-print"></i> Imprimir Cartão Saúde</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="row">
+    <div class="col-12">
+        <div class="card m-b-20">
+            <div class="card-header text-uppercase">
+                <span class="fa fa-stethoscope"></span> Registros de Atendimentos
+                <div class=" card-action">
+                    <a href="@Url.Action("Atendimento","CartaoSaude", new { area="SASS", @f= Model.FUN_ID})" class="badge badge-pill btn-outline-primary btn-sm waves-effect waves-light sm-1">
+                        <i class="fa fa-plus"></i>
+                        Novo atendimento
+                    </a>
+                </div>
+            </div>
+            <div class="card-body">
+
+
+
+                <div class="row-sm-12">
+                    <div id="datatable-buttons_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+
+                        <table class="table table-sm table-bordered dt-responsive nowrap dataTable no-footer dtr-inline collapsed" id="datatable">
+                            <thead style="align-items:center">
+
+                                <tr>
+                                    <th>
+                                        ATEND.
+                                    </th>
+                                    <th>
+                                        TIPO DE ATEND.
+                                    </th>
+
+
+                                    <th>
+                                        DATA ATEND.
+                                    </th>
+                                    <th>
+                                        FUMA
+                                    </th>
+                                    <th>
+                                        ETILISMO
+                                    </th>
+                                    <th>
+                                        HIPERTENSO
+                                    </th>
+                                    <th>
+                                        DIABÉTICO
+                                    </th>
+                                    <th>
+                                        PESO
+                                    </th>
+                                    <th>
+                                        ALTURA
+                                    </th>
+                                    <th>
+                                        IMC
+                                    </th>
+                                    <th>
+                                        GLICEMIA
+                                    </th>
+                                    <th>
+                                        P. ARTERIAL MAX
+                                    </th>
+                                    <th>
+                                        P. ARTERIAL MIN
+                                    </th>
+
+                                    <th>
+                                        COLESTEROL TOTAL
+                                    </th>
+                                    <th>
+                                        TRIGLICERÍDIOS
+                                    </th>
+                                    <th>
+                                        HDL
+                                    </th>
+                                    <th>
+                                        LDL
+                                    </th>
+                                    <th>
+                                        CIRC. ABDOMINAL
+                                    </th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (TempData["ListAtendimento"] != null)
+                                {
+                                    foreach (var item in (List<CMM.Projects.Apresentation.Areas.SASS.Models.ConsultaModelView>)TempData["ListAtendimento"])
+
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.CON_ID)
+                                            </td>
+                                            <td>
+                                                @item.CON_TIPO.Value.Descricao()
+                                            </td>
+
+                                            <td>
+                                                @item.CON_DATA.Value.ToString("dd/MM/yyyy")
+                                            </td>
+                                            <td>
+                                                @item.CON_FUMA.Value.Descricao()
+
+                                            </td>
+                                            <td>
+                                                @item.CON_ETILISMO.Value.Descricao()
+                                            </td>
+                                            <td>
+                                                @item.CON_HIPERTENSO.Value.Descricao()
+                                            </td>
+                                            <td>
+                                                @item.CON_DIABETICO.Value.Descricao()
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.CON_PESO)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.CON_ALTURA)
+                                            </td>
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.CON_IMC)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.CON_GLICEMIA)
+                                                @if (item.CON_GLICEMIA != null)
+                                                {
+                                                    if (item.CON_GLICEMIA.Value > 99)
+                                                    {
+                                                        <b><span class="fa fa-lg fa-frown-o text-danger"></span></b>
+                                                    }
+                                                    else
+                                                    {
+                                                        <b><span class="fa fa-lg fa-smile-o text-success "></span></b>
+                                                    }
+                                                }
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.CON_PRESSAOARTERIALMAX)
+                                                @if (item.CON_PRESSAOARTERIALMAX != null)
+                                                {
+                                                    if (item.CON_PRESSAOARTERIALMAX.Value >= 130)
+                                                    {
+                                                        <b><span class="fa fa-lg fa-frown-o text-danger"></span></b>
+                                                    }
+                                                    else
+                                                    {
+                                                        <b><span class="fa fa-lg fa-smile-o text-success "></span></b>
+                                                    }
+                                                }
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.CON_PRESSAOARTERIALMIN)
+                                                @if (item.CON_PRESSAOARTERIALMIN != null)
+                                                {
+
+                                                    if (item.CON_PRESSAOARTERIALMIN.Value >= 85)
+                                                    {
+                                                        <b><span class="fa fa-lg fa-frown-o text-danger"></span></b>
+                                                    }
+                                                    else
+                                                    {
+                                                        <b><span class="fa fa-lg fa-smile-o text-success "></span></b>
+                                                    }
+                                                }
+                                            </td>
+
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.CON_COLESTEROLTOTAL)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.CON_TRIGLICERIDEOS)
+                                                @if (item.CON_TRIGLICERIDEOS != null)
+                                                {
+                                                    if (item.CON_TRIGLICERIDEOS.Value >= 150)
+                                                    {
+                                                        <b><span class="fa fa-lg fa-frown-o text-danger"></span></b>
+                                                    }
+                                                    else
+                                                    {
+                                                        <b><span class="fa fa-lg fa-smile-o text-success "></span></b>
+                                                    }
+                                                }
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.CON_HDL)
+
+                                                @if (item.CON_HDL != null)
+                                                {
+                                                    if (Model.FUN_SEXO == "M" && item.CON_HDL < 40)
+                                                    {
+                                                        <b><span class="fa fa-lg fa-frown-o text-danger"></span></b>
+                                                    }
+                                                    else if (Model.FUN_SEXO == "F" && item.CON_HDL < 50)
+                                                    {
+                                                        <b><span class="fa fa-lg fa-frown-o text-danger"></span></b>
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <b><span class="fa fa-lg fa-smile-o text-success "></span></b>
+
+                                                    }
+                                                }
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.CON_LDL)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.CON_CIRCUNFERENCIAABDOMINAL)
+
+                                                @if (item.CON_HDL != null)
+                                                {
+                                                    if (Model.FUN_SEXO == "M" && item.CON_CIRCUNFERENCIAABDOMINAL > 0 && item.CON_CIRCUNFERENCIAABDOMINAL >= 90)
+                                                    {
+                                                        <b><span class="fa fa-lg fa-frown-o text-danger"></span></b>
+                                                    }
+                                                    else if (Model.FUN_SEXO == "F" && item.CON_CIRCUNFERENCIAABDOMINAL > 0 && item.CON_CIRCUNFERENCIAABDOMINAL >= 80)
+                                                    {
+                                                        <b><span class="fa fa-lg fa-frown-o text-danger"></span></b>
+
+                                                    }
+                                                    else
+                                                    {
+                                                        <b><span class="fa fa-lg fa-smile-o text-success "></span></b>
+
+                                                    }
+                                                }
+                                            </td>
+                                            <td>
+                                                @Html.ActionLink("Editar", "Atendimento", new { id = item.CON_ID }, new { @class = " btn-sm btn-outline-primary" }) 
+                                                @Html.ActionLink("Detalhes", "AtendimentoDetails", new { id = item.CON_ID }, new { @class = " btn-sm btn-outline-primary" })
+                                                @Html.ActionLink("Excluir", "AtendimentoDelete", new { id = item.CON_ID }, new { @class = " btn-sm btn-outline-primary" })
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/Grid")
+    <script src="~/Scripts/moment.min.js"></script>
+    <script src="~/Scripts/Grid/datetime-moment.js"></script>
+
+    <script type="text/javascript">
+        var dataTable;
+        $(document).ready(function () {
+            $.fn.dataTable.moment('DD/MM/YYYY');
+            $("#datatable").dataTable({
+                "autoWidth": false,
+                "order":
+                    [[2, "desc"]],
+                "dom": '<"toolbar">frtip'
+            });
+
+
+        });
+
+
+
+    </script>
+}

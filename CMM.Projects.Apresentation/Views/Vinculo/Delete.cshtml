@@ -1,0 +1,123 @@
+﻿@model CMM.Projects.Apresentation.Models.VinculoModelView
+
+
+<div class="modal-header">
+    <h4>Você tem certeza que deseja excluir este registro?</h4>
+    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+</div>
+<div class="row">
+
+    <div class="modal-body">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.VNC_ID)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.VNC_ID)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.FUN_ID)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FUN_NOME)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.CRG_ID)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CRG_NOME)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.VNCTP_ID)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.VNC_TIPO)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.VNCST_ID)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.VNC_SITUACAO)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.VNC_ADMISSAO)
+            </dt>
+
+            <dd>
+                @if (Model.VNC_ADMISSAO.HasValue)
+        {
+            @Model.VNC_ADMISSAO.Value.ToString("dd/MM/yyyy")
+}
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.VNC_DEMISSAO)
+            </dt>
+
+            <dd>
+                @if (Model.VNC_DEMISSAO.HasValue)
+        {
+            @Model.VNC_DEMISSAO.Value.ToString("dd/MM/yyyy")
+}
+
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.VNC_AREA)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.GetVinculoArea)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.VNC_CARGAHORARIA)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.VNC_CARGAHORARIA)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.VNC_CONCURSO)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.VNC_CONCURSO)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.VNC_HISTORICO)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.VNC_HISTORICO)
+            </dd>
+        </dl>
+    </div>
+</div>
+@using (Html.BeginForm("Delete", "Vinculo", FormMethod.Post, new { id = "formCrud" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="modal-footer">
+        <a data-dismiss="modal" class="btn btn-sm btn-outline-secondary">Voltar</a>
+        <input type="button" value="Excluir" class="btn btn-outline-danger" />
+    </div>
+}
+
+
+
+
+
+
+<script src="~/Scripts/ccm.projects/EnviaFormCad.js"></script>
+@Scripts.Render("~/bundles/jqueryval")

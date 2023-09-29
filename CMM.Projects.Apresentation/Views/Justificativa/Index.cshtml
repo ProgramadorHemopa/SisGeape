@@ -1,0 +1,64 @@
+﻿@model IEnumerable<CMM.Projects.Apresentation.Models.JustificativaPontoModelView>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.MTVJUS_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CID_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JUSPT_DATAINICIO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JUSPT_DATAFIM)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JUSPT_DATARECEBIMENTO)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VNC_ID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.JUSPT_OBSERVACAO)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MTVJUS_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CID_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JUSPT_DATAINICIO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JUSPT_DATAFIM)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JUSPT_DATARECEBIMENTO)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.VNC_ID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.JUSPT_OBSERVACAO)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.JUSPT_ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.JUSPT_ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.JUSPT_ID })
+        </td>
+    </tr>
+}
+
+</table>

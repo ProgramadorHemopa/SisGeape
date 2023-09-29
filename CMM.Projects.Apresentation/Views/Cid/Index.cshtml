@@ -1,0 +1,83 @@
+﻿@model IEnumerable<CMM.Projects.Apresentation.Models.CidModelView>
+
+@{
+
+    ViewBag.Title = "Consulta CID";
+    ViewData["TituloPagina"] = "Consulta CID";
+
+}
+<div class="row">
+    <div class="col-lg-12 col-xl-12 col-md-12">
+
+        <div class="card">
+            <div class="card-body">
+                <a class=" btn btn-sm btn-primary waves-effect waves-light text-white m-1" style="margin-left:15px" onclick=abrirModal('@Url.Action("Create")')><i class="fa fa-plus"></i> Novo CID</a>
+
+
+
+                <br />
+
+                <table class="table table-sm display responsive table-striped table-bordered no-wrap" cellspacing="0" width="100%" id="grdMain">
+                    <thead class="text-center">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CID_CODIGO)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.CID_DESCRICAO)
+                            </th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CID_CODIGO)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CID_DESCRICAO)
+                                </td>
+                                <td>
+                                    <a class='badge badge-pill btn-outline-primary btn-sm waves-effect waves-light sm-1' data-toggle='tooltip' data-placement='top' title='Editar' OnClick='location.href="@Url.Action("Edit","Cid", new { id=item.CID_ID })"'>
+                                        <i class='fa fa-edit fa-sm'></i>  Editar
+                                    </a>
+                                    <a class='badge badge-pill btn-outline-primary btn-sm waves-effect waves-light sm-1' data-toggle='tooltip' data-placement='top' title='Detalhes' OnClick='location.href="@Url.Action("Edit","Cid", new { id=item.CID_ID })"'>
+                                        <i class='fa fa-edit fa-sm'></i>  Detalhes
+                                    </a>
+                                    <a class=' badge badge-pill btn-outline-danger btn-sm waves-effect waves-light m-1 ' data-toggle='tooltip' data-placement='top' title='Excluir' onclick='location.href="@Url.Action("Delete","Cid", new {id= item.CID_ID })"'>
+                                        <i class='fa fa-trash'></i>  Deletar
+                                    </a>
+
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<link href="~/Scripts/Grid/Responsive-2.2.1/css/responsive.bootstrap4.min.css" rel="stylesheet" />
+<link href="~/Scripts/Grid/DataTables-1.10.16/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+
+@section scripts{
+    @Scripts.Render("~/bundles/Grid")
+    <script type="text/javascript">
+        var dataTable;
+
+        $(document).ready(function () {
+            dataTable = $('#grdMain').DataTable({
+                "responsive": true
+                , "dom": "Bfrtip",
+                "deferRender": true
+            });
+        });
+
+    </script>
+}

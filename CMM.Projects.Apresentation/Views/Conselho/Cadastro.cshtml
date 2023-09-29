@@ -1,0 +1,57 @@
+﻿@model CMM.Projects.Apresentation.Models.ConselhoModelView
+
+@{
+    ViewData["TituloPagina"] = ViewBag.Title;
+}
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                @using (Html.BeginForm())
+                {
+                    @Html.AntiForgeryToken()
+
+                    <div class="form-horizontal">
+
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        @Html.HiddenFor(model => model.CON_ID)
+
+                        <div class="row m-b-15">
+                            <div class="col-12">
+                                @Html.LabelFor(model => model.CRG_ID, htmlAttributes: new { @class = "control-label" })
+
+                                @Html.DropDownListFor(model => model.CRG_ID, ViewBag.Cargo as SelectList, "Selecione", htmlAttributes: new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.CRG_ID, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="row m-b-15">
+                            <div class="col-12">
+                                @Html.LabelFor(model => model.CON_NOME, htmlAttributes: new { @class = "control-label" })
+
+                                @Html.EditorFor(model => model.CON_NOME, new { htmlAttributes = new { @class = "form-control", @autocomplete = "off" } })
+                                @Html.ValidationMessageFor(model => model.CON_NOME, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+
+             
+                    <div class="row m-b-15">
+                        <div class="col-12">
+                            <input type="submit" value="Salvar" class="btn btn-sm btn-primary" />
+                            @Html.ActionLink("Voltar", "Index", null, new { @class = "btn-sm btn-light waves-light waves-effect" })
+
+                        </div>
+                    </div>
+                </div>
+
+            }
+
+            </div>
+        </div>
+    </div>
+    </div>
+
+    @section Scripts {
+        @Scripts.Render("~/bundles/jqueryval")
+    }

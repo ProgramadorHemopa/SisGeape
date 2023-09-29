@@ -1,0 +1,54 @@
+﻿@model CMM.Projects.Apresentation.Models.ControleCNHModelView
+
+<div class="modal-header">
+    <h3 class="modal-title"><span class="fa fa-edit"></span> @ViewBag.Title</h3>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+</div>
+@using (Html.BeginForm("CadastroControleCNH", "ControleCNH", FormMethod.Post, new { @autocomplete = "off" }))
+{
+    <div class="modal-body">
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.CNH_ID)
+            @Html.HiddenFor(model => model.VNC_ID)
+            @Html.HiddenFor(model => model.CNHA_ID)
+            @Html.HiddenFor(model => model.CNHA_DATARECEBIMENTO)
+
+            <div class="row m-b-15">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.CNH_NREG, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.CNH_NREG, new { htmlAttributes = new { @class = "form-control form-control-sm", @onkeyDown = "return Utils.somenteNumeros(event);" } })
+                    @Html.ValidationMessageFor(model => model.CNH_NREG, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.CNHA_CATEGORIA, htmlAttributes: new { @class = "control-label" })
+                    @Html.DropDownListFor(model => model.CNHA_CATEGORIA, (SelectList)ViewBag.Categoria, "-- Selecione --", htmlAttributes: new { @class = "form-control form-control-sm" })
+                    @Html.ValidationMessageFor(model => model.CNHA_CATEGORIA, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="row m-b-15">
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.CNHA_EMISSAO, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.CNHA_EMISSAO, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                    @Html.ValidationMessageFor(model => model.CNHA_EMISSAO, "", new { @class = "text-danger" })
+                </div>
+                <div class="col-md-6">
+                    @Html.LabelFor(model => model.CNHA_VALIDADE, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.CNHA_VALIDADE, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                    @Html.ValidationMessageFor(model => model.CNHA_VALIDADE, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="modal-footer">
+        <input type="button" data-dismiss="modal" value="Voltar" class="btn btn-sm btn-default  waves-effect waves-light sm-1" />
+        <input type="submit" value="Salvar" class="btn btn-sm btn-primary" />
+    </div>
+}
+
+@Scripts.Render("~/bundles/jqueryval")
+
+
+

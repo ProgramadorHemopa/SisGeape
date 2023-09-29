@@ -1,0 +1,72 @@
+﻿@model IEnumerable<CMM.Projects.Apresentation.Models.ConselhoModelView>
+
+@{
+    ViewBag.Title = "Index";
+    ViewData["TituloPagina"] = "Consulta Conselhos";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <div id="datatable-buttons_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                    <div class="row-sm-12">
+                        <table class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline collapsed" id="datatable">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.CRG_ID)
+                                    </th>
+                                    <th>
+                                        @Html.DisplayNameFor(model => model.CON_NOME)
+                                    </th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @foreach (var item in (List<CMM.Projects.Apresentation.Models.ConselhoModelView>)TempData["ListConselho"])
+                                {
+                                    <tr>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.CRG_NOME)
+                                        </td>
+                                        <td>
+                                            @Html.DisplayFor(modelItem => item.CON_NOME)
+                                        </td>
+                                        <td>
+                                            @Html.ActionLink("Editar", "Cadastro", new { id = item.CON_ID }, new { @class = "btn-sm btn-outline-primary" }) |
+                                            @Html.ActionLink("Detalhes", "Details", new { id = item.CON_ID }, new { @class = "btn-sm btn-outline-primary" }) |
+                                            @Html.ActionLink("Excluir", "Delete", new { id = item.CON_ID }, new { @class = "btn-sm btn-outline-primary" })
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/Grid")
+    <script type="text/javascript">
+        var dataTable;
+        $(document).ready(function () {
+
+
+            $("#datatable").dataTable({
+                "autoWidth": false,
+                "dom":
+                    "Bfrtip"
+            });
+        });
+
+
+
+    </script>
+}

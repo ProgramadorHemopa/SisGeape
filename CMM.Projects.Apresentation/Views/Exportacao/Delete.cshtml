@@ -1,0 +1,600 @@
+﻿@model CMM.Projects.Apresentation.Models.funcionarios
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>funcionarios</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.n_folha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.n_folha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nome)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nome)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.n_identificador)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.n_identificador)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.carteira)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.carteira)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.empresa_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.empresa_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.horario_num)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.horario_num)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.funcao_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.funcao_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.departamento_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.departamento_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.admissao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.admissao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.demissao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.demissao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nao_digital)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nao_digital)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.afast_data_ini)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.afast_data_ini)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.afast_data_fim)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.afast_data_fim)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.afast_motivo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.afast_motivo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.afast_justificativa_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.afast_justificativa_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.invisivel)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.invisivel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.escala_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.escala_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.escala_mensal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.escala_mensal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.t_horario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.t_horario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.senha_equipamento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.senha_equipamento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.filtro1_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.filtro1_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.filtro2_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.filtro2_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.obs)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.obs)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.xcampo1)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.xcampo1)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.alt2_horario_num)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.alt2_horario_num)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.alt3_horario_num)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.alt3_horario_num)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.alt4_horario_num)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.alt4_horario_num)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.endereco)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.endereco)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bairro)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bairro)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cidade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cidade)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.uf)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.uf)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cep)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cep)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.telefone)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.telefone)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.celular)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.celular)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.rg)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.rg)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.expedicao)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.expedicao)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ssp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ssp)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cpf)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cpf)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.mae)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.mae)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.pai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.pai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nascimento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nascimento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sexo_masculino)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sexo_masculino)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estado_civil_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estado_civil_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nacionalidade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nacionalidade)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.naturalidade)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.naturalidade)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.web_senha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.web_senha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.web_nao_altera)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.web_nao_altera)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.web_bloqueado)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.web_bloqueado)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.alt_usuario_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.alt_usuario_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.alt_data)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.alt_data)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.master)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.master)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.n_provisorio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.n_provisorio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.provisorio_data_ini)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.provisorio_data_ini)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.provisorio_data_fim)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.provisorio_data_fim)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cidade_empresa_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cidade_empresa_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.estrutura_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.estrutura_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.assinatura_eletronica)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.assinatura_eletronica)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.integracao_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.integracao_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bh_inicio)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bh_inicio)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.centro_custos)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.centro_custos)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.nivel_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.nivel_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.web_auto_aceitar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.web_auto_aceitar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.n_pis)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.n_pis)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.web_solicitacoes)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.web_solicitacoes)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.data_alteracao_portaria)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.data_alteracao_portaria)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.web_data_fechamento)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.web_data_fechamento)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.especial_insight_sinha)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.especial_insight_sinha)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.motivo_demissao_id)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.motivo_demissao_id)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.web_somente_visto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.web_somente_visto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.web_nao_incluir_manual)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.web_nao_incluir_manual)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

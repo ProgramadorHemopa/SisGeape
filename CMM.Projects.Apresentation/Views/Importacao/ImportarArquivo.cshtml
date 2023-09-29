@@ -1,0 +1,76 @@
+﻿
+@{ Layout = null;
+    ViewBag.Title = "Importar Arquivo de Batidas";}
+
+
+<div class="modal-header">
+    <h3 class="modal-title"><span class="fa fa-edit"></span> @ViewBag.Title</h3>
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+</div>
+
+<div class="row m-b-15">
+    <div class="col-sm-12">
+    
+                @using (Html.BeginForm("ImportarArquivo", "Importacao", FormMethod.Post, new { @autocomplete = "off", @enctype = "multipart/form-data" }))
+                {<div class="modal-body">
+
+                        @Html.AntiForgeryToken()
+
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                @Html.Label("INICIO", htmlAttributes: new { @class = "control-label" })
+                                @Html.Editor("INICIO", new { htmlAttributes = new { @class = "form-control form-control-sm datepicker", @required = "true" } })
+                                @Html.ValidationMessage("INICIO", "", new { @class = "text-danger" })
+                            </div>
+                            <div class="form-group col-md-6">
+                                @Html.Label("FIM", htmlAttributes: new { @class = "control-label" })
+                                @Html.Editor("FIM", new { htmlAttributes = new { @class = "form-control form-control-sm datepicker", @required = "true" } })
+                                @Html.ValidationMessage("FIM", "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                @Html.Label("OBSERVACAO", "OBSERVAÇÃO", htmlAttributes: new { @class = "control-label" })
+                                @Html.TextArea("OBSERVACAO", htmlAttributes: new { @class = "form-control form-control-sm", @rows = 4 })
+                                @Html.ValidationMessage("OBSERVACAO", "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12">
+                                @Html.Label("ARQUIVO", htmlAttributes: new { @class = "control-label" })
+                                <div class="fallback">
+                                    @Html.Editor("ARQUIVO", new { htmlAttributes = new { @class = "form-control-file form-control-sm ", @type = "file", @accept = ".txt", @required = "true" } })
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                 <div class="modal-footer">
+                     <a data-dismiss="modal" class="btn btn-sm btn-outline-secondary">Voltar</a>
+                     <input type="submit" value="Salvar" class="btn btn-secondary" />
+                 </div>
+                }
+            </div>
+        </div>
+
+
+<link href="~/assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css">
+<link href="~/assets/plugins/dropzone/css/dropzone.css" rel="stylesheet" />
+    <script src="~/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/assets/plugins/dropzone/js/dropzone.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            $(".datepicker").datepicker({
+                autoclose: true,
+                language: "pt-BR",
+                format: "dd/mm/yyyy",
+                viewMode: "days",
+                minViewMode: "days",
+                endDate: 'm'
+            });
+        });
+    </script>

@@ -1,0 +1,53 @@
+﻿@model CMM.Projects.Apresentation.Models.SystemRoleModelView
+@using CMM.Projects.Apresentation.Utils;
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+
+                <h4>Você tem certeza que deseja excluir este registro?</h4>
+                <div>
+
+                    <hr />
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.SUSR_ID)
+                        </dt>
+
+                        <dd>
+                                @*@Html.DropDownListFor(model => model.SUSR_ID, null, "Selecione", htmlAttributes: new { @class = "form-control form-control-sm col-4", disabled = "disabled" })*@
+                            @ViewBag.SUSR_ID
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.SIS_ID)
+                        </dt>
+                        <dd>
+                            @Model.SIS_ID.Descricao()
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.SUSR_PERFIL)
+                        </dt>
+                        <dd>
+                            @Model.SUSR_PERFIL.Descricao()
+
+                        </dd>
+                    </dl>
+                    <hr />
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-actions no-color">
+                            <input type="submit" value="Excluir" class="btn btn-sm btn-danger" />
+                            @Html.ActionLink("Voltar", "Index", null, new { @class = "btn-sm btn-light waves-light waves-effect" })
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

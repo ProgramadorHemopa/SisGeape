@@ -1,0 +1,165 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="autor" />
+    <title>SISGEAPE © Hemopa - @DateTime.Today.Year</title>
+    <!--favicon-->
+    <link rel="icon" href="@Url.Content("~/icone-hemopa1.ico")" />
+    <link href="~/assets/css/icons.css" rel="stylesheet" />
+    <!-- notifications css -->
+    <link rel="stylesheet" href="~/assets/plugins/notifications/css/lobibox.min.css" />
+
+
+
+    @Styles.Render("~/BundledStyles/css")
+    <link href="~/assets/css/app-style.css" rel="stylesheet" />
+
+    <link href="~/Scripts/Grid/DataTables-1.10.16/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+    <link href="~/Scripts/Grid/Responsive-2.2.1/css/responsive.bootstrap4.min.css" rel="stylesheet" />
+
+
+
+</head>
+
+<body>
+    <!-- Start wrapper-->
+    <div id="wrapper">
+        @*sidebar-lat*@
+
+        @Html.Partial("~/Views/Shared/InformativosTop.cshtml");
+
+        @Html.Partial("~/Views/Shared/MenuLateral.cshtml");
+
+        <!--End topbar header-->
+        <input class="hide" value="@TempData["msgSuccess"]" id="msgSuccess" style="display:none" />
+        <input class="hide" value="@TempData["msgError"]" id="msgError" style="display:none" />
+        <input class="hide" value="@TempData["msgInfo"]" id="msgInfo" style="display:none" />
+        <div class="clearfix"></div>
+        <div class="content-wrapper" style="margin-top:-20px;">
+
+
+            <div class="modal fade" id="minhaModal">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+
+
+                        <div class="modal-body">
+
+                            <div id="conteudoModal">
+
+                                <div class="col-12">
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="content">
+
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-sm-9">
+                            <h4 class="page-title"> @ViewData["TituloPagina"]</h4>
+
+                        </div>
+                        <hr />
+                        <br />
+                        <div class="col-12">
+
+                            <!--Start Dashboard Content-->
+                            @RenderBody()
+
+                        </div>
+                        <!-- End container-fluid-->
+
+                    </div><!--End content-wrapper-->
+                    <!--Start Back To Top Button-->
+                    <a href="javaScript:void();" class="back-to-top"><i class="fa fa-angle-double-up"></i> </a>
+                    <!--End Back To Top Button-->
+
+
+                </div>
+
+            </div>
+            <!--Start footer-->
+            <!--End footer-->
+            <!--End wrapper-->
+
+
+            @Scripts.Render("~/bundles/jquery")
+            @Scripts.Render("~/bundles/layout")
+            <!--notification js -->
+            <script src="~/assets/plugins/notifications/js/lobibox.min.js"></script>
+            <script src="~/assets/plugins/notifications/js/notifications.min.js"></script>
+            <script src="~/assets/plugins/notifications/js/notification-custom-script.js"></script>
+            <script src="~/assets/plugins/alerts-boxes/js/sweet-alert-script.js"></script>
+            <script src="~/assets/plugins/alerts-boxes/js/sweetalert.min.js"></script>
+
+            <script type="text/javascript">
+
+                $(function () {
+
+
+                    var success = $('#msgSuccess').val();
+                    var error = $('#msgError').val();
+                    var msg = $('#msgInfo').val();
+                    
+                    if (msg != '')
+                        swal({
+                            title: 'Alerta!',
+                            text: msg,
+                            html:true,
+                            icon: 'warning',
+                        });
+                    if (error != '')
+                        swal({
+                            title: 'Ops!',
+                            text: error,
+                            html: true,
+                            icon: 'error',
+                            buttons: false,
+                            timer: 2000,
+                        });
+                    if (success != '')
+                        swal({
+                            title: 'Bom trabalho!',
+                            text: success,
+                            html: true,
+                            icon: 'success',
+                            buttons: false,
+                            timer: 2000,
+                        });
+
+                });
+        
+                function abrirModal(url) {
+
+                    $.ajax(url).done(function (data) {
+
+                        $("#conteudoModal").html(data);
+                        $('#minhaModal').modal('show');
+
+                    });
+
+                };
+            </script>
+
+            @RenderSection("scripts", required: false)
+        </div>
+        <footer class="footer">
+            <div class="text-center dtr-inline">
+                Desenvolvido com <i class="fa fa-heart text-danger"></i> por <span>Gerencia de Informatica - GETIN</span> <br /> © @DateTime.Today.Year Hemopa
+            </div>
+        </footer>
+    </div>
+
+</body>
+</html>

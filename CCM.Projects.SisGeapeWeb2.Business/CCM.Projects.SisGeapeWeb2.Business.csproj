@@ -1,0 +1,299 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{35F47247-1C52-47F6-9B1A-E69578A91177}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>CCM.Projects.SisGeapeWeb2.Business</RootNamespace>
+    <AssemblyName>CCM.Projects.SisGeapeWeb2.Business</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="APB.Framework.Encryption">
+      <HintPath>bin\APB.Framework.Encryption.dll</HintPath>
+    </Reference>
+    <Reference Include="BarcodeLib, Version=1.3.0.0, Culture=neutral, PublicKeyToken=5f09bda868cc39e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\BarcodeLib.1.3.0.0\lib\net20\BarcodeLib.dll</HintPath>
+    </Reference>
+    <Reference Include="CCM.Utils, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\CCM.Utils\bin\Debug\CCM.Utils.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="FluentDateTime, Version=1.15.0.0, Culture=neutral, PublicKeyToken=6ccbc613702e6c71, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentDateTime.1.15.0\lib\net452\FluentDateTime.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BancoBusiness.cs" />
+    <Compile Include="BeneficioBusiness.cs" />
+    <Compile Include="BeneficioVinculoBusiness.cs" />
+    <Compile Include="CargoBusiness.cs" />
+    <Compile Include="CartaoPontoBusiness.cs" />
+    <Compile Include="CidBusiness.cs" />
+    <Compile Include="Connected Services\ServiceCorreios\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="ConselhoClasseBusiness.cs" />
+    <Compile Include="ControleCNHBusiness.cs" />
+    <Compile Include="FeriadoBusiness.cs" />
+    <Compile Include="FeriasBusiness.cs" />
+    <Compile Include="FuncaoBusiness.cs" />
+    <Compile Include="FuncaoVinculoBusiness.cs" />
+    <Compile Include="FuncionarioBusiness.cs" />
+    <Compile Include="FuncionarioDependenteBusiness.cs" />
+    <Compile Include="InfraValidation\Interface\IValidationDictionary.cs" />
+    <Compile Include="Interface\ICartaoPontoBusiness.cs" />
+    <Compile Include="Interface\IBancoBusiness.cs" />
+    <Compile Include="Interface\IBeneficioBusiness.cs" />
+    <Compile Include="Interface\IBeneficioVinculoBusiness.cs" />
+    <Compile Include="Interface\IBusiness.cs" />
+    <Compile Include="Interface\ICargoBusiness.cs" />
+    <Compile Include="Interface\ICidBusiness.cs" />
+    <Compile Include="Interface\IConselhoClasseBusiness.cs" />
+    <Compile Include="Interface\IControleCNHBusiness.cs" />
+    <Compile Include="Interface\IFeriadoBusiness.cs" />
+    <Compile Include="Interface\IFeriasBusiness.cs" />
+    <Compile Include="Interface\IFuncaoBusiness.cs" />
+    <Compile Include="Interface\IFuncaoVinculoBusiness.cs" />
+    <Compile Include="Interface\IFuncionarioBusiness.cs" />
+    <Compile Include="Interface\IFuncionarioDependenteBusiness.cs" />
+    <Compile Include="Interface\IJustificativaPontoBusiness.cs" />
+    <Compile Include="Interface\ILicencaBusiness.cs" />
+    <Compile Include="Interface\IPontoImportacaoBusiness.cs" />
+    <Compile Include="Interface\ISystemUser.cs" />
+    <Compile Include="Interface\IUnidadeBusiness.cs" />
+    <Compile Include="Interface\IVinculoBusiness.cs" />
+    <Compile Include="Interface\IVinculoUnidadeBusiness.cs" />
+    <Compile Include="Interface\SASS\IAvaliacaoClinicaBusiness.cs" />
+    <Compile Include="Interface\SASS\ICartaoSaudeBusiness.cs" />
+    <Compile Include="JustificativaPontoBusiness.cs" />
+    <Compile Include="LicencaBusiness.cs" />
+    <Compile Include="PontoImportacaoBusiness.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SASS\AvalicaoClinicaBusiness.cs" />
+    <Compile Include="SASS\CartaoSaudeBusiness.cs" />
+    <Compile Include="SystemUserBusiness.cs" />
+    <Compile Include="UnidadeBusiness.cs" />
+    <Compile Include="VinculoBusiness.cs" />
+    <Compile Include="VinculoUnidadeBusiness.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CCM.Projects.SisGeape2.Domain\CCM.Projects.SisGeapeWeb2.Domain.csproj">
+      <Project>{9701C1E5-F946-4DCC-8DB2-38F75C8D99DE}</Project>
+      <Name>CCM.Projects.SisGeapeWeb2.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CCM.Projects.SisGeapeWeb2.Repository\CCM.Projects.SisGeapeWeb2.Repository.csproj">
+      <Project>{3A5B9C5D-3BE9-46DF-AA69-51018B468739}</Project>
+      <Name>CCM.Projects.SisGeapeWeb2.Repository</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Connected Services\ServiceCorreios\AtendeClienteService.wsdl" />
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.atualizaPagamentoNaEntregaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.atualizaRemessaAgrupadaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.bloquearObjetoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.buscaClienteResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.buscaContratoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.buscaDataAtualResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.buscaPagamentoEntregaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.buscaServicosAdicionaisAtivosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.buscaServicosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.buscaServicosValorDeclaradoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.buscaServicosXServicosAdicionaisResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.buscaTarifaValeResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.calculaTarifaServicoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.cancelarObjetoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.cancelarPedidoScolResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.clienteERP.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.consultaCEPResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.consultaSROResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.consultaSRO_NEWResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.contratoERP.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.embalagemLRSMaster.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.enderecoERP.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.fechaPlpResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.fechaPlpVariosServicosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.geraDigitoVerificadorEtiquetasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.getStatusCartaoPostagemResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.getStatusPLPResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.integrarUsuarioScolResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.obterClienteAtualizacaoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.obterEmbalagemLRSResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.retornoCancelamento.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.servicoAdicionalXML.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.servicoERP.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.solicitaEtiquetasResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.solicitaPLPResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.solicitarPostagemScolResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.solicitaXmlPlpResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.statusCartao.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.statusPlp.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.valePostal.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.validaEtiquetaPLPResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.validaPlpResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.validarPostagemReversaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.validarPostagemSimultaneaResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.verificaDisponibilidadeServicoResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\ServiceCorreios\CCM.Projects.SisGeapeWeb2.Business.ServiceCorreios.VerificaSeTodosObjetosCanceladosResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\ServiceCorreios\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceCorreios\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceCorreios\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\ServiceCorreios\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

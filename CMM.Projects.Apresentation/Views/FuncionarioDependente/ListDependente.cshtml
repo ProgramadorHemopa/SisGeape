@@ -1,0 +1,43 @@
+﻿@model IEnumerable<CMM.Projects.Apresentation.Models.FuncionarioDependenteModelView>
+
+
+<div class="col-sm-12 col-lg-12">
+    <table class="table table-sm display responsive dataTable" cellspacing="0" width="100%" id="grdDependente">
+        <thead class="text-center">
+            <tr>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.FUNDEP_CPF)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FUNDEP_NOME)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FUNDEP_TIPO)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.FUNDEP_DATANASCIMENTO)
+                </th>
+
+
+                <th>
+                    Ações
+                </th>
+
+            </tr>
+        </thead>
+    </table>
+
+
+</div>
+
+<br />
+<br />
+<br />
+
+<a class=" btn btn-sm btn-primary waves-effect waves-light text-white m-1" style="margin-left:15px" onclick=abrirModal('@Url.Action("AddUpdateDependente", "FuncionarioDependente" , new { @id=0,@func =@ViewBag.FUN_ID})')>
+    <i class="fa fa-plus"></i> Novo Dependente
+</a>
+
+
+

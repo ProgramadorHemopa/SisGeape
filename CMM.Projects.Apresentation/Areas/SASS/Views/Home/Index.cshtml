@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["TituloPagina"] = "Painel de Controle";
+}
+@{
+    var saud = "";
+    if (DateTime.Now.ToLocalTime().Hour >= 0 && DateTime.Now.ToLocalTime().Hour <= 12)
+    {
+        saud = "Bom dia";
+    }
+    else if (DateTime.Now.ToLocalTime().Hour >= 13 && DateTime.Now.ToLocalTime().Hour <= 18)
+    {
+        saud = "Boa tarde";
+
+    }
+    else
+    {
+        saud = "Boa noite";
+
+    }
+}
+<hr />
+<div class="row mt-1">
+
+    <div class="col-lg-12 col-sm-12">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active">@saud, @HttpContext.Current.User.Identity.Name. Seja Bem-vindo(a) - @DateTime.Today.ToShortDateString(), @DateTime.Today.ToString("ddddd", new System.Globalization.CultureInfo("pt-br"))</li>
+        </ol>
+    </div>
+</div>
+<div class="row mt-1">
+    <div class="col-12 col-md-6 col-lg-6 col-xl-3">
+        <a href="@Url.Action("AtendimentoPendente", "CartaoSaude")">
+            <div class="card text-center border-bottom-sm border-top-sm border-warning">
+                <div class="card-body">
+                    <h6>Atendimento Pendente</h6>
+                    <h5 class="text-warning"> <span class="fa fa-user-md"></span> @TempData["ServidorPendente"] </h5>
+
+                </div>
+            </div>
+        </a>
+    </div>
+</div>

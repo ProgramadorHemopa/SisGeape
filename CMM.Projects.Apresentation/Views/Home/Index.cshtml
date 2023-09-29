@@ -1,0 +1,309 @@
+﻿@{
+    ViewData["TituloPagina"] = "Painel de Controle";
+}
+<link href="~/assets/plugins/c3/css/c3.min.css" rel="stylesheet" />
+<hr />
+<div class="row mt-1">
+
+    <div class="col-lg-12 col-sm-2">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item active">@ViewBag.Saudacao</li>
+        </ol>
+    </div>
+</div>
+
+<div class="row mt-1">
+
+    @if ((HttpContext.Current.User as CMM.Projects.Apresentation.InfraAuthentication.MyPrincipal).IsInRole("ADMIN"))
+    {
+        <div class="col-12 col-md-6 col-lg-6 col-xl-3">
+            <a href="@Url.Action("CrachaPendente", "Funcionario")">
+                <div class="card text-center border-bottom-sm border-top-sm border-warning">
+                    <div class="card-body">
+                        <h6>CRACHÁS PENDENTES</h6>
+                        <h5 class="text-warning"> <span class="fa fa-address-card-o"></span> @ViewBag.TotalSolicitacaoCracha </h5>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+    else
+    {
+        <div class="col-12 col-md-6 col-lg-6 col-xl-3">
+
+            <a href="@Url.Action("SolicitacaoIndex", "Funcionario")">
+                <div class="card text-center border-bottom-sm border-top-sm border-warning">
+                    <div class="card-body">
+                        <h6>CRACHÁS PENDENTES</h6>
+                        <h5 class="text-warning"> <span class="fa fa-address-card-o"></span> @ViewBag.TotalSolicitacaoCracha </h5>
+                    </div>
+                </div>
+            </a>
+        </div>  
+    }
+
+
+    <div class="col-12 col-md-6 col-lg-6 col-xl-3">
+        <a href="@Url.Action("Afastamento", "Ferias")">
+            <div class="card text-center border-bottom-sm border-top-sm border-info">
+                <div class="card-body">
+                    <h6>SERVIDORES EM FÉRIAS</h6>
+                    <h5 class="text-info"> <span class="fa fa-plane"></span> @ViewBag.TotalServidorFerias </h5>
+                </div>
+            </div>
+        </a>
+    </div>
+    @*<div class="col-12 col-lg-4 col-xl-4">
+            <div class="card bg-pattern-warning">
+                <a href="@Url.Action("CrachaPendente","Funcionario")">
+
+                    <div class="card-body">
+                        <div class="media">
+                            <div class="media-body text-left">
+                                <h4 class="text-white">@ViewBag.TotalSolicitacaoCracha</h4>
+                                <span class="text-white">Solicitações de Crachás pendentes</span>
+                            </div>
+                            <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
+                                <i class="fa fa-address-card-o text-white"></i>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>*@
+
+</div>
+@*<div class="row mt-1">
+
+
+        <div class="col-12 col-lg-6 col-xl-6">
+            <div class="card">
+                <div class="card-header  text-uppercase">Situação de Servidores</div>
+                <div class="card-body">
+                    <div id="c3-dount-chart"></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-lg-6 col-xl-6">
+            <div class="card">
+                <div class="card-header text-uppercase">SERVIDORES COM GRATIFICAÇÕES</div>
+                <div class="card-body">
+                    <div id="c3-pie-chart"></div>
+                </div>
+            </div>
+        </div>
+    </div>*@
+<br />
+
+<h5>Atalhos</h5>
+<hr />
+
+<div class="row justify-content-md-center mt-1">
+    <div class="col-12 col-lg-6 col-xl-4">
+        <div class="card bg-pattern-secondary">
+            <a href="http://www2.sead.pa.gov.br:7777/forms/frmservlet?config=archonj" target="_blank">
+
+                <div class="card-body">
+                    <div class="media">
+                        <div class="media-body text-center">
+                            <div class="text-uppercase mt-3">
+                                <h5 class="text-white"> SIGIRH</h5>
+                            </div>
+                        </div>
+                        <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
+                            <i class="fa fa-address-book-o text-white"></i>
+                        </div>
+                    </div>
+
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-12 col-lg-6 col-xl-4">
+        @{DateTime data = DateTime.Today;
+            if ((int)DateTime.Today.DayOfWeek == 6)
+            {
+                data = data.AddDays(-1);
+
+            }
+            else if ((int)DateTime.Today.DayOfWeek == 0)
+            {
+                data = data.AddDays(-2);
+            }
+
+            var url = string.Format("http://www.ioepa.com.br/pages/{0}/{0}.{1}.{2}.DOE.pdf", data.Year, data.Month.ToString().PadLeft(2, '0'), data.Day.ToString().PadLeft(2, '0'));
+        }
+        <div class="card bg-pattern-secondary">
+            <a href="@url" target="_blank">
+
+                <div class="card-body">
+                    <div class="media">
+                        <div class="media-body text-center">
+                            <div class="text-uppercase mt-3">
+                                <h6 class="text-white"> Diário Oficial</h6>
+                            </div>
+                        </div>
+                        <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
+                            <i class="fa fa-file-pdf-o text-white"></i>
+                        </div>
+                    </div>
+
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="row mt-1 justify-content-center align-content-center">
+    <!-- 
+        Divisão pra ficha de competencias
+     -->   
+    <div class="col-12 col-lg-6 col-xl-3">
+        <div class="card bg-pattern-primary">
+            <a href="@Url.Action("FichaCompetencia", "Funcionario")">
+
+                <div class="card-body">
+                    <div class="media">
+                        <div class="media-body text-center">
+                            <div class="text-uppercase mt-3">
+                                <h5 class="text-white">Ficha de Competência</h5>
+                            </div>
+                        </div>
+                        <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
+                            <i class="fa fa-clipboard text-white"></i>
+                        </div>
+                    </div>
+                </div>
+
+            </a>    
+        </div>
+    </div>
+    <div class="col-12 col-lg-6 col-xl-3">
+        <div class="card bg-pattern-primary">
+            <a href="@Url.Action("Consulta","Funcionario")">
+
+                <div class="card-body">
+                    <div class="media">
+                        <div class="media-body text-center">
+                            <div class="text-uppercase mt-3">
+                                <h5 class="text-white"> Servidores</h5>
+                            </div>
+                        </div>
+                        <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
+                            <i class="fa fa-users text-white"></i>
+                        </div>
+                    </div>
+                </div>
+
+            </a>
+        </div>
+    </div>
+    <div class="col-12 col-lg-6 col-xl-3">
+        <div class="card bg-pattern-primary">
+            <a href="@Url.Action("Unidade","CartaoPonto")">
+
+                <div class="card-body">
+                    <div class="media">
+                        <div class="media-body text-center">
+                            <div class="text-uppercase mt-3">
+                                <h6 class="text-white"> Cartão Ponto</h6>
+                            </div>
+                        </div>
+                        <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
+                            <i class="icon-calendar text-white"></i>
+                        </div>
+                    </div>
+                </div>
+
+            </a>
+        </div>
+    </div>
+    <div class="col-12 col-lg-6 col-xl-3">
+        <div class="card bg-pattern-primary">
+            <a href="@Url.Action("Index","Unidade")">
+
+                <div class="card-body">
+                    <div class="media">
+                        <div class="media-body text-center">
+                            <div class="text-uppercase mt-3">
+                                <h5 class="text-white"> Unidades</h5>
+                            </div>
+                        </div>
+                        <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
+                            <i class="fa fa-gears text-white"></i>
+                        </div>
+                    </div>
+
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="col-12 col-lg-6 col-xl-3">
+        <div class="card bg-pattern-primary ">
+            <a href="@Url.Action("Index","ConselhoClasse")">
+
+                <div class="card-body">
+                    <div class="media">
+                        <div class="media-body text-center">
+                            <div class="text-uppercase mt-2">
+                                <h5 class="text-white"> Conselho de Classe</h5>
+                            </div>
+                        </div>
+                        <div class="align-self-center float-right w-circle-icon rounded-circle bg-contrast">
+                            <i class="fa fa-graduation-cap text-white"></i>
+                        </div>
+                    </div>
+
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+
+
+@section scripts{
+
+ @*   c3 Charts*@
+    @*<script src="~/assets/plugins/d3/d3.min.js"></script>
+    <script src="~/assets/plugins/c3/js/c3.min.js"></script>
+    <script type="text/javascript">
+
+
+        $(document).ready(function () {
+
+            var jsonDataBeneficio = @Html.Raw(ViewBag.DataBeneficio);
+            var data = {};
+            var count = [];
+            jsonDataBeneficio.forEach(function (e) {
+                count.push(e.BENEFICIO);
+                data[e.BENEFICIO] = e.QUANTIDADE;
+            })
+
+            var c3PieChart = c3.generate({
+                bindto: '#c3-pie-chart',
+                data: {
+                    json: [data],
+                    keys: {
+                        value: count,
+                    },
+                    type: 'pie'
+                },
+                tooltip: {
+                    format: {
+                        value: function (value, ratio, id) {
+                            var commaFormat = d3.format(",");
+                            var dotFormat = function (num) {
+                                return commaFormat(num).replace(/,/g, ".");
+                            };
+                            return dotFormat(value);
+                        }
+                    }
+                }
+            });
+
+
+        });
+
+
+    </script>*@
+}

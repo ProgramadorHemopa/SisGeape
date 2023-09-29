@@ -1,0 +1,106 @@
+﻿@model IEnumerable<CMM.Projects.Apresentation.Models.ReferenciaFuncaoModelView>
+
+@{
+    ViewBag.Title = "Index";
+    ViewData["TituloPagina"] = "Consulta Referências";
+
+}
+
+<div class="row">
+    <div class="col-lg-12 col-xl-12 col-md-12">
+
+        <div class="card">
+            <div class="card-body">
+                <a class=" btn btn-sm btn-primary waves-effect waves-light text-white m-1" style="margin-left:15px" onclick=abrirModal('@Url.Action("AddUpdateRef","ReferenciaFuncao")')>
+                    <i class="fa fa-plus"></i> Nova Referência
+                </a>
+
+
+
+                <br />
+                <table class="table table-sm display responsive table-striped table-bordered no-wrap" cellspacing="0" width="100%" id="grdMain">
+                    <thead class="text-center">
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.REFFNC_ID)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.REFFNC_NOME)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.REFFNC_OBSERVACAO)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.REFFNC_VALOR)
+                            </th>
+                            <th>
+                                Ações
+                            </th>
+                        </tr>
+                    </thead>
+
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<link href="~/Scripts/Grid/DataTables-1.10.16/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+
+@section scripts{
+    @Scripts.Render("~/bundles/Grid")
+    <script type="text/javascript">
+        var dataTable;
+
+        function abrirModal(url) {
+            $("#conteudoModal").load(url,
+                function() {
+                    $('#minhaModal').modal('show');
+                });
+        };
+
+        $(document).ready(function() {
+            dataTable= $('#grdMain').DataTable({
+                "processing": "true",
+                "serverSide": "true",
+                "ajax": {
+                    "url": "@Url.Action("ListarRefFuncao")",
+                    "type": "POST",
+                    "datatype": "json"
+                },
+                "columns":
+                [
+                    { "data": "REFFNC_ID" },
+                    { "data": "REFFNC_NOME" },
+                    { "data": "REFFNC_OBSERVACAO" },
+                    { "data": "REFFNC_VALOR", "render": $.fn.dataTable.render.number('.', ',', 2, 'R$ ') },
+                    {
+                        "data": "REFFNC_ID",
+                        "render": function(data) {
+                            return "<a class='badge badge-pill btn-outline-primary btn-sm waves-effect waves-light sm-1' data-toggle='tooltip' data-placement='top' title='Editar'onclick=abrirModal('@Url.Action("AddUpdateRef","ReferenciaFuncao")/" +
+                                data +
+                                "')>" +
+                                "<i class='fa fa-edit fa-sm'></i></a>    <a class=' badge badge-pill btn-outline-danger btn-sm waves-effect waves-light m-1 ' data-toggle='tooltip' data-placement='top' title='Excluir' onclick=abrirModal('@Url.Action("Delete","ReferenciaFuncao")/" +
+                                data +
+                                "') >" +
+                                "<i class='fa fa-trash'></i></a>";
+                        },
+                        "orderable": false,
+                        "searchable": false, "width": "40px"
+
+                    }
+                ],
+                "order":
+                    [0, "asc"]
+                ,"dom":
+                    "Bfrtip"
+                , "deferRender": true
+            });
+        });
+
+
+    </script>
+}

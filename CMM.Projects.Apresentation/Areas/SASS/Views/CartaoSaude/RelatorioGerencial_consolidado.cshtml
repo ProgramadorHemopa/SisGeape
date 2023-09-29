@@ -1,0 +1,616 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="icon" href="@Url.Content("~/icone-hemopa1.ico")" />
+    <title>Relatório Gerencial - Consolidado</title>
+    <link href="~/assets/css/bootstrap.min.css" rel="stylesheet" />
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/assets/css/icons.css" rel="stylesheet" />
+
+
+    <style TYPE="text/css">
+        .page-breaker {
+            display: block;
+            clear: both;
+            page-break-after: always;
+        }
+
+        table tbody tr td:before,
+        table tbody tr td:after {
+            content: "";
+            height: 4px;
+            display: block;
+        }
+    </style>
+</head>
+<body style="background-color:white;font-size: medium;">
+    @{
+        var list = (List<CMM.Projects.Apresentation.Areas.SASS.Models.ConsultaModelView>)TempData["Details"];
+    }
+    <div class="header">
+        <img src="~/Imagem/cabecalho.png" style="width:100%; height:120px;align-items:center" />
+
+        <h2 style="TEXT-ALIGN:center; font-weight:bold" id="txtheader">
+            Relatório Gerencial do Cartão Saúde
+        </h2>
+    </div>
+
+    <div class="container-fluid">
+
+
+        <div class="row mt form-group">
+
+            <div class="col-xs-12">
+                <h2 style="font-weight:bold">ANO: @TempData["Ano"] </h2>
+                <p style="font-size: 18px;"> Total de Atendimento: @list.Count()</p>
+            </div>
+
+        </div>
+
+        <hr />
+        <br />
+        <div class="row mt">
+            <div class="col-xs-12 justify-content-md-left">
+
+                <table class="table table-bordered table-striped table-hover table-bordered ">
+                    <thead style="text-align:center; font-weight:bold">
+                        <tr>
+                            <td>#</td>
+                            <td>
+                                SIM
+                            </td>
+                            <td>
+                                NÃO
+                            </td>
+                            <td>
+                                N/I
+                            </td>
+                            <td>
+                                %
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody style="text-align:center">
+                        <tr>
+                            <td style="text-align:left">
+                                FUMANTE
+                            </td>
+                            <td>@list.Count(x => x.CON_FUMA == CMM.Projects.Apresentation.Areas.SASS.Models.ConsultaModelView.SimNao.Sim)</td>
+                            <td>@list.Count(x => x.CON_FUMA == CMM.Projects.Apresentation.Areas.SASS.Models.ConsultaModelView.SimNao.Não)</td>
+                            <td>@list.Count(x => x.CON_FUMA == CMM.Projects.Apresentation.Areas.SASS.Models.ConsultaModelView.SimNao.NãoInformado)</td>
+                            <td>
+                                @TempData["%Fuma"]%
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left">
+                                ETILISTA
+                            </td>
+                            <td>@list.Count(x => x.CON_ETILISMO == CMM.Projects.Apresentation.Areas.SASS.Models.ConsultaModelView.SimNao.Sim)</td>
+                            <td>@list.Count(x => x.CON_ETILISMO == CMM.Projects.Apresentation.Areas.SASS.Models.ConsultaModelView.SimNao.Não)</td>
+                            <td>@list.Count(x => x.CON_ETILISMO == CMM.Projects.Apresentation.Areas.SASS.Models.ConsultaModelView.SimNao.NãoInformado)</td>
+                            <td>
+                                @TempData["%Etilismo"]%
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left">
+                                SEDENTARIOS
+                            </td>
+                            <td>@list.Count(x => x.CON_SEDENTARISMO == CMM.Projects.Apresentation.Areas.SASS.Models.ConsultaModelView.SimNao.Sim)</td>
+                            <td>@list.Count(x => x.CON_SEDENTARISMO == CMM.Projects.Apresentation.Areas.SASS.Models.ConsultaModelView.SimNao.Não)</td>
+                            <td>@list.Count(x => x.CON_SEDENTARISMO == CMM.Projects.Apresentation.Areas.SASS.Models.ConsultaModelView.SimNao.NãoInformado)</td>
+                            <td>
+                                @TempData["%Sedentarismo"]%
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left">
+                                DIABÉTICOS
+                            </td>
+                            <td>@list.Count(x => x.CON_DIABETICO == CMM.Projects.Apresentation.Areas.SASS.Models.ConsultaModelView.SimNao.Sim)</td>
+                            <td>@list.Count(x => x.CON_DIABETICO == CMM.Projects.Apresentation.Areas.SASS.Models.ConsultaModelView.SimNao.Não)</td>
+                            <td>@list.Count(x => x.CON_DIABETICO == CMM.Projects.Apresentation.Areas.SASS.Models.ConsultaModelView.SimNao.NãoInformado)</td>
+                            <td>
+                                @TempData["%Diabetico"]%
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left">
+                                HIPERTENSO
+                            </td>
+                            <td>@list.Count(x => x.CON_HIPERTENSO == CMM.Projects.Apresentation.Areas.SASS.Models.ConsultaModelView.SimNao.Sim)</td>
+                            <td>@list.Count(x => x.CON_HIPERTENSO == CMM.Projects.Apresentation.Areas.SASS.Models.ConsultaModelView.SimNao.Não)</td>
+                            <td>@list.Count(x => x.CON_HIPERTENSO == CMM.Projects.Apresentation.Areas.SASS.Models.ConsultaModelView.SimNao.NãoInformado)</td>
+                            <td>
+                                @TempData["%Hipertenso"]%
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left">
+                                PRESSÃO ARTERIAL ALTERADA
+                            </td>
+                            <td>@list.Count(x => x.CON_PRESSAOARTERIALMAX >= 130 || x.CON_PRESSAOARTERIALMIN <= 85)</td>
+                            <td>@list.Count(x => x.CON_PRESSAOARTERIALMAX < 130 && x.CON_PRESSAOARTERIALMIN > 85)</td>
+                            <td>@list.Count(x => x.CON_PRESSAOARTERIALMAX == null || x.CON_PRESSAOARTERIALMIN == null || x.CON_PRESSAOARTERIALMAX == 0 || x.CON_PRESSAOARTERIALMIN == 0)</td>
+                            <td>
+                                @TempData["%Pressao"]%
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left">
+                                GLICEMIA ALTERADA
+                            </td>
+                            <td>@list.Count(x => x.CON_GLICEMIA > 99)</td>
+                            <td>@list.Count(x => x.CON_GLICEMIA <= 99)</td>
+                            <td>@list.Count(x => x.CON_GLICEMIA == null || x.CON_GLICEMIA == 0)</td>
+
+                            <td>
+                                @TempData["%Glicemia"]%
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left">
+                                COLESTEROL TOTAL ALTERADO
+                            </td>
+                            <td>@list.Count(x => x.CON_COLESTEROLTOTAL >= 200)</td>
+                            <td>@list.Count(x => x.CON_COLESTEROLTOTAL < 200)</td>
+                            <td>@list.Count(x => x.CON_COLESTEROLTOTAL == null || x.CON_COLESTEROLTOTAL == 0)</td>
+                            <td>@TempData["%Colesterol"]%</td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:left">
+                                HDL ALTERADO
+                            </td>
+                            <td>@list.Count(x => (x.Funcionario.FUN_SEXO.ToUpper() == "M" && x.CON_HDL < 40) || (x.Funcionario.FUN_SEXO.ToUpper() == "F" && x.CON_HDL < 50))</td>
+                            <td>@list.Count(x => (x.Funcionario.FUN_SEXO.ToUpper() == "M" && x.CON_HDL > 40) || (x.Funcionario.FUN_SEXO.ToUpper() == "F" && x.CON_HDL > 50))</td>
+                            <td>@list.Count(x => x.CON_HDL == null || x.CON_HDL == 0)</td>
+                            <td>
+                                @TempData["%HDL"]%
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="text-align:left">
+                                TRIGLICÉRIDEOS ALTERADO
+                            </td>
+                            <td>@list.Count(x => x.CON_TRIGLICERIDEOS >= 150)</td>
+                            <td>@list.Count(x => x.CON_TRIGLICERIDEOS < 150)</td>
+                            <td>@list.Count(x => x.CON_TRIGLICERIDEOS == null || x.CON_TRIGLICERIDEOS == 0)</td>
+                            <td>
+                                @TempData["%Triglicerideos"]%
+                            </td>
+                        </tr>
+
+                    </tbody>
+
+                </table>
+            </div>
+        </div>
+
+
+        <div class="page-breaker"></div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+        <div class="col-sm-12">
+            <h3 style="font-weight:bold">IMC - Índice de Massa Corporal </h3>
+        </div>
+        <hr />
+        <div class="col-xs-12">
+
+            <table class="table table-bordered table-striped table-hover table-bordered ">
+
+                <thead style="text-align:center;font-size:medium; font-weight:bold">
+                    <tr>
+                        <td>IMC</td>
+                        <td>
+                            ABAIXO DE 18
+                        </td>
+                        <td>
+                            ENTRE 18 E 30 ANOS
+                        </td>
+                        <td>
+                            ENTRE 31 E 45 ANOS
+                        </td>
+                        <td>
+                            ENTRE 46 E 60 ANOS
+                        </td>
+                        <td>
+                            ENTRE 61 E 75 ANOS
+                        </td>
+                        <td>
+                            ACIMA 75 ANOS
+                        </td>
+                        <td>
+                            TOTAL
+                        </td>
+                    </tr>
+                </thead>
+                <tbody style="text-align:center;font-size:small;">
+                    <tr>
+                        <td>Abaixo do Ideal</td>
+                        <td>
+                            M: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "M" && x.Funcionario.Idade() < 18 && x.CON_IMC < 18.5)<br />
+                            F: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "F" && x.Funcionario.Idade() < 18 && x.CON_IMC < 18.5)
+                        </td>
+
+                        <td>
+                            M: @list.Count(x => x.Funcionario.Idade() >= 18 && x.Funcionario.FUN_SEXO.ToUpper() == "M" && x.Funcionario.Idade() <= 30 && x.CON_IMC < 18.5) <br>
+                            F: @list.Count(x => x.Funcionario.Idade() >= 18 && x.Funcionario.FUN_SEXO.ToUpper() == "F" && x.Funcionario.Idade() <= 30 && x.CON_IMC < 18.5)
+                        </td>
+                        <td>
+                            M:@list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "M" && x.Funcionario.Idade() > 30 && x.Funcionario.Idade() <= 45 && x.CON_IMC < 18.5)
+                            <br />
+                            F:@list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "F" && x.Funcionario.Idade() > 30 && x.Funcionario.Idade() <= 45 && x.CON_IMC < 18.5)
+                        </td>
+                        <td>
+                            M: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "M" && x.Funcionario.Idade() > 45 && x.Funcionario.Idade() <= 60 && x.CON_IMC < 18.5) <br />
+                            F: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "F" && x.Funcionario.Idade() > 45 && x.Funcionario.Idade() <= 60 && x.CON_IMC < 18.5)
+                        </td>
+                        <td>
+                            M: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "M" && x.Funcionario.Idade() > 60 && x.Funcionario.Idade() <= 75 && x.CON_IMC < 18.5) <br />
+                            F: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "F" && x.Funcionario.Idade() > 60 && x.Funcionario.Idade() <= 75 && x.CON_IMC < 18.5)
+                        </td>
+                        <td>
+                            M: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "M" && x.Funcionario.Idade() > 75 && x.CON_IMC < 18.5) <br />
+                            F: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "F" && x.Funcionario.Idade() > 75 && x.CON_IMC < 18.5)
+                        </td>
+                        <td>
+                            @list.Count(x => x.CON_IMC < 18.5)
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Ideal</td>
+                        <td>
+                            M: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "M" && x.Funcionario.Idade() < 18 && x.CON_IMC >= 18.5 && x.CON_IMC <= 24.9)<br />
+                            F: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "F" && x.Funcionario.Idade() < 18 && x.CON_IMC >= 18.5 && x.CON_IMC <= 24.9)
+                        </td>
+
+                        <td>
+                            M: @list.Count(x => x.Funcionario.Idade() >= 18 && x.Funcionario.FUN_SEXO.ToUpper() == "M" && x.Funcionario.Idade() <= 30 && x.CON_IMC >= 18.5 && x.CON_IMC <= 24.9) <br>
+                            F: @list.Count(x => x.Funcionario.Idade() >= 18 && x.Funcionario.FUN_SEXO.ToUpper() == "F" && x.Funcionario.Idade() <= 30 && x.CON_IMC >= 18.5 && x.CON_IMC <= 24.9)
+                        </td>
+                        <td>
+                            M:@list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "M" && x.Funcionario.Idade() > 30 && x.Funcionario.Idade() <= 45 && x.CON_IMC >= 18.5 && x.CON_IMC <= 24.9)
+                            <br />
+                            F:@list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "F" && x.Funcionario.Idade() > 30 && x.Funcionario.Idade() <= 45 && x.CON_IMC >= 18.5 && x.CON_IMC <= 24.9)
+                        </td>
+                        <td>
+                            M: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "M" && x.Funcionario.Idade() > 45 && x.Funcionario.Idade() <= 60 && x.CON_IMC >= 18.5 && x.CON_IMC <= 24.9) <br />
+                            F: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "F" && x.Funcionario.Idade() > 45 && x.Funcionario.Idade() <= 60 && x.CON_IMC >= 18.5 && x.CON_IMC <= 24.9)
+                        </td>
+                        <td>
+                            M: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "M" && x.Funcionario.Idade() > 60 && x.Funcionario.Idade() <= 75 && x.CON_IMC >= 18.5 && x.CON_IMC <= 24.9) <br />
+                            F: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "F" && x.Funcionario.Idade() > 60 && x.Funcionario.Idade() <= 75 && x.CON_IMC >= 18.5 && x.CON_IMC <= 24.9)
+                        </td>
+                        <td>
+                            M: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "M" && x.Funcionario.Idade() > 75 && x.CON_IMC >= 18.5 && x.CON_IMC <= 24.9) <br />
+                            F: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "F" && x.Funcionario.Idade() > 75 && x.CON_IMC >= 18.5 && x.CON_IMC <= 24.9)
+                        </td>
+                        <td>
+                            @list.Count(x => x.CON_IMC >= 18.5 && x.CON_IMC <= 24.9)
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Sobrepeso</td>
+                        <td>
+                            M: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "M" && x.Funcionario.Idade() < 18 && x.CON_IMC >= 25 && x.CON_IMC < 30)<br />
+                            F: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "F" && x.Funcionario.Idade() < 18 && x.CON_IMC >= 25 && x.CON_IMC < 30)
+                        </td>
+
+                        <td>
+                            M: @list.Count(x => x.Funcionario.Idade() >= 18 && x.Funcionario.FUN_SEXO.ToUpper() == "M" && x.Funcionario.Idade() <= 30 && x.CON_IMC >= 25 && x.CON_IMC < 30) <br>
+                            F: @list.Count(x => x.Funcionario.Idade() >= 18 && x.Funcionario.FUN_SEXO.ToUpper() == "F" && x.Funcionario.Idade() <= 30 && x.CON_IMC >= 25 && x.CON_IMC < 30)
+                        </td>
+                        <td>
+                            M:@list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "M" && x.Funcionario.Idade() > 30 && x.Funcionario.Idade() <= 45 && x.CON_IMC >= 25 && x.CON_IMC < 30)
+                            <br />
+                            F:@list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "F" && x.Funcionario.Idade() > 30 && x.Funcionario.Idade() <= 45 && x.CON_IMC >= 25 && x.CON_IMC < 30)
+                        </td>
+                        <td>
+                            M: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "M" && x.Funcionario.Idade() > 45 && x.Funcionario.Idade() <= 60 && x.CON_IMC >= 25 && x.CON_IMC < 30) <br />
+                            F: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "F" && x.Funcionario.Idade() > 45 && x.Funcionario.Idade() <= 60 && x.CON_IMC >= 25 && x.CON_IMC < 30)
+                        </td>
+                        <td>
+                            M: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "M" && x.Funcionario.Idade() > 60 && x.Funcionario.Idade() <= 75 && x.CON_IMC >= 25 && x.CON_IMC < 30) <br />
+                            F: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "F" && x.Funcionario.Idade() > 60 && x.Funcionario.Idade() <= 75 && x.CON_IMC >= 25 && x.CON_IMC < 30)
+                        </td>
+                        <td>
+                            M: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "M" && x.Funcionario.Idade() > 75 && x.CON_IMC >= 25 && x.CON_IMC < 30) <br />
+                            F: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "F" && x.Funcionario.Idade() > 75 && x.CON_IMC >= 25 && x.CON_IMC < 30)
+                        </td>
+                        <td>
+                            @list.Count(x => x.CON_IMC >= 25 && x.CON_IMC < 30)
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Obesidade Grau I</td>
+                        <td>
+                            M: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "M" && x.Funcionario.Idade() < 18 && x.CON_IMC >= 30 && x.CON_IMC < 35)<br />
+                            F: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "F" && x.Funcionario.Idade() < 18 && x.CON_IMC >= 30 && x.CON_IMC < 35)
+                        </td>
+
+                        <td>
+                            M: @list.Count(x => x.Funcionario.Idade() >= 18 && x.Funcionario.FUN_SEXO.ToUpper() == "M" && x.Funcionario.Idade() <= 30 && x.CON_IMC >= 30 && x.CON_IMC < 35) <br>
+                            F: @list.Count(x => x.Funcionario.Idade() >= 18 && x.Funcionario.FUN_SEXO.ToUpper() == "F" && x.Funcionario.Idade() <= 30 && x.CON_IMC >= 30 && x.CON_IMC < 35)
+                        </td>
+                        <td>
+                            M:@list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "M" && x.Funcionario.Idade() > 30 && x.Funcionario.Idade() <= 45 && x.CON_IMC >= 30 && x.CON_IMC < 35)
+                            <br />
+                            F:@list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "F" && x.Funcionario.Idade() > 30 && x.Funcionario.Idade() <= 45 && x.CON_IMC >= 30 && x.CON_IMC < 35)
+                        </td>
+                        <td>
+                            M: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "M" && x.Funcionario.Idade() > 45 && x.Funcionario.Idade() <= 60 && x.CON_IMC >= 30 && x.CON_IMC < 35) <br />
+                            F: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "F" && x.Funcionario.Idade() > 45 && x.Funcionario.Idade() <= 60 && x.CON_IMC >= 30 && x.CON_IMC < 35)
+                        </td>
+                        <td>
+                            M: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "M" && x.Funcionario.Idade() > 60 && x.Funcionario.Idade() <= 75 && x.CON_IMC >= 30 && x.CON_IMC < 35) <br />
+                            F: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "F" && x.Funcionario.Idade() > 60 && x.Funcionario.Idade() <= 75 && x.CON_IMC >= 30 && x.CON_IMC < 35)
+                        </td>
+                        <td>
+                            M: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "M" && x.Funcionario.Idade() > 75 && x.CON_IMC >= 30 && x.CON_IMC < 35) <br />
+                            F: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "F" && x.Funcionario.Idade() > 75 && x.CON_IMC >= 30 && x.CON_IMC < 35)
+                        </td>
+                        <td>
+                            @list.Count(x => x.CON_IMC >= 30 && x.CON_IMC < 35)
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Obesidade Grau II</td>
+                        <td>
+                            M: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "M" && x.Funcionario.Idade() < 18 && x.CON_IMC >= 35 && x.CON_IMC < 40)<br />
+                            F: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "F" && x.Funcionario.Idade() < 18 && x.CON_IMC >= 35 && x.CON_IMC < 40)
+                        </td>
+
+                        <td>
+                            M: @list.Count(x => x.Funcionario.Idade() >= 18 && x.Funcionario.FUN_SEXO.ToUpper() == "M" && x.Funcionario.Idade() <= 30 && x.CON_IMC >= 35 && x.CON_IMC < 40) <br>
+                            F: @list.Count(x => x.Funcionario.Idade() >= 18 && x.Funcionario.FUN_SEXO.ToUpper() == "F" && x.Funcionario.Idade() <= 30 && x.CON_IMC >= 35 && x.CON_IMC < 40)
+                        </td>
+                        <td>
+                            M:@list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "M" && x.Funcionario.Idade() > 30 && x.Funcionario.Idade() <= 45 && x.CON_IMC >= 35 && x.CON_IMC < 40)
+                            <br />
+                            F:@list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "F" && x.Funcionario.Idade() > 30 && x.Funcionario.Idade() <= 45 && x.CON_IMC >= 35 && x.CON_IMC < 40)
+                        </td>
+                        <td>
+                            M: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "M" && x.Funcionario.Idade() > 45 && x.Funcionario.Idade() <= 60 && x.CON_IMC >= 35 && x.CON_IMC < 40) <br />
+                            F: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "F" && x.Funcionario.Idade() > 45 && x.Funcionario.Idade() <= 60 && x.CON_IMC >= 35 && x.CON_IMC < 40)
+                        </td>
+                        <td>
+                            M: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "M" && x.Funcionario.Idade() > 60 && x.Funcionario.Idade() <= 75 && x.CON_IMC >= 35 && x.CON_IMC < 40) <br />
+                            F: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "F" && x.Funcionario.Idade() > 60 && x.Funcionario.Idade() <= 75 && x.CON_IMC >= 35 && x.CON_IMC < 40)
+                        </td>
+                        <td>
+                            M: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "M" && x.Funcionario.Idade() > 75 && x.CON_IMC >= 35 && x.CON_IMC < 40) <br />
+                            F: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "F" && x.Funcionario.Idade() > 75 && x.CON_IMC >= 35 && x.CON_IMC < 40)
+                        </td>
+                        <td>
+                            @list.Count(x => x.CON_IMC >= 35 && x.CON_IMC < 40)
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Obesidade Grau III</td>
+                        <td>
+                            M: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "M" && x.Funcionario.Idade() < 18 && x.CON_IMC >= 40)<br />
+                            F: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "F" && x.Funcionario.Idade() < 18 && x.CON_IMC >= 40)
+                        </td>
+
+                        <td>
+                            M: @list.Count(x => x.Funcionario.Idade() >= 18 && x.Funcionario.FUN_SEXO.ToUpper() == "M" && x.Funcionario.Idade() <= 30 && x.CON_IMC >= 40) <br>
+                            F: @list.Count(x => x.Funcionario.Idade() >= 18 && x.Funcionario.FUN_SEXO.ToUpper() == "F" && x.Funcionario.Idade() <= 30 && x.CON_IMC >= 40)
+                        </td>
+                        <td>
+                            M:@list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "M" && x.Funcionario.Idade() > 30 && x.Funcionario.Idade() <= 45 && x.CON_IMC >= 40)
+                            <br />
+                            F:@list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "F" && x.Funcionario.Idade() > 30 && x.Funcionario.Idade() <= 45 && x.CON_IMC >= 40)
+                        </td>
+                        <td>
+                            M: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "M" && x.Funcionario.Idade() > 45 && x.Funcionario.Idade() <= 60 && x.CON_IMC >= 40) <br />
+                            F: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "F" && x.Funcionario.Idade() > 45 && x.Funcionario.Idade() <= 60 && x.CON_IMC >= 40)
+                        </td>
+                        <td>
+                            M: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "M" && x.Funcionario.Idade() > 60 && x.Funcionario.Idade() <= 75 && x.CON_IMC >= 40) <br />
+                            F: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "F" && x.Funcionario.Idade() > 60 && x.Funcionario.Idade() <= 75 && x.CON_IMC >= 40)
+                        </td>
+                        <td>
+                            M: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "M" && x.Funcionario.Idade() > 75 && x.CON_IMC >= 40) <br />
+                            F: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "F" && x.Funcionario.Idade() > 75 && x.CON_IMC >= 40)
+                        </td>
+                        <td>
+                            @list.Count(x => x.CON_IMC >= 40)
+
+                        </td>
+                    </tr>
+
+
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="8">* <b>M</b>- Masculino  <b>F</b>- Feminino</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <br />
+        <div class="col-sm-12">
+            <h3 style="font-weight:bold">IMC - Detalhado </h3>
+        </div>
+        <hr />
+        <div class="row">
+
+
+
+            <div class="col-xs-7">
+
+                <div id="canvas-holder" style="width:500px; height: 500px;">
+                    <canvas id="charGlicemia" width="800" height="800"></canvas>
+                </div>
+                <script>
+
+                        var ctx = document.getElementById("charGlicemia").getContext("2d");
+                        // draw bar chart
+                        window.myBar = new Chart(ctx, {
+                            type: "pie",
+                            data: {
+                                labels: ["Abaixo do Ideal", "Normal", "Sobrepeso", " Obesidade Grau I", " Obesidade Grau II", " Obesidade Grau III"],
+
+                                datasets: [
+                                    {
+                                        labels: ["Abaixo do Ideal", "Normal", "Sobrepeso", " Obesidade Grau I", " Obesidade Grau II", " Obesidade Grau III"],
+                                        data: [@list.Count(x=>x.CON_IMC<18.5), @list.Count(x => x.CON_IMC >= 18.5 && x.CON_IMC<=24.9),@list.Count(x => x.CON_IMC >=25 && x.CON_IMC<=29.9), @list.Count(x => x.CON_IMC >=30 && x.CON_IMC<35),@list.Count(x => x.CON_IMC >= 35 && x.CON_IMC<40),@list.Count(x => x.CON_IMC >=40)],
+                                        backgroundColor: ["rgb(255, 99, 132)",
+                                            "rgb(94, 162, 235)",
+                                            "rgb(255, 205, 86)",
+                                            '#F4A460',
+                                            '#DA70D6',
+                                            '#3CB371',]
+                                        , borderWidth: 1
+
+                                    }
+                                ]
+                            },
+                            options:
+                            {
+                                events: false,
+                                animation: {
+                                    duration: 020,
+                                    easing: "easeInOutElastic",
+                                    onComplete: function () {
+                                        var ctx = this.chart.ctx;
+                                        ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontFamily, 'normal', Chart.defaults.global.defaultFontFamily);
+                                        ctx.textAlign = 'center';
+                                        ctx.textBaseline = 'bottom';
+
+                                        this.data.datasets.forEach(function (dataset) {
+
+                                            for (var i = 0; i < dataset.data.length; i++) {
+                                                var model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model,
+                                                    total = dataset._meta[Object.keys(dataset._meta)[0]].total,
+                                                    mid_radius = model.innerRadius + (model.outerRadius - model.innerRadius) / 2,
+                                                    start_angle = model.startAngle,
+                                                    end_angle = model.endAngle,
+                                                    mid_angle = start_angle + (end_angle - start_angle) / 2;
+
+                                                var x = mid_radius * Math.cos(mid_angle);
+                                                var y = mid_radius * Math.sin(mid_angle);
+
+                                                ctx.fillStyle = '#000000';
+                                                if (i == 3) { // Darker text color for lighter background
+                                                    ctx.fillStyle = '#000000';
+                                                }
+
+                                                var val = Math.round(dataset.data[i] / total * 100)
+
+                                                if (Math.round(val) !== val)
+                                                    val = (dataset.data[i] / total * 100).toFixed(1);
+
+                                                var percent = val + "%";
+
+                                                if (val != 0) {
+                                                    // Display percent in another line, line break doesn't work for fillText
+                                                    ctx.fillText(percent , model.x + x, model.y + y + 15);
+
+                                                    if (val > 5) {
+                                                        ctx.fillText(dataset.labels[i], model.x + x, model.y + y);
+                                                    }
+                                                }
+                                            }
+                                        });
+                                    }
+                                }
+                            }
+                        });
+                </script>
+            </div>
+            <div class="col-xs-5">
+                <div class="row">
+
+                    <div class="col-xs-12">
+
+                        <div class="card text-dark border border-dark">
+                            <div class="card-header bg-dark text-white"><span class="fa fa-warning"></span> Valores de Referencia</div>
+                            <div class="card-body">
+                                <p class="card-text"><b>Abaixo de 18,5</b>    - Abaixo do peso ideal </p>
+                                <p class="card-text"><b>Entre 18,5 e 24,9</b> - Peso ideal        </p>
+                                <p class="card-text"><b>Entre 25 e 29,9</b>   - Sobrepeso           </p>
+                                <p class="card-text"><b>Entre 30 e 34,9</b>   - Obesidade grau I    </p>
+                                <p class="card-text"><b>Entre 35 e 39,9</b>   - Obesidade grau II   </p>
+                                <p class="card-text"><b>Acima de 40</b>       - Obesidade grau III      </p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br />
+                @*<div class="row">
+                    <div class="col-xs-12">
+
+                        <table class="table table-bordered table-striped table-hover table-bordered ">
+
+                            <thead style="text-align:center; font-weight:bold">
+                                <tr>
+                                    <td>IMC</td>
+                                    <td>
+                                        TOTAL
+                                    </td>
+                                    <td>
+                                        ENTRE 18 E 30 ANOS
+                                    </td>
+                                    <td>
+                                        ENTRE 31 E 45 ANOS
+                                    </td>
+                                    <td>
+                                        ENTRE 46 E 60 ANOS
+                                    </td>
+                                    <td>
+                                        ENTRE 61 E 75 ANOS
+                                    </td>
+                                </tr>
+                            </thead>
+                            <tbody style="text-align:center">
+                                <tr></tr>
+                                <tr></tr>
+                                <tr></tr>
+                                <tr></tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>*@
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        </div>
+
+        <script src="~/assets/js/bootstrap.min.js"></script>
+</body>
+</html>

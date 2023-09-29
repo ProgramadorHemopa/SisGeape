@@ -1,0 +1,105 @@
+﻿@model IEnumerable<CMM.Projects.Apresentation.Models.CargoModelView>
+
+@{
+    ViewBag.Title = "Index";
+    ViewData["TituloPagina"] = "Consulta Cargos";
+
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <div id="datatable-buttons_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                    <div class="row-sm-12">
+                            <a class=" btn btn-sm btn-primary waves-effect waves-light text-white m-1" style="margin-left:20px" onclick=abrirModal('@Url.Action("AddUpdateCargo","Cargo")')><i class="fa fa-plus"></i> Novo Cargo</a>
+                    </div>
+
+                    <div class="row-sm-12">
+
+                        <table class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline collapsed" id="datatable">
+                            <thead class="text-center">
+                                <tr role="row">
+                                    <th>
+                                        ID
+                                    </th>
+                                    <th>
+                                        CODIGO
+                                    </th>
+                                    <th>
+                                        NOME
+                                    </th>
+
+                                    <th>
+                                        REF SALARIAL
+                                    </th>
+                                    <th>
+                                        REF CARGO
+                                    </th>
+
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/Grid")
+    <script type="text/javascript">
+        var dataTable;
+
+        $(document).ready(function () {
+            ////Here you need to provide the webapi address
+            //$.getJSON('http://localhost:58956/api/cargo')
+            //    .done(function (data) {
+            //        $.each(data, function (key, item) {
+            //            //Add the result to gridview
+            //            $("#grdMain").append('<tr> '+
+            //                '<td>'+ item.CRG_ID + '</td>'+
+            //                '<td>' + item.CRG_CODIGO + '</td>'+
+            //                '<td>' + item.CRG_NOME + '</td>'+
+            //                '<td>' + item.CRG_DESCRICAO + '</td>'+
+            //                '<td>' + item.CRG_REFSALARIAL + '</td>' +
+            //                '</tr >'
+            //                );
+            //        });
+            //    })
+            //    .fail(function (d) {
+            //        alert("error occured" + d.responseText);
+            //    });
+            //$('#example').DataTable({
+
+            //});
+            $(document).ready(function () {
+                $("#datatable").dataTable({
+                    "autoWidth": false,
+                    "ajax": {
+                        url: '@Url.HttpRouteUrl("DefaultApi", new { controller = "cargo" })'
+                        , datatype: "json"
+                        , dataSrc: ""
+                    },
+                    "columns": [
+                        { "data": "CRG_ID" },
+                        { "data": "CRG_CODIGO" },
+                        { "data": "CRG_NOME" },
+                        { "data": "CRG_DESCRICAO" },
+                        { "data": "CRG_REFSALARIAL" },
+                    ], "dom":
+                        "Bfrtip"
+                }), $("#datatable-buttons, .datatable-buttons").each(function () {
+                    $(this).DataTable(
+                        { lengthChange: !1, order: [[($(this).find('th.index').index() == -1) ? 0 : $(this).find('th.index').index(), 'desc']] }).columns('.col-hide').visible(false).container().appendTo($(this).parents('.dataTables_wrapper').find('.col-md-6:eq(0)'))
+                        , $(this).removeAttr('style');
+                });
+            });
+        });
+
+
+
+    </script>
+}

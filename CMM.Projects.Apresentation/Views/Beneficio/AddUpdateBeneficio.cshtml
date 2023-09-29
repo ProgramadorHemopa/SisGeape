@@ -1,0 +1,54 @@
+﻿@model CMM.Projects.Apresentation.Models.BeneficioModelView
+
+<div class="modal-header">
+    <h3 class="modal-title"><span class="fa fa-edit"></span> @ViewBag.Title</h3>
+
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+
+</div>
+<div class="modal-body">
+
+    @using (Html.BeginForm("AddUpdateBeneficio", "Beneficio", FormMethod.Post, new { id = "formCrud" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.BNF_ID)
+
+            <div class="row">
+                <div class="col-md-8 col-lg-8">
+
+                    @Html.LabelFor(model => model.BNF_DESCRICAO, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.BNF_DESCRICAO, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                    @Html.ValidationMessageFor(model => model.BNF_DESCRICAO, "", new { @class = "text-danger" })
+                </div>
+
+                <div class="form-group col-md-4">
+
+                    @Html.LabelFor(model => model.BNF_VALOR, htmlAttributes: new { @class = "control-label" })
+                    <div class="input-group input-group-sm mb-3">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text sm">R$</span>
+                        </div>
+
+                        @Html.EditorFor(model => model.BNF_VALOR, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.BNF_VALOR, "", new { @class = "text-danger" })
+
+                </div>
+            </div>
+
+
+        </div>
+    }
+</div>
+<div class="modal-footer">
+    <a data-dismiss="modal" class="btn btn-sm btn-outline-secondary">Voltar</a>
+    <input type="button" value="Salvar" class="btn btn-secondary" />
+</div>
+
+@Scripts.Render("~/bundles/jqueryval")
+<script src="~/Scripts/ccm.projects/EnviaForm.js"></script>
+<script src="~/Scripts/ccm.projects/CustomValidacoes.js"></script>

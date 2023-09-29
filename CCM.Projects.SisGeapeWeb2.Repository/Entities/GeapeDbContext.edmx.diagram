@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="102e431d214b441184fb6504f215568e" Name="Diagram1" ZoomLevel="80">
+        <EntityTypeShape EntityType="geapedbModel.ap_banco" Width="1.5" PointX="0.75" PointY="26.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="geapedbModel.ap_beneficio" Width="1.5" PointX="8.25" PointY="14.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="geapedbModel.ap_beneficioxvinculo" Width="1.5" PointX="10.5" PointY="17.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="geapedbModel.ap_cargo" Width="1.5" PointX="5.125" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="geapedbModel.ap_cartaosaude" Width="1.5" PointX="5.25" PointY="21.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="geapedbModel.ap_cessao" Width="1.5" PointX="2.875" PointY="18" IsExpanded="true" />
+        <EntityTypeShape EntityType="geapedbModel.ap_conselhoclasse" Width="1.5" PointX="5.125" PointY="27.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="geapedbModel.ap_curso" Width="1.875" PointX="6.875" PointY="28.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="geapedbModel.ap_ferias" Width="2.125" PointX="11.625" PointY="21.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="geapedbModel.ap_funcao" Width="1.5" PointX="11.25" PointY="9.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="geapedbModel.ap_funcaoxvinculo" Width="3.125" PointX="13.5" PointY="20.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="geapedbModel.ap_funcionario" Width="1.5" PointX="3" PointY="21.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="geapedbModel.ap_funcionarioxcurso" Width="1.5" PointX="9.75" PointY="26.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="geapedbModel.ap_funcionarioxdependente" Width="1.5" PointX="5.25" PointY="31.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="geapedbModel.ap_funcionarioxfoto" Width="1.5" PointX="5.25" PointY="35.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="geapedbModel.ap_licenca" Width="1.5" PointX="13.5" PointY="14.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="geapedbModel.ap_licencapericia" Width="1.5" PointX="18.75" PointY="15" IsExpanded="true" />
+        <EntityTypeShape EntityType="geapedbModel.ap_licencasituacaopericia" Width="1.5" PointX="16.5" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="geapedbModel.ap_licencatipo" Width="1.5" PointX="11.25" PointY="13.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="geapedbModel.ap_referenciafuncao" Width="1.5" PointX="9" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="geapedbModel.ap_unidade" Width="2.25" PointX="12" PointY="31.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="geapedbModel.ap_vinculo" Width="2.625" PointX="0.875" PointY="15.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="geapedbModel.ap_vinculosituacao" Width="2.5" PointX="5.125" PointY="9.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="geapedbModel.ap_vinculotipo" Width="1.5" PointX="6" PointY="39.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="geapedbModel.ap_vinculoxunidade" Width="1.5" PointX="12.625" PointY="26" IsExpanded="true" />
+        <EntityTypeShape EntityType="geapedbModel.pon_horario" Width="1.5" PointX="14.25" PointY="28.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="geapedbModel.pon_horarioxvinculo" Width="1.5" PointX="19.25" PointY="20.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="geapedbModel.pon_justificativaponto" Width="2.125" PointX="25.125" PointY="20.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="geapedbModel.pon_motivojustificativa" Width="1.5" PointX="14.25" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="geapedbModel.pon_ponto" Width="1.5" PointX="6" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="geapedbModel.pon_pontoequipamento" Width="2.125" PointX="0.5" PointY="1.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="geapedbModel.pon_pontoimportacao" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="geapedbModel.roles" Width="1.5" PointX="0.625" PointY="4.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="geapedbModel.systemuser" Width="1.875" PointX="5.125" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="geapedbModel.systemuserxroles" Width="1.5" PointX="2.625" PointY="4.75" IsExpanded="true" />
+        <AssociationConnector Association="geapedbModel.fk_fun_banco" ManuallyRouted="false" />
+        <AssociationConnector Association="geapedbModel.FK_BNFVNC_BENEFICIO" ManuallyRouted="false" />
+        <AssociationConnector Association="geapedbModel.FK_BNFVNC_VINCULO" ManuallyRouted="false" />
+        <AssociationConnector Association="geapedbModel.fk_vnc_cargo" ManuallyRouted="false" />
+        <AssociationConnector Association="geapedbModel.fk_cartao_fun" ManuallyRouted="false" />
+        <AssociationConnector Association="geapedbModel.fk_funcionario" ManuallyRouted="false" />
+        <AssociationConnector Association="geapedbModel.FK_conselho" ManuallyRouted="false" />
+        <AssociationConnector Association="geapedbModel.fk_funcrs_curso" ManuallyRouted="false" />
+        <AssociationConnector Association="geapedbModel.fk_frs_vinculo" ManuallyRouted="false" />
+        <AssociationConnector Association="geapedbModel.fk_fncvnc_funcao" ManuallyRouted="false" />
+        <AssociationConnector Association="geapedbModel.FK_REF" ManuallyRouted="false" />
+        <AssociationConnector Association="geapedbModel.fk_fncvnc_vinculo" ManuallyRouted="false" />
+        <AssociationConnector Association="geapedbModel.fk_funcrs_funcionario" ManuallyRouted="false" />
+        <AssociationConnector Association="geapedbModel.fk_fundep_funcionario" ManuallyRouted="false" />
+        <AssociationConnector Association="geapedbModel.fk_funft_funcionario" ManuallyRouted="false" />
+        <AssociationConnector Association="geapedbModel.fk_vnc_funcionario" ManuallyRouted="false" />
+        <AssociationConnector Association="geapedbModel.FK_LICENCA" ManuallyRouted="false" />
+        <AssociationConnector Association="geapedbModel.FK_LICENCA_TIPO" ManuallyRouted="false" />
+        <AssociationConnector Association="geapedbModel.FK_LICENCA_VINCULO" ManuallyRouted="false" />
+        <AssociationConnector Association="geapedbModel.FK_LIC_STPRC" ManuallyRouted="false" />
+        <AssociationConnector Association="geapedbModel.fk_unidadepai" ManuallyRouted="false" />
+        <AssociationConnector Association="geapedbModel.fk_vncu_unidade" ManuallyRouted="false" />
+        <AssociationConnector Association="geapedbModel.FK_HORVNC_VNC" ManuallyRouted="false" />
+        <AssociationConnector Association="geapedbModel.FK_JUSPT_VINCULO" ManuallyRouted="false" />
+        <AssociationConnector Association="geapedbModel.FK_JUSPT_VNC" ManuallyRouted="false" />
+        <AssociationConnector Association="geapedbModel.fk_situacao" ManuallyRouted="false" />
+        <AssociationConnector Association="geapedbModel.fk_tipo" ManuallyRouted="false" />
+        <AssociationConnector Association="geapedbModel.fk_vncu_vinculo" ManuallyRouted="false" />
+        <AssociationConnector Association="geapedbModel.FK_HORVNC_HOR" ManuallyRouted="false" />
+        <AssociationConnector Association="geapedbModel.FK_JUSPT_MTV" ManuallyRouted="false" />
+        <AssociationConnector Association="geapedbModel.fk_pon_importacao" ManuallyRouted="false" />
+        <AssociationConnector Association="geapedbModel.FK_PONTO_EQUIP" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="geapedbModel.ap_horario" Width="1.5" PointX="7.75" PointY="0.75" />
+        <EntityTypeShape EntityType="geapedbModel.ap_horarioxdiasemana" Width="1.5" PointX="8.75" PointY="3.75" />
+        <EntityTypeShape EntityType="geapedbModel.ap_licencapericiasituacao" Width="1.5" PointX="9.75" PointY="0.75" />
+        <EntityTypeShape EntityType="geapedbModel.pon_situacaopericia" Width="1.5" PointX="0.75" PointY="9.75" />
+        <AssociationConnector Association="geapedbModel.fk_surol_role" />
+        <AssociationConnector Association="geapedbModel.fk_surol_user" />
+        <EntityTypeShape EntityType="geapedbModel.ap_cid10" Width="1.5" PointX="14.875" PointY="3.875" />
+        <AssociationConnector Association="geapedbModel.FK_JUSPT_CID1" />
+        <EntityTypeShape EntityType="geapedbModel.ap_funcionariocracha" Width="2.5" PointX="6.5" PointY="41.875" />
+        <AssociationConnector Association="geapedbModel.FK_CRC_VINCULO" />
+        <AssociationConnector Association="geapedbModel.fk_concla_vnc" />
+        <EntityTypeShape EntityType="geapedbModel.ap_conselho" Width="1.5" PointX="7.375" PointY="46.25" />
+        <AssociationConnector Association="geapedbModel.fk_con_cargo" />
+        <AssociationConnector Association="geapedbModel.fk_concla_conselho" />
+        <EntityTypeShape EntityType="geapedbModel.sass_avaliacaoclinica" Width="1.5" PointX="13.5" PointY="44.125" />
+        <EntityTypeShape EntityType="geapedbModel.sass_consulta" Width="2.125" PointX="13.25" PointY="36.625" />
+        <EntityTypeShape EntityType="geapedbModel.sass_prontuario" Width="1.5" PointX="10.5" PointY="38.875" />
+        <EntityTypeShape EntityType="geapedbModel.sass_prontuarioxavaliacao" Width="1.5" PointX="15.75" PointY="38.875" />
+        <AssociationConnector Association="geapedbModel.FK_PRT_VNC" />
+        <AssociationConnector Association="geapedbModel.FK_PRTAVC_AVALIACAO" />
+        <AssociationConnector Association="geapedbModel.FK_PRTAVC_PROTUARIO" />
+        <AssociationConnector Association="geapedbModel.fk_con_funcionario" />
+        <EntityTypeShape EntityType="geapedbModel.ap_feriado" Width="1.5" PointX="13.625" PointY="0.875" />
+        <EntityTypeShape EntityType="geapedbModel.ap_controlecnh" Width="1.5" PointX="4.25" PointY="43" />
+        <AssociationConnector Association="geapedbModel.fk_vinculo" />
+        <EntityTypeShape EntityType="geapedbModel.ap_controlecnh_aux" Width="1.5" PointX="6.5" PointY="50.25" />
+        <AssociationConnector Association="geapedbModel.fk_cnh" />
+        <EntityTypeShape EntityType="geapedbModel.systemuser_old" Width="1.5" PointX="11.375" PointY="4.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

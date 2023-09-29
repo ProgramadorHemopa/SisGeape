@@ -1,0 +1,33 @@
+﻿@model IEnumerable<CMM.Projects.Apresentation.Models.BeneficioVinculoModelView>
+
+<table class="table table-sm display responsive  table-responsive-lg dataTable" cellspacing="0" width="100%" id="grdBeneficio">
+    <thead class="text-center">
+
+        <tr>
+            <th>
+                ID
+            </th>
+
+            <th>
+                @Html.DisplayNameFor(model => model.VNC_ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BNF_ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BNFVNC_DATAINICIO)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BNFVNC_DATAFIM)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BNFVNC_NUMPORTARIA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.BNFVNC_DATAPORTARIA)
+            </th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+   
+</table>

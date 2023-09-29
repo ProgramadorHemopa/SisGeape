@@ -1,0 +1,84 @@
+﻿@model CMM.Projects.Apresentation.Models.FuncionarioSolicitarCrachaModelView
+
+@{
+    ViewData["TituloPagina"] = ViewBag.Title;
+}
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <div class="row-sm-12">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.FUN_NOME)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.FUN_NOME)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.VNC_ID)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.VNC_NOME)
+                        </dd>
+
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.FUNCRC_DATASOLICITACAO)
+                        </dt>
+
+                        <dd>
+                            @if (Model.FUNCRC_DATASOLICITACAO.HasValue)
+                            {
+                                @Model.FUNCRC_DATASOLICITACAO.Value.ToString("dd/MM/yyyy HH:mm:ss");
+                            }
+                        </dd>
+
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.TIPOCRACHA)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.TIPOCRACHA)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.SITUACAO)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.SITUACAO)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.FUNCRC_OBSERVACAO)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.FUNCRC_OBSERVACAO)
+                        </dd>
+
+
+                    </dl>
+
+
+                </div>
+                <hr />
+                <div class="pull-right m-t-15">
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        @Html.ActionLink("Voltar", "SolicitacaoIndex", null, new { @class = "btn-sm btn-light waves-light waves-effect" })
+                        <button type="submit" class="btn btn-sm btn-danger waves-light waves-effect d-md-inline "><i class="fa fa-vcard-o"></i> Cancelar Solicitação</button>
+
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

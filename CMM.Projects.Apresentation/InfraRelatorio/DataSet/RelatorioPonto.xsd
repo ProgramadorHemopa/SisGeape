@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="RelatorioPonto" targetNamespace="http://tempuri.org/RelatorioPonto.xsd" xmlns:mstns="http://tempuri.org/RelatorioPonto.xsd" xmlns="http://tempuri.org/RelatorioPonto.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="RelatorioPonto" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="RelatorioPonto" msprop:Generator_UserDSName="RelatorioPonto">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="Funcionario" msprop:Generator_TableClassName="FuncionarioDataTable" msprop:Generator_TableVarName="tableFuncionario" msprop:Generator_TablePropName="Funcionario" msprop:Generator_RowDeletingName="FuncionarioRowDeleting" msprop:Generator_RowChangingName="FuncionarioRowChanging" msprop:Generator_RowEvHandlerName="FuncionarioRowChangeEventHandler" msprop:Generator_RowDeletedName="FuncionarioRowDeleted" msprop:Generator_UserTableName="Funcionario" msprop:Generator_RowChangedName="FuncionarioRowChanged" msprop:Generator_RowEvArgName="FuncionarioRowChangeEvent" msprop:Generator_RowClassName="FuncionarioRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="FUN_ID" msprop:Generator_ColumnVarNameInTable="columnFUN_ID" msprop:Generator_ColumnPropNameInRow="FUN_ID" msprop:Generator_ColumnPropNameInTable="FUN_IDColumn" msprop:Generator_UserColumnName="FUN_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="MATRICULA" msprop:Generator_ColumnVarNameInTable="columnMATRICULA" msprop:Generator_ColumnPropNameInRow="MATRICULA" msprop:Generator_ColumnPropNameInTable="MATRICULAColumn" msprop:Generator_UserColumnName="MATRICULA" type="xs:string" minOccurs="0" />
+              <xs:element name="FUN_FOTO" msprop:Generator_ColumnVarNameInTable="columnFUN_FOTO" msprop:Generator_ColumnPropNameInRow="FUN_FOTO" msprop:Generator_ColumnPropNameInTable="FUN_FOTOColumn" msprop:Generator_UserColumnName="FUN_FOTO" type="xs:string" minOccurs="0" />
+              <xs:element name="NOME" msprop:Generator_ColumnVarNameInTable="columnNOME" msprop:Generator_ColumnPropNameInRow="NOME" msprop:Generator_ColumnPropNameInTable="NOMEColumn" msprop:Generator_UserColumnName="NOME" type="xs:string" minOccurs="0" />
+              <xs:element name="TIPAGEM" msprop:Generator_ColumnVarNameInTable="columnTIPAGEM" msprop:Generator_ColumnPropNameInRow="TIPAGEM" msprop:Generator_ColumnPropNameInTable="TIPAGEMColumn" msprop:Generator_UserColumnName="TIPAGEM" type="xs:string" minOccurs="0" />
+              <xs:element name="UNIDADE" msprop:Generator_ColumnVarNameInTable="columnUNIDADE" msprop:Generator_ColumnPropNameInRow="UNIDADE" msprop:Generator_ColumnPropNameInTable="UNIDADEColumn" msprop:Generator_UserColumnName="UNIDADE" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="CartaoPonto" msprop:Generator_TableClassName="CartaoPontoDataTable" msprop:Generator_TableVarName="tableCartaoPonto" msprop:Generator_TablePropName="CartaoPonto" msprop:Generator_RowDeletingName="CartaoPontoRowDeleting" msprop:Generator_RowChangingName="CartaoPontoRowChanging" msprop:Generator_RowEvHandlerName="CartaoPontoRowChangeEventHandler" msprop:Generator_RowDeletedName="CartaoPontoRowDeleted" msprop:Generator_UserTableName="CartaoPonto" msprop:Generator_RowChangedName="CartaoPontoRowChanged" msprop:Generator_RowEvArgName="CartaoPontoRowChangeEvent" msprop:Generator_RowClassName="CartaoPontoRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="VNC_ID" msprop:Generator_ColumnVarNameInTable="columnVNC_ID" msprop:Generator_ColumnPropNameInRow="VNC_ID" msprop:Generator_ColumnPropNameInTable="VNC_IDColumn" msprop:Generator_UserColumnName="VNC_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="FUN_ID" msprop:Generator_ColumnVarNameInTable="columnFUN_ID" msprop:Generator_ColumnPropNameInRow="FUN_ID" msprop:Generator_ColumnPropNameInTable="FUN_IDColumn" msprop:Generator_UserColumnName="FUN_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="DATA" msprop:Generator_ColumnVarNameInTable="columnDATA" msprop:Generator_ColumnPropNameInRow="DATA" msprop:Generator_ColumnPropNameInTable="DATAColumn" msprop:Generator_UserColumnName="DATA" type="xs:string" minOccurs="0" />
+              <xs:element name="ENTRADA1" msprop:Generator_ColumnVarNameInTable="columnENTRADA1" msprop:Generator_ColumnPropNameInRow="ENTRADA1" msprop:Generator_ColumnPropNameInTable="ENTRADA1Column" msprop:Generator_UserColumnName="ENTRADA1" type="xs:string" minOccurs="0" />
+              <xs:element name="SAIDA1" msprop:Generator_ColumnVarNameInTable="columnSAIDA1" msprop:Generator_ColumnPropNameInRow="SAIDA1" msprop:Generator_ColumnPropNameInTable="SAIDA1Column" msprop:Generator_UserColumnName="SAIDA1" type="xs:string" minOccurs="0" />
+              <xs:element name="FALTA" msprop:Generator_ColumnVarNameInTable="columnFALTA" msprop:Generator_ColumnPropNameInRow="FALTA" msprop:Generator_ColumnPropNameInTable="FALTAColumn" msprop:Generator_UserColumnName="FALTA" type="xs:string" minOccurs="0" />
+              <xs:element name="DIFERENCA" msprop:Generator_ColumnVarNameInTable="columnDIFERENCA" msprop:Generator_ColumnPropNameInRow="DIFERENCA" msprop:Generator_ColumnPropNameInTable="DIFERENCAColumn" msprop:Generator_UserColumnName="DIFERENCA" type="xs:string" minOccurs="0" />
+              <xs:element name="ATRASO" msprop:Generator_ColumnVarNameInTable="columnATRASO" msprop:Generator_ColumnPropNameInRow="ATRASO" msprop:Generator_ColumnPropNameInTable="ATRASOColumn" msprop:Generator_UserColumnName="ATRASO" type="xs:string" minOccurs="0" />
+              <xs:element name="JUSTIFICATIVA" msprop:Generator_ColumnVarNameInTable="columnJUSTIFICATIVA" msprop:Generator_ColumnPropNameInRow="JUSTIFICATIVA" msprop:Generator_ColumnPropNameInTable="JUSTIFICATIVAColumn" msprop:Generator_UserColumnName="JUSTIFICATIVA" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="UnidadeCartao" msprop:Generator_TableClassName="UnidadeCartaoDataTable" msprop:Generator_TableVarName="tableUnidadeCartao" msprop:Generator_TablePropName="UnidadeCartao" msprop:Generator_RowDeletingName="UnidadeCartaoRowDeleting" msprop:Generator_RowChangingName="UnidadeCartaoRowChanging" msprop:Generator_RowEvHandlerName="UnidadeCartaoRowChangeEventHandler" msprop:Generator_RowDeletedName="UnidadeCartaoRowDeleted" msprop:Generator_UserTableName="UnidadeCartao" msprop:Generator_RowChangedName="UnidadeCartaoRowChanged" msprop:Generator_RowEvArgName="UnidadeCartaoRowChangeEvent" msprop:Generator_RowClassName="UnidadeCartaoRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="FUN_ID" msprop:Generator_ColumnVarNameInTable="columnFUN_ID" msprop:Generator_ColumnPropNameInRow="FUN_ID" msprop:Generator_ColumnPropNameInTable="FUN_IDColumn" msprop:Generator_UserColumnName="FUN_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="MATRICULA" msprop:Generator_ColumnVarNameInTable="columnMATRICULA" msprop:Generator_ColumnPropNameInRow="MATRICULA" msprop:Generator_ColumnPropNameInTable="MATRICULAColumn" msprop:Generator_UserColumnName="MATRICULA" type="xs:string" minOccurs="0" />
+              <xs:element name="FUN_FOTO" msprop:Generator_ColumnVarNameInTable="columnFUN_FOTO" msprop:Generator_ColumnPropNameInRow="FUN_FOTO" msprop:Generator_ColumnPropNameInTable="FUN_FOTOColumn" msprop:Generator_UserColumnName="FUN_FOTO" type="xs:string" minOccurs="0" />
+              <xs:element name="NOME" msprop:Generator_ColumnVarNameInTable="columnNOME" msprop:Generator_ColumnPropNameInRow="NOME" msprop:Generator_ColumnPropNameInTable="NOMEColumn" msprop:Generator_UserColumnName="NOME" type="xs:string" minOccurs="0" />
+              <xs:element name="TIPAGEM" msprop:Generator_ColumnVarNameInTable="columnTIPAGEM" msprop:Generator_ColumnPropNameInRow="TIPAGEM" msprop:Generator_ColumnPropNameInTable="TIPAGEMColumn" msprop:Generator_UserColumnName="TIPAGEM" type="xs:string" minOccurs="0" />
+              <xs:element name="UNIDADE" msprop:Generator_ColumnVarNameInTable="columnUNIDADE" msprop:Generator_ColumnPropNameInRow="UNIDADE" msprop:Generator_ColumnPropNameInTable="UNIDADEColumn" msprop:Generator_UserColumnName="UNIDADE" type="xs:string" minOccurs="0" />
+              <xs:element name="VNC_ID" msprop:Generator_ColumnVarNameInTable="columnVNC_ID" msprop:Generator_ColumnPropNameInRow="VNC_ID" msprop:Generator_ColumnPropNameInTable="VNC_IDColumn" msprop:Generator_UserColumnName="VNC_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="DATA" msprop:Generator_ColumnVarNameInTable="columnDATA" msprop:Generator_ColumnPropNameInRow="DATA" msprop:Generator_ColumnPropNameInTable="DATAColumn" msprop:Generator_UserColumnName="DATA" type="xs:string" minOccurs="0" />
+              <xs:element name="ENTRADA1" msprop:Generator_ColumnVarNameInTable="columnENTRADA1" msprop:Generator_ColumnPropNameInRow="ENTRADA1" msprop:Generator_ColumnPropNameInTable="ENTRADA1Column" msprop:Generator_UserColumnName="ENTRADA1" type="xs:string" minOccurs="0" />
+              <xs:element name="SAIDA1" msprop:Generator_ColumnVarNameInTable="columnSAIDA1" msprop:Generator_ColumnPropNameInRow="SAIDA1" msprop:Generator_ColumnPropNameInTable="SAIDA1Column" msprop:Generator_UserColumnName="SAIDA1" type="xs:string" minOccurs="0" />
+              <xs:element name="FALTA" msprop:Generator_ColumnVarNameInTable="columnFALTA" msprop:Generator_ColumnPropNameInRow="FALTA" msprop:Generator_ColumnPropNameInTable="FALTAColumn" msprop:Generator_UserColumnName="FALTA" type="xs:string" minOccurs="0" />
+              <xs:element name="DIFERENCA" msprop:Generator_ColumnVarNameInTable="columnDIFERENCA" msprop:Generator_ColumnPropNameInRow="DIFERENCA" msprop:Generator_ColumnPropNameInTable="DIFERENCAColumn" msprop:Generator_UserColumnName="DIFERENCA" type="xs:duration" minOccurs="0" />
+              <xs:element name="ATRASO" msprop:Generator_ColumnVarNameInTable="columnATRASO" msprop:Generator_ColumnPropNameInRow="ATRASO" msprop:Generator_ColumnPropNameInTable="ATRASOColumn" msprop:Generator_UserColumnName="ATRASO" type="xs:string" minOccurs="0" />
+              <xs:element name="JUSTIFICATIVA" msprop:Generator_ColumnVarNameInTable="columnJUSTIFICATIVA" msprop:Generator_ColumnPropNameInRow="JUSTIFICATIVA" msprop:Generator_ColumnPropNameInTable="JUSTIFICATIVAColumn" msprop:Generator_UserColumnName="JUSTIFICATIVA" type="xs:string" minOccurs="0" />
+              <xs:element name="DIA" msprop:Generator_ColumnVarNameInTable="columnDIA" msprop:Generator_ColumnPropNameInRow="DIA" msprop:Generator_ColumnPropNameInTable="DIAColumn" msprop:Generator_UserColumnName="DIA" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:annotation>
+    <xs:appinfo>
+      <msdata:Relationship name="Funcionario_CartaoPonto" msdata:parent="Funcionario" msdata:child="CartaoPonto" msdata:parentkey="FUN_ID" msdata:childkey="FUN_ID" msprop:Generator_UserChildTable="CartaoPonto" msprop:Generator_ChildPropName="GetCartaoPontoRows" msprop:Generator_UserRelationName="Funcionario_CartaoPonto" msprop:Generator_ParentPropName="FuncionarioRow" msprop:Generator_RelationVarName="relationFuncionario_CartaoPonto" msprop:Generator_UserParentTable="Funcionario" />
+    </xs:appinfo>
+  </xs:annotation>
+</xs:schema>

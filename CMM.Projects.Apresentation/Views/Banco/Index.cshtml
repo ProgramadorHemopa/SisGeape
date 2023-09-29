@@ -1,0 +1,89 @@
+﻿@model IEnumerable<CMM.Projects.Apresentation.Models.bancoModelView>
+
+@{
+
+    ViewBag.Title = "Consulta Bancos";
+    ViewData["TituloPagina"] = "Consulta Bancos";
+
+}
+<div class="row">
+    <div class="col-lg-12 col-xl-12 col-md-12">
+
+        <div class="card">
+            <div class="card-body">
+                <a class=" btn btn-sm btn-primary waves-effect waves-light text-white m-1" style="margin-left:15px" onclick=abrirModal('@Url.Action("AddUpdateBanco","Banco")')><i class="fa fa-plus"></i> Novo Banco</a>
+
+
+
+                <br />
+
+                <table class="table table-sm display responsive table-striped table-bordered no-wrap" cellspacing="0" width="100%" id="grdMain">
+                    <thead class="text-center">
+                        <tr>
+                            <th>
+                                ID
+                            </th>
+                            <th>
+                                NOME
+                            </th>
+                            <th>
+                                Ações
+                            </th>
+                        </tr>
+                    </thead>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<link href="~/Scripts/Grid/DataTables-1.10.16/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+
+@section scripts{
+    @Scripts.Render("~/bundles/Grid")
+    <script type="text/javascript">
+        var dataTable;
+
+        $(document).ready(function() {
+            dataTable= $('#grdMain').DataTable({
+                "processing": "true",
+                "serverSide": "true",
+                "ajax": {
+                    "url": "@Url.Action("ListarBanco")",
+                    "type": "POST",
+                    "datatype": "json"
+                },
+                "columns":
+                [
+                    { "data": "BNC_ID", "width": "100px"},
+                    { "data": "BNC_DESCRICAO"},
+                    {
+                        "data": "BNC_ID",
+                        "render": function(data) {
+                            return "<a class='badge badge-pill btn-outline-primary btn-sm waves-effect waves-light sm-1' data-toggle='tooltip' data-placement='top' title='Editar'onclick=abrirModal('@Url.Action("AddUpdateBanco","Banco")/" +
+                                data +
+                                "')>" +
+                                "<i class='fa fa-edit fa-sm'></i></a>    <a class=' badge badge-pill btn-outline-danger btn-sm waves-effect waves-light m-1 ' data-toggle='tooltip' data-placement='top' title='Excluir' onclick=abrirModal('@Url.Action("Delete","Banco")/" +
+                                data +
+                                "') >" +
+                                "<i class='fa fa-trash'></i></a>";
+                        },
+                        "orderable": false,
+                        "searchable": false, "width": "40px"
+
+
+                    }
+                ],
+                "order":
+                    [0, "asc"]
+                ,"dom":
+                    "Bfrtip", "deferRender": true
+            });
+        });
+
+
+    </script>
+}
+

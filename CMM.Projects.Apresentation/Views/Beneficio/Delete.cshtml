@@ -1,0 +1,45 @@
+﻿@model CMM.Projects.Apresentation.Models.BeneficioModelView
+
+<div class="modal-header">
+    <h4>Você tem certeza que deseja excluir este registro?</h4>
+    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+</div>
+
+<div class="row">
+
+    <div class="modal-body">
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.BNF_DESCRICAO)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.BNF_DESCRICAO)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.BNF_VALOR)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.BNF_VALOR)
+            </dd>
+
+        </dl>
+
+
+        @using (Html.BeginForm("Delete", "Beneficio", FormMethod.Post, new { id = "formCrud" }))
+        {
+            @Html.AntiForgeryToken()
+
+
+            <div class="modal-footer">
+                <a data-dismiss="modal" class="btn btn-sm btn-outline-secondary">Voltar</a>
+                <input type="button" value="Excluir" class="btn btn-outline-danger" />
+            </div>
+        }
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/jqueryval")
+<script src="~/Scripts/ccm.projects/EnviaForm.js"></script>

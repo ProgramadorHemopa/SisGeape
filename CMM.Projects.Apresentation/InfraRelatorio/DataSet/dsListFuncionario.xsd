@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsListFuncionario" targetNamespace="http://tempuri.org/dsListFuncionario.xsd" xmlns:mstns="http://tempuri.org/dsListFuncionario.xsd" xmlns="http://tempuri.org/dsListFuncionario.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsListFuncionario" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsListFuncionario" msprop:Generator_UserDSName="dsListFuncionario">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="dsFunc" msprop:Generator_TableClassName="dsFuncDataTable" msprop:Generator_TableVarName="tabledsFunc" msprop:Generator_TablePropName="dsFunc" msprop:Generator_RowDeletingName="dsFuncRowDeleting" msprop:Generator_RowChangingName="dsFuncRowChanging" msprop:Generator_RowEvHandlerName="dsFuncRowChangeEventHandler" msprop:Generator_RowDeletedName="dsFuncRowDeleted" msprop:Generator_UserTableName="dsFunc" msprop:Generator_RowChangedName="dsFuncRowChanged" msprop:Generator_RowEvArgName="dsFuncRowChangeEvent" msprop:Generator_RowClassName="dsFuncRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="FUN_ID" msprop:Generator_ColumnVarNameInTable="columnFUN_ID" msprop:Generator_ColumnPropNameInRow="FUN_ID" msprop:Generator_ColumnPropNameInTable="FUN_IDColumn" msprop:Generator_UserColumnName="FUN_ID" type="xs:string" minOccurs="0" />
+              <xs:element name="FUN_NOME" msprop:Generator_ColumnVarNameInTable="columnFUN_NOME" msprop:Generator_ColumnPropNameInRow="FUN_NOME" msprop:Generator_ColumnPropNameInTable="FUN_NOMEColumn" msprop:Generator_UserColumnName="FUN_NOME" type="xs:string" minOccurs="0" />
+              <xs:element name="FUN_MATRICULA" msprop:Generator_ColumnVarNameInTable="columnFUN_MATRICULA" msprop:Generator_ColumnPropNameInRow="FUN_MATRICULA" msprop:Generator_ColumnPropNameInTable="FUN_MATRICULAColumn" msprop:Generator_UserColumnName="FUN_MATRICULA" type="xs:string" minOccurs="0" />
+              <xs:element name="UND_NOME" msprop:Generator_ColumnVarNameInTable="columnUND_NOME" msprop:Generator_ColumnPropNameInRow="UND_NOME" msprop:Generator_ColumnPropNameInTable="UND_NOMEColumn" msprop:Generator_UserColumnName="UND_NOME" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

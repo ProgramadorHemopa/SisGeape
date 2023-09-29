@@ -1,0 +1,38 @@
+﻿@model CMM.Projects.Apresentation.Models.bancoModelView
+
+
+
+<div class="modal-header">
+    <h3 class="modal-title"><span class="fa fa-edit"></span> @ViewBag.Title</h3>
+
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+
+</div>
+<div class="modal-body">
+
+    @using (Html.BeginForm("AddUpdateBanco", "Banco", FormMethod.Post, new { id = "formCrud" }))
+    {
+        @Html.AntiForgeryToken()
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.BNC_ID)
+
+        <div class="row">
+
+            <div class="form-group col-md-12 col-sm-12 col-lg-12">
+                @Html.LabelFor(model => model.BNC_DESCRICAO, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.BNC_DESCRICAO, new { htmlAttributes = new { @class = "form-control form-control-sm", @autocomplete = "off" } })
+                @Html.ValidationMessageFor(model => model.BNC_DESCRICAO, "", new { @class = "text-danger" })
+            </div>
+
+        </div>
+    }
+</div>
+<div class="modal-footer">
+    <a data-dismiss="modal" class="btn btn-sm btn-outline-secondary">Voltar</a>
+    <input type="button" value="Salvar" class="btn btn-secondary" />
+</div>
+
+
+@Scripts.Render("~/bundles/jqueryval")
+<script src="~/Scripts/ccm.projects/EnviaForm.js"></script>

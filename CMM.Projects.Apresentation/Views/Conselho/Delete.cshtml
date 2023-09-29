@@ -1,0 +1,48 @@
+﻿@model CMM.Projects.Apresentation.Models.ConselhoModelView
+
+@{
+    ViewData["TituloPagina"] = ViewBag.Title;
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+
+                <h4>Você tem certeza que deseja excluir este registro?</h4>
+                <div>
+
+                    <hr />
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.CRG_ID)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.CRG_NOME)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.CON_NOME)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.CON_NOME)
+                        </dd>
+
+                    </dl>
+
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-actions no-color">
+                            <input type="submit" value="Excluir" class="btn btn-sm btn-danger" />
+                            @Html.ActionLink("Voltar", "Index", null, new { @class = "btn-sm btn-light waves-light waves-effect" })
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

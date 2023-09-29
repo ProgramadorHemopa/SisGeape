@@ -1,0 +1,236 @@
+﻿@using CMM.Projects.Apresentation.Utils
+@using System.Collections.Generic
+@{
+
+    Layout = null;
+    var Unidade = TempData["Unidade"] as CMM.Projects.Apresentation.Models.UnidadeCartaoPontoModelView;
+    var Cponto = TempData["CartaoPonto"] as List<CMM.Projects.Apresentation.Models.CartaoPontoPlantaoView>;
+    var periodoRelatorio = (TempData["Periodo"] as DateTime?).Value.ToString("MMMM/yyyy");
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="icon" href="@Url.Content("~/icone-hemopa1.ico")" />
+    <title>Relatório de Ponto Plantão - @Unidade.UNIDADE </title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/assets/js/jquery.min.js"></script>
+    <style TYPE="text/css">
+
+        .page-breaker {
+            display: block;
+            clear: both;
+            page-break-after: always;
+        }
+
+
+        table tbody tr td:before,
+        table tbody tr td:after {
+            content: "";
+            height: 4px;
+            display: block;
+        }
+    </style>
+</head>
+<body class="container" style="background-color:white;font-size:10px;font-weight:500">
+
+    @if (Cponto.Count != 0)
+    {
+        foreach (var item in Cponto.GroupBy(x => x.DATA.Month).ToList())
+        {
+
+            <div class="container-fluid">
+                <div class="header" style="text-align:center">
+                    <img src="~/Imagem/cabecalho.png" style="width:100%; height:120px;align-content:center" />
+                    <label style="TEXT-ALIGN:center; font-size:25px; font-weight:bold" id="txtheader">
+                        Relatório de Ponto Servidor
+                    </label>
+                    <br />
+                    <label style="TEXT-ALIGN:center;font-weight:bold;font-size:18px">@Unidade.UNIDADE - Período: @periodoRelatorio.ToUpper() </label>
+                </div>
+                <hr />
+
+                @foreach (var semana in item.OrderBy(x => x.DATA).GroupBy(x => x.DATA.Day).ToList())
+                {
+
+                    var sem = @semana.FirstOrDefault();
+                    <br>
+                    @*Gera o período semanal para exibição*@
+                    var periodo_inicio = new DateTime();
+                    var periodo_fim = sem.DATA;
+                    if ((int)sem.DATA.DayOfWeek == 6)
+                    {
+                        periodo_inicio = new DateTime(sem.DATA.Year, sem.DATA.Month, (sem.DATA.Day - 5));
+                        periodo_fim = new DateTime(@sem.DATA.Year, @sem.DATA.Month, (@sem.DATA.Day + 1));
+                    }
+                    else
+                    if ((int)sem.DATA.DayOfWeek == 0)
+                    {
+                        periodo_inicio = new DateTime(sem.DATA.Year, sem.DATA.Month, (sem.DATA.Day - 6));
+                    }
+
+                    <div class="row m-t-10">
+                        <div class="col-xs-12">
+                            @if ((int)sem.DATA.DayOfWeek == 6)
+                            {
+                                <h5 style="font-weight:bold">
+                                    Perído de @periodo_inicio.ToShortDateString() a @periodo_fim.ToShortDateString()
+                                </h5>
+                            }
+                            <text style="font-weight:bold; font-size: 17px">
+                                @sem.DATA.ToString("dddd").ToUpper()
+                            </text>
+                            <br />
+
+                        </div>
+                    </div>
+
+                    <div class="row mt form-group">
+                        <div class="col-xs-12">
+                            <table class=" table-sm  dtr-inline table-bordered" width="100%">
+                                <thead style="text-align:center; font-weight:bold;font-size:small;">
+                                    <tr>
+                                        <td>DATA</td>
+                                        <td>FUNCIONARIO</td>
+                                        <td>
+                                            ENTRADA
+                                        </td>
+                                        <td>
+                                            SAÍDA
+                                        </td>
+                                        <td>
+                                            DIFERENÇA
+                                        </td>
+                                        <td>
+                                            OBSERVAÇÃO
+                                        </td>
+                                    </tr>
+                                </thead>
+                                <tbody style="text-align:center;font-size:12px">
+                                    @foreach (var item2 in semana.OrderBy(x => x.DATA).ToList())
+                                    {
+
+                                        var bgColor = "";
+                                        if ((int)item2.DATA.DayOfWeek != 6 && (int)item2.DATA.DayOfWeek != 0)
+                                        {
+                                            if (item2.FERIADO != null)
+                                            {
+                                                bgColor = "#FFF0F5";
+                                            }
+                                            else
+                                            {
+                                                bgColor = "Transparent";
+                                            }
+                                        }
+                                        else
+                                        {
+                                            bgColor = "#F5F5F5";
+                                        }
+
+                                        <tr style="background-color:@bgColor">
+                                            <td>
+                                                @item2.DATA.ToShortDateString() - @System.Globalization.DateTimeFormatInfo.CurrentInfo.GetAbbreviatedDayName(item2.DATA.DayOfWeek).ToUpper()
+                                            </td>
+                                            <td class="fixed" style="width:180px;">
+                                                @item2.NOME_FUNCIONARIO
+                                            </td>
+                                            <td class="fixed" style="width:100px;">
+                                                @item2.ENTRADA
+                                            </td>
+                                            <td class="fixed" style="width:100px;">
+                                                @item2.SAIDA
+                                            </td>
+                                            <td class="fixed" style="width:120px;">
+                                                @if (item2.DIFERENCA.HasValue)
+                                                {@item2.DIFERENCA.Value}
+                                            </td>
+                                            <td class="fixed" style="font-size:x-small;text-align:start;width:250px">
+                                                @item2.OBSERVACOES
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+
+                        </div>
+                    </div>
+                    <hr />
+
+                    if (@sem.DATA.DayOfWeek == 0)
+                    {
+                        <div class="page-breaker"></div>
+                        <!-- INICIO -> ADICIONA CABEÇALHO APÓS A QUEBRA DE PAGINA-->
+                        <div class="header" style="text-align:center">
+                            <img src="~/Imagem/cabecalho.png" style="width:100%; height:120px;align-content:center" />
+                            <label style="TEXT-ALIGN:center; font-size:25px; font-weight:bold" id="txtheader">
+                                Relatório de Ponto Servidor
+                            </label>
+                            <br />
+                            <label style="TEXT-ALIGN:center;font-weight:bold;font-size:18px">@Unidade.UNIDADE - Período: @periodoRelatorio.ToUpper() </label>
+                        </div>
+                        <hr />
+                        <!-- FIM -> ADICIONA CABEÇALHO APÓS A QUEBRA DE PAGINA-->
+                    }
+
+                }
+
+            </div>
+        }
+
+    }
+    else
+    {
+        @*Se não houver dados retornados, é criada um pagina indicando que não houve retorno de dados*@
+        <div class="container-fluid">
+            <div class="header" style="text-align:center">
+                <img src="~/Imagem/cabecalho.png" style="width:100%; height:120px;align-content:center" />
+                <label style="TEXT-ALIGN:center; font-size:25px; font-weight:bold" id="txtheader">
+                    Relatório de Ponto Servidor
+                </label>
+                <br />
+                <label style="TEXT-ALIGN:center;font-weight:bold;font-size:18px">@Unidade.UNIDADE - Período: @periodoRelatorio.ToUpper() </label>
+            </div>
+            <hr />
+
+            <div class="row mt form-group">
+                <div class="col-xs-12">
+                    <table class=" table-sm  dtr-inline table-bordered" width="100%">
+                        <thead style="text-align:center; font-weight:bold;font-size:small;">
+                            <tr>
+                                <td>DATA</td>
+                                <td>FUNCIONARIO</td>
+                                <td>
+                                    ENTRADA
+                                </td>
+                                <td>
+                                    SAÍDA
+                                </td>
+                                <td>
+                                    DIFERENÇA
+                                </td>
+                                <td>
+                                    OBSERVAÇÃO
+                                </td>
+                            </tr>
+                        </thead>
+                        <tbody style="text-align:center;font-size:12px">
+                            <tr style="background-color:#E6E6FA">
+                                <td colspan="6" class="fixed">
+                                    Nenhum Dado Registrado
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+            <hr />
+
+        </div>
+    }
+
+</body>
+</html>

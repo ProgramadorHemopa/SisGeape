@@ -1,0 +1,186 @@
+﻿@model CMM.Projects.Apresentation.Models.FuncionarioPesquisaModelView
+@{
+    ViewBag.Title = "Consultar Servidor";
+    ViewData["TituloPagina"] = "Consulta Servidor";
+
+
+}
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-xl-12">
+
+        <div class="card">
+            <div class="card-body">
+
+                <form>
+                    <div class="form-row">
+
+
+
+                        <div class="form-group col-md-2">
+                            @Html.Label("MATRICULA", htmlAttributes: new { @class = "" })
+                            @Html.Editor("MATRICULA", new { htmlAttributes = new { @class = "form-control form-control-sm", @id = "MATRICULA", @onkeyup = "somenteNumeros(this);" } })
+
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            @Html.Label("NOME", htmlAttributes: new { @class = "" })
+                            @Html.Editor("NOME", new { htmlAttributes = new { @class = "form-control form-control-sm", @id = "NOME" } })
+
+
+                        </div>
+
+                        <div class="form-group col-md-4">
+                            @Html.Label("CARGO", htmlAttributes: new { @class = "" })
+                            @Html.DropDownList("CARGO", (SelectList)ViewBag.Cargo, "-- Todos --", htmlAttributes: new { @class = "form-control form-control-sm", @id = "CARGO" })
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-row">
+
+                        <div class="form-group col-md-4">
+                            @Html.Label("UNIDADE", htmlAttributes: new { @class = "" })
+                            @Html.DropDownList("UNIDADE", (SelectList)ViewBag.Unidade, "-- Todos --", htmlAttributes: new { @class = "form-control form-control-sm", @id = "UNIDADE" })
+
+                        </div>
+
+
+                        <div class="form-group col-md-4">
+                            @Html.Label("TIPO", htmlAttributes: new { @class = "" })
+                            @Html.DropDownList("TIPO", ViewBag.Tipo as IEnumerable<SelectListItem>, "-- Todos --", htmlAttributes: new { @class = "form-control form-control-sm", @id = "TIPO" })
+
+                        </div>
+                        <div class="form-group col-md-2">
+                            @Html.Label("SITUAÇÃO", htmlAttributes: new { @class = "" })
+                            @Html.DropDownListFor(model => model.SITUACAO, null, "-- Todos --", htmlAttributes: new { @class = "form-control form-control-sm", @id = "SITUACAO" })
+
+                        </div>
+
+
+                        <div class="form-group col-md-2">
+                            @Html.Label("BENEFÍCIO", htmlAttributes: new { @class = "" })
+                            @Html.DropDownList("BENEFICIO", (SelectList)ViewBag.Beneficio, "-- Todos --", htmlAttributes: new { @class = "form-control form-control-sm", @id = "BENEFICIO" })
+
+                        </div>
+
+                    </div>
+
+
+
+
+                </form>
+
+                <hr />
+
+                <div class="pull-right">
+
+                    <a href="@Url.Action("Cadastro","Funcionario")" class="btn btn-sm btn-primary"><i class="fa fa-plus"></i> Novo Servidor</a>
+                    <button type="button" class="btn btn-sm btn-secondary d-md-inline " onclick="Pesquisar()" id="btnPesquisar"><i class="fa fa-search"></i> Pesquisar</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-xl-12">
+
+        <div class="card">
+            <div class="card-body">
+
+                <div class="row m-b-15">
+                    <table class="table table-sm table-bordered table-striped dt-responsive  dtr-inline collapsed" id="grdMain">
+                        <thead class="text-center">
+                            <tr>
+
+                                <th>SERVIDOR</th>
+                               
+                                <th>MATRICULA</th>
+                                <th>NOME</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                    </table>
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link href="~/Scripts/Grid/DataTables-1.10.16/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+
+@section scripts{
+    @Scripts.Render("~/bundles/Grid")
+
+    <script type="text/javascript">
+        var dataTable;
+
+        function LoadFunc(url) {
+                  location.href = url;
+
+        };
+
+        function keypressHandler(e) {
+            if (e.which == 13) {
+                e.preventDefault();
+                $(this).blur();
+                $('#btnPesquisar').focus().click();
+            }
+        }
+
+        $(document).keypress(keypressHandler);
+
+
+       function Pesquisar() {
+
+            if ($.fn.DataTable.isDataTable('#grdMain'))
+            {
+                dataTable.destroy();
+
+            }
+
+            dataTable= $('#grdMain').DataTable({
+                "processing": "true",
+                "serverSide": "true",
+                "autoWidth": false,
+                "responsive":true,
+                "ajax": {
+                    "data": { pMAT: $('#MATRICULA').val(), pNome: $('#NOME').val(), pCrg: $('#CARGO').val(), pUnd: $('#UNIDADE').val(), pVNCTP: $('#TIPO').val(), pVNCST: $('#SITUACAO').val(), pBNF: $('#BENEFICIO').val() },
+                    "url": "@Url.Action("InterfacePesquisa")",
+                    "type": "POST",
+                    "datatype": "json"
+                },
+                "columns":
+                [
+                    { "data": "FUN_ID"
+                    },
+                        { "data": "FUN_MATRICULA"},
+                        { "data": "FUN_NOME"},
+                    {
+                        "data": "FUN_ID",
+                        "render": function(data) {
+                            return "<a class='btn-sm btn-outline-primary' href='@Url.Action("Cadastro","Funcionario")/" + data + "')>Visualizar</a>";
+                   
+                        },
+                        "orderable": false,
+                        "searchable": false,
+
+                    }
+                ],
+                "order":
+                    [2, "asc"]
+                , "dom": '<"top">rt<"bottom"ip><"clear">',
+                "deferRender": true
+            });
+
+
+        };
+
+
+    </script>
+}

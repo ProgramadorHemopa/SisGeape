@@ -1,0 +1,126 @@
+﻿@model IEnumerable<CMM.Projects.Apresentation.Models.CargoModelView>
+
+@{
+    ViewBag.Title = "Index";
+    ViewData["TituloPagina"] = "Consulta Cargos";
+
+}
+
+<div class="row">
+    <div class="col-lg-12 col-xl-12 col-md-12">
+        <div class="card">
+            <div class="card-body">
+                <a class=" btn btn-sm btn-primary waves-effect waves-light text-white m-1" style="margin-left:15px" onclick=abrirModal('@Url.Action("AddUpdateCargo","Cargo")')><i class="fa fa-plus"></i> Novo Cargo</a>
+
+
+
+                <br />
+                <table class="table table-sm display responsive  table-striped table-bordered no-wrap" width="100%" cellspacing="0" id="grdMain">
+                    <thead class="text-center">
+                        <tr>
+                            <th>
+                                ID
+                            </th>
+                            <th>
+                                CODIGO
+                            </th>
+                            <th>
+                                NOME
+                            </th>
+
+                            <th>
+                                REF SALARIAL
+                            </th>
+                            <th>
+                                REF CARGO
+                            </th>
+                            <th>
+                                RISCO
+                            </th>
+                            <th>
+                                ESCOLARIDADE
+                            </th>
+                            <th>
+                                DESCRICAO
+                            </th>
+                            <th>
+                                SALARIO BASE
+                            </th>
+
+                            <th>
+                                Ações
+                            </th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<link href="~/Scripts/Grid/DataTables-1.10.16/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<link href="~/Scripts/Grid/Responsive-2.2.1/css/responsive.bootstrap4.min.css" rel="stylesheet" />
+
+@section scripts{
+    @Scripts.Render("~/bundles/Grid")
+    <script type="text/javascript">
+        var dataTable;
+
+        $(document).ready(function() {
+            dataTable = $('#grdMain').DataTable({
+                "responsive": "true",
+                "processing": "true",
+                "serverSide": "true",
+                "ajax": { url: "api/Cargo", "method": "POST" },
+                "columns":
+                [
+                    { "data": "CRG_ID"},
+                    { "data": "CRG_CODIGO"},
+                    { "data": "CRG_NOME"},
+                   
+                    { "data": "CRG_REFSALARIAL" },
+                    { "data": "CRG_REFCARGO" },
+                    { "data": "CRG_RISCOS" }
+                    ,{
+                            "data": "CRG_ESCOLARIDADE", "render": function (data) {
+                                if (data === 1)
+                                    return 'Fundamental';
+                                else if (data === 2)
+                                    return 'Médio';
+                                else if (data === 3)
+                                    return 'Superior';
+                                else
+                                    return ''; }
+
+                        },
+                        { "data": "CRG_DESCRICAO" },
+                    { "data": "CRG_BASESALARIAL", "render": $.fn.dataTable.render.number('.', ',', 2, 'R$ ') },
+                    {
+                        "data": "CRG_ID",
+                        "render": function(data) {
+                            return "<a class='badge badge-pill btn-outline-primary btn-sm waves-effect waves-light sm-1' data-toggle='tooltip' data-placement='top' title='Editar'onclick=abrirModal('@Url.Action("AddUpdateCargo","Cargo")/" +
+                                data +
+                                "')>" +
+                                "<i class='fa fa-edit fa-sm'></i></a>    <a class=' badge badge-pill btn-outline-danger btn-sm waves-effect waves-light m-1 ' data-toggle='tooltip' data-placement='top' title='Excluir' onclick=abrirModal('@Url.Action("Delete","Cargo")/" +
+                                data +
+                                "') >" +
+                                "<i class='fa fa-trash'></i></a>";
+                        },
+                        "orderable": false,
+                        "searchable": false, "width": "40px"
+
+                    }
+                    ],
+                "order":
+                    [0, "asc"]
+                ,"dom":
+                    "Bfrtip"
+                , "deferRender": true
+            });
+        });
+
+
+    </script>
+}

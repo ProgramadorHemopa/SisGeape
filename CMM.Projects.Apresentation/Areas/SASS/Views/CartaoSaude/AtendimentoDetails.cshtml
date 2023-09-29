@@ -1,0 +1,175 @@
+﻿@model CMM.Projects.Apresentation.Areas.SASS.Models.ConsultaModelView
+@using CMM.Projects.Apresentation.Utils
+
+@{
+    ViewData["TituloPagina"] = "Detalhes Atendimento - " + Model.CON_ID.ToString() +" "+ Model.FUN_NOME.ToUpper();
+}
+
+<div class="row">
+    <div class="col-12">
+        <div class="card m-b-20">
+            <div class="card-body">
+
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.FUN_ID)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.FUN_NOME)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CON_DATA)
+                    </dt>
+
+                    <dd>
+                        @Model.CON_DATA.Value.ToString("dd/MM/yyyy")
+                    </dd>
+
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CON_PESO)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CON_PESO)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CON_ALTURA)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CON_ALTURA)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CON_IMC)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CON_IMC)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CON_ANTIHBS)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CON_ANTIHBS)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CON_PRESSAOARTERIALMAX)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CON_PRESSAOARTERIALMAX)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CON_PRESSAOARTERIALMIN)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CON_PRESSAOARTERIALMIN)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CON_GLICEMIA)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CON_GLICEMIA)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CON_COLESTEROLTOTAL)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CON_COLESTEROLTOTAL)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CON_TRIGLICERIDEOS)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CON_TRIGLICERIDEOS)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CON_HDL)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CON_HDL)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CON_LDL)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CON_LDL)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CON_ACIDOURICO)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CON_ACIDOURICO)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CON_CIRCUNFERENCIAABDOMINAL)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CON_CIRCUNFERENCIAABDOMINAL)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CON_RESPATENDIMENTO)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CON_RESPATENDIMENTO)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.AntiHBS)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.AntiHBS)
+                    </dd>
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CON_TIPO)
+                    </dt>
+
+                    <dd>
+                        @Model.CON_TIPO.Descricao()
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CON_OBSERVACAO)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CON_OBSERVACAO)
+                    </dd>
+                </dl>
+                <hr />
+                <div class="pull-right">
+                    @Html.ActionLink("Voltar", "Details", new { id = Model.FUN_ID }, new { @class = "btn-sm btn-light" })
+                    @Html.ActionLink("Editar", "Atendimento", new { id = Model.CON_ID }, new { @class = "btn-sm btn-warning" })
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

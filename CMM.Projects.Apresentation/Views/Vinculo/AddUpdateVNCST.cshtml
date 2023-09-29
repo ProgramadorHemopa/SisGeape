@@ -1,0 +1,39 @@
+﻿@model CMM.Projects.Apresentation.Models.VinculoSituacaoModelView
+
+
+
+
+<div class="modal-header">
+    <h3 class="modal-title"><span class="fa fa-edit"></span> @ViewBag.Title</h3>
+
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+
+</div>
+<div class="modal-body">
+    @using (Html.BeginForm("AddUpdateVNCST", "Vinculo", FormMethod.Post, new { id = "formCrud" }))
+    {
+        @Html.AntiForgeryToken()
+
+
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.VNCST_ID)
+        <div class="row">
+            @Html.LabelFor(model => model.VNCST_DESCRICAO, htmlAttributes: new { @class = "control-label" })
+            <div class="form-group col-md-12 col-lg-12 col-xs-12 ">
+                @Html.EditorFor(model => model.VNCST_DESCRICAO, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                @Html.ValidationMessageFor(model => model.VNCST_DESCRICAO, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+    }
+</div>
+<div class="modal-footer">
+    <a data-dismiss="modal" class="btn btn-sm btn-outline-secondary">Voltar</a>
+    <input type="button" value="Salvar" class="btn btn-secondary" />
+</div>
+
+@Scripts.Render("~/bundles/jqueryval")
+<script src="~/Scripts/ccm.projects/EnviaForm.js"></script>

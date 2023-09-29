@@ -1,0 +1,397 @@
+﻿@model CMM.Projects.Apresentation.Areas.SASS.Models.ConsultaModelView
+@using CMM.Projects.Apresentation.Utils;
+
+
+@{
+    ViewData["TituloPagina"] = "Detalhes Atendimento - Servidor: " + Model.FUN_NOME;
+}
+@if (Model.CON_ID == 0)
+{
+    <div class="row m-b-15">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="form-group text-center">
+                        <h4>Selecione o tipo de atendimento</h4>
+                        <button onclick="javascript:TipoAtendimento('1')" class="btn btn-sm btn-outline-primary atendimentos">Admissional</button>
+                        <button onclick="javascript:TipoAtendimento('2')" class="btn btn-sm btn-outline-primary atendimentos">Períodico</button>
+                        <button onclick="javascript:TipoAtendimento('3')" class="btn btn-sm btn-outline-primary atendimentos">Retorno ao Trabalho</button>
+                        <button onclick="javascript:TipoAtendimento('4')" class="btn btn-sm btn-outline-primary atendimentos">Demissional</button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+
+
+
+
+<div class="row m-b-15" id="Admissional" style="display:none;">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+
+
+                @using (Html.BeginForm("Atendimento", "CartaoSaude", FormMethod.Post, new { @autocomplete = "off" }))
+                {
+                    @Html.ValidationMessageFor(model => model.CON_TIPO, "", new { @class = "text-danger" })
+
+                    @Html.AntiForgeryToken()
+
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.CON_ID)
+                    @Html.HiddenFor(model => model.FUN_ID)
+                    @Html.HiddenFor(model => model.CON_TIPO)
+                    if (Model.CON_TIPO.HasValue)
+                    {
+                        <div class="row m-b-15">
+
+
+                            <div class="col-lg-4 col-sm-12 col-xl-4">
+                                @Html.LabelFor(model => model.CON_TIPO, htmlAttributes: new { @class = "control-label " })
+                                @Html.EnumDropDownListFor(model => model.CON_TIPO, "Selecione", htmlAttributes: new { @class = "form-control form-control-sm" })
+                                @Html.ValidationMessageFor(model => model.CON_TIPO, "", new { @class = "text-danger" })
+
+                            </div>
+
+                            <div class="col-lg-4 col-sm-12 col-xl-4">
+                                @Html.LabelFor(model => model.CON_RESPATENDIMENTO, htmlAttributes: new { @class = "control-label " })
+                                @Html.DropDownListFor(model => model.CON_RESPATENDIMENTO, (SelectList)ViewBag.RespAtendimento, "Selecione", htmlAttributes: new { @class = "form-control form-control-sm" })
+                                @Html.ValidationMessageFor(model => model.CON_RESPATENDIMENTO, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-lg-4 col-sm-12 col-xl-4">
+
+                                @Html.LabelFor(model => model.CON_DATA, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.CON_DATA, new { htmlAttributes = new { @class = "form-control form-control-sm", Value = !(Model.CON_DATA.HasValue) ? DateTime.Today.ToString("yyyy-MM-dd") : Model.CON_DATA.Value.ToString("yyyy-MM-dd") } })
+                                @Html.ValidationMessageFor(model => model.CON_DATA, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    }
+                    else
+                    {<div class="row m-b-15">
+
+
+                            <div class="col-lg-6 col-sm-12 col-xl-6">
+                                @Html.LabelFor(model => model.CON_RESPATENDIMENTO, htmlAttributes: new { @class = "control-label " })
+                                @Html.DropDownListFor(model => model.CON_RESPATENDIMENTO, (SelectList)ViewBag.RespAtendimento, "Selecione", htmlAttributes: new { @class = "form-control form-control-sm" })
+                                @Html.ValidationMessageFor(model => model.CON_RESPATENDIMENTO, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-lg-6 col-sm-12 col-xl-6">
+
+                                @Html.LabelFor(model => model.CON_DATA, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.CON_DATA, new { htmlAttributes = new { @class = "form-control form-control-sm", Value = DateTime.Today.ToString("yyyy-MM-dd") } })
+                                @Html.ValidationMessageFor(model => model.CON_DATA, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    }
+                    <div class="row m-b-15">
+
+                        <div class="col-lg-4 col-sm-12 col-xl-4">
+
+                            @Html.LabelFor(model => model.CON_SEDENTARISMO, htmlAttributes: new { @class = "control-label " })
+                            @Html.EnumDropDownListFor(model => model.CON_SEDENTARISMO, "Selecione", htmlAttributes: new { @class = "form-control form-control-sm" })
+                            @Html.ValidationMessageFor(model => model.CON_SEDENTARISMO, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="col-lg-4 col-sm-12 col-xl-4">
+
+                            @Html.LabelFor(model => model.CON_FUMA, htmlAttributes: new { @class = "control-label " })
+                            @Html.EnumDropDownListFor(model => model.CON_FUMA, "Selecione", htmlAttributes: new { @class = "form-control form-control-sm" })
+                            @Html.ValidationMessageFor(model => model.CON_FUMA, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="col-lg-4 col-sm-12 col-xl-4">
+
+                            @Html.LabelFor(model => model.CON_ETILISMO, htmlAttributes: new { @class = "control-label " })
+                            @Html.EnumDropDownListFor(model => model.CON_ETILISMO, "Selecione", htmlAttributes: new { @class = "form-control form-control-sm" })
+                            @Html.ValidationMessageFor(model => model.CON_ETILISMO, "", new { @class = "text-danger" })
+
+                        </div>
+
+                    </div>
+                    <div class="row m-b-15">
+
+                        <div class="col-lg-6 col-sm-12 col-xl-6">
+
+                            @Html.LabelFor(model => model.CON_HIPERTENSO, htmlAttributes: new { @class = "control-label " })
+                            @Html.EnumDropDownListFor(model => model.CON_HIPERTENSO, "Selecione", htmlAttributes: new { @class = "form-control form-control-sm" })
+                            @Html.ValidationMessageFor(model => model.CON_HIPERTENSO, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="col-lg-6 col-sm-12 col-xl-6">
+
+                            @Html.LabelFor(model => model.CON_DIABETICO, htmlAttributes: new { @class = "control-label " })
+                            @Html.EnumDropDownListFor(model => model.CON_DIABETICO, "Selecione", htmlAttributes: new { @class = "form-control form-control-sm" })
+                            @Html.ValidationMessageFor(model => model.CON_DIABETICO, "", new { @class = "text-danger" })
+
+                        </div>
+
+
+                    </div>
+                    <hr />
+
+
+
+
+                    <div class="row m-b-15">
+
+
+                        <div class="col-lg-4 col-sm-12 col-xl-4">
+                            @Html.LabelFor(model => model.CON_PESO, htmlAttributes: new { @class = "control-label " })
+                            <div class="input-group input-group-sm mb-3">
+                                @Html.EditorFor(model => model.CON_PESO, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">kg</span>
+                                </div>
+
+                            </div>
+                            @Html.ValidationMessageFor(model => model.CON_PESO, "", new { @class = "text-danger" })
+
+
+                        </div>
+                        <div class="col-lg-4 col-sm-12 col-xl-4">
+                            @Html.LabelFor(model => model.CON_ALTURA, htmlAttributes: new { @class = "control-label " })
+                            <div class="input-group input-group-sm mb-3">
+                                @Html.EditorFor(model => model.CON_ALTURA, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">mt</span>
+                                </div>
+
+                            </div>
+                            @Html.ValidationMessageFor(model => model.CON_ALTURA, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="col-lg-4 col-sm-12 col-xl-4">
+                            @Html.LabelFor(model => model.CON_IMC, htmlAttributes: new { @class = "control-label " })
+                            <div class="input-group input-group-sm mb-3">
+                                @Html.EditorFor(model => model.CON_IMC, new { htmlAttributes = new { @class = "form-control form-control-sm", @readonly = "readonly" } })
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="fa fa-filter"></i></span>
+                                </div>
+
+                            </div>
+                            @Html.ValidationMessageFor(model => model.CON_IMC, "", new { @class = "text-danger" })
+
+                        </div>
+
+                    </div>
+                    <div class="row m-b-15">
+
+
+                        <div class="col-lg-4 col-sm-12 col-xl-4">
+                            @Html.LabelFor(model => model.CON_PRESSAOARTERIALMAX, htmlAttributes: new { @class = "control-label " })
+                            <div class="input-group input-group-sm mb-3">
+                                @Html.EditorFor(model => model.CON_PRESSAOARTERIALMAX, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">mmHg</span>
+                                </div>
+
+                            </div>
+                            @Html.ValidationMessageFor(model => model.CON_PRESSAOARTERIALMAX, "", new { @class = "text-danger" })
+
+
+                        </div>
+                        <div class="col-lg-4 col-sm-12 col-xl-4">
+                            @Html.LabelFor(model => model.CON_PRESSAOARTERIALMIN, htmlAttributes: new { @class = "control-label " })
+                            <div class="input-group input-group-sm mb-3">
+                                @Html.EditorFor(model => model.CON_PRESSAOARTERIALMIN, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">mmHg</span>
+                                </div>
+
+                            </div>
+                            @Html.ValidationMessageFor(model => model.CON_PRESSAOARTERIALMIN, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="col-lg-4 col-sm-12 col-xl-4">
+                            @Html.LabelFor(model => model.CON_GLICEMIA, htmlAttributes: new { @class = "control-label " })
+                            <div class="input-group input-group-sm mb-3">
+                                @Html.EditorFor(model => model.CON_GLICEMIA, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">mg/dl</span>
+                                </div>
+
+                            </div>
+                            @Html.ValidationMessageFor(model => model.CON_GLICEMIA, "", new { @class = "text-danger" })
+
+                        </div>
+
+                    </div>
+
+
+                    <div class=" row m-b-15">
+
+                        <div class="col-lg-4 col-sm-12 col-xl-4">
+                            @Html.LabelFor(model => model.CON_HDL, htmlAttributes: new { @class = "control-label " })
+                            <div class="input-group input-group-sm mb-3">
+                                @Html.EditorFor(model => model.CON_HDL, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">mg/dl</span>
+                                </div>
+
+                            </div>
+                            @Html.ValidationMessageFor(model => model.CON_HDL, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="col-lg-4 col-sm-12 col-xl-4">
+                            @Html.LabelFor(model => model.CON_LDL, htmlAttributes: new { @class = "control-label " })
+                            <div class="input-group input-group-sm mb-3">
+                                @Html.EditorFor(model => model.CON_LDL, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">mg/dl</span>
+                                </div>
+
+                            </div>
+                            @Html.ValidationMessageFor(model => model.CON_LDL, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="col-lg-4 col-sm-12 col-xl-4">
+
+                            @Html.LabelFor(model => model.CON_TRIGLICERIDEOS, htmlAttributes: new { @class = "control-label" })
+                            <div class="input-group input-group-sm mb-3">
+                                @Html.EditorFor(model => model.CON_TRIGLICERIDEOS, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">mg/dl</span>
+                                </div>
+
+                            </div>
+                            @Html.ValidationMessageFor(model => model.CON_TRIGLICERIDEOS, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+
+
+                    <div class="row m-b-15">
+                        <div class="col-lg-4 col-sm-12 col-xl-4">
+
+                            @Html.LabelFor(model => model.CON_COLESTEROLTOTAL, htmlAttributes: new { @class = "control-label " })
+                            <div class="input-group input-group-sm mb-3">
+                                @Html.EditorFor(model => model.CON_COLESTEROLTOTAL, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">mg/dl</span>
+                                </div>
+
+                            </div>
+                            @Html.ValidationMessageFor(model => model.CON_COLESTEROLTOTAL, "", new { @class = "text-danger" })
+
+                        </div>
+                        <div class="col-lg-4 col-sm-12 col-xl-4">
+
+                            @Html.LabelFor(model => model.CON_ANTIHBS, htmlAttributes: new { @class = "control-label " })
+                            @Html.EditorFor(model => model.CON_ANTIHBS, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+
+                            <small id="resultAntiHBS"></small>
+                            @Html.ValidationMessageFor(model => model.CON_ANTIHBS, "", new { @class = "error" })
+
+                        </div>
+                        <div class="col-lg-4 col-sm-12 col-xl-4">
+
+                            @Html.LabelFor(model => model.CON_CIRCUNFERENCIAABDOMINAL, htmlAttributes: new { @class = "control-label " })
+                            <div class="input-group input-group-sm mb-3">
+                                @Html.EditorFor(model => model.CON_CIRCUNFERENCIAABDOMINAL, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">cm</span>
+                                </div>
+
+                            </div>
+                            @Html.ValidationMessageFor(model => model.CON_CIRCUNFERENCIAABDOMINAL, "", new { @class = "text-danger" })
+
+                        </div>
+                    </div>
+
+
+
+
+
+                    <div class="row m-b-15">
+
+                        <div class="col-lg-12 col-sm-12 col-xl-12">
+                            @Html.LabelFor(model => model.CON_OBSERVACAO, htmlAttributes: new { @class = "control-label " })
+                            @Html.TextAreaFor(model => model.CON_OBSERVACAO, htmlAttributes: new { @class = "form-control form-control-sm", @colspan = 3 })
+                            @Html.ValidationMessageFor(model => model.CON_OBSERVACAO, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+                    <hr />
+
+                    <div class="form-group">
+                        <div class="pull-right m-t-15">
+                            <a href="@Request.UrlReferrer" class="btn btn-sm btn-light">Voltar</a>
+
+                            <input type="submit" value="Salvar" class="btn btn-sm btn-primary" />
+                        </div>
+                    </div>
+
+                }
+
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/ccm.projects/CustomValidacoes.js"></script>
+    <script src="~/assets/plugins/jQuery-Mask-Plugin-master/dist/jquery.mask.min.js"></script>
+    <script>
+
+        $(document).ready(function () {
+            if ($('#CON_ID').val() != 0) {
+                calcAntiHBS();
+                $('#Admissional').removeAttr('style');
+            }
+        });
+
+        $('#CON_ANTIHBS').blur(function () {
+            calcAntiHBS()
+        });
+
+
+        function calcAntiHBS() {
+            var antihbs = convertToFloatNumber($('#CON_ANTIHBS').val());
+            if (antihbs < 10 && antihbs > 0) {
+                $('#resultAntiHBS').text('NÃO REAGENTE').removeClass().addClass('text-success font-weight-bold');
+            } else if (antihbs >= 10) {
+                $('#resultAntiHBS').text('REAGENTE').removeClass().addClass('text-danger font-weight-bold');
+
+            } else
+                $('#resultAntiHBS').text('');
+        }
+
+        function TipoAtendimento(id) {
+            var btn = $('.atendimentos[onclick="javascript:TipoAtendimento(\'' + id + '\')"]');
+            $('.atendimentos').removeClass('btn-primary').addClass('btn-outline-primary');
+            btn.removeClass('btn-outline-primary').addClass('btn-primary');
+            $('#Admissional').fadeIn('slow');
+            $('#CON_TIPO').val(id);
+            console.log($('#CON_TIPO').val());
+
+        };
+
+
+        $('#CON_ALTURA, #CON_PESO').blur(function () {
+            var peso = convertToFloatNumber($('#CON_PESO').val());
+            var altura = convertToFloatNumber($('#CON_ALTURA').val());
+            var imc = (peso / (altura * altura));
+            $("#CON_IMC").val(imc.toFixed(2).toString().replace('.', ','));
+        });
+
+
+
+        var convertToFloatNumber = function (value) {
+            value = value.toString();
+            return parseFloat(value.replace(',', '.'));
+        }
+
+
+
+
+
+
+    </script>
+}

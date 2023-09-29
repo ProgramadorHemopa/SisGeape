@@ -1,0 +1,199 @@
+﻿@using CMM.Projects.Apresentation.Utils
+@using System.Collections.Generic
+@{
+    Layout = null;
+    var relatorioServidor = TempData["RelatorioJustificativa"] as List<CMM.Projects.Apresentation.Models.JustificativaPontoModelView>;
+    var CamposPesquisa = TempData["CJust"] as CMM.Projects.Apresentation.Models.CamposJustificativaBuscaRelatorioModelView;
+    var Idd = "";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="icon" href="@Url.Content("~/icone-hemopa1.ico")" />
+    <title>Relatório de Servidores</title>
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+    <script src="~/assets/js/jquery.min.js"></script>
+    <style TYPE="text/css">
+
+        .page-breaker {
+            display: block;
+            clear: both;
+            page-break-after: always;
+        }
+
+
+        table tbody tr td:before,
+        table tbody tr td:after {
+            content: "";
+            height: 4px;
+            display: block;
+        }
+    </style>
+</head>
+<body class="container" style="background-color:white;font-size:10px;font-weight:500">
+
+    <div class="container-fluid">
+        <div class="header" style="text-align:center">
+            <img src="~/Imagem/cabecalho.png" style="width:100%; height:120px;align-content:center" />
+            <label style="TEXT-ALIGN:center; font-size:25px; font-weight:bold" id="txtheader">
+                Relatório de Justificativas
+            </label>
+            <br />
+        </div>
+        <hr />
+        <div class="row">
+            <label class="control-label" style="font-size:15px; font-weight:bold">
+                Servidor por:
+            </label>
+            <br />
+        </div>
+        <div class="row mt mb-3">
+
+            @if (CamposPesquisa.MATRICULA != "")
+            {
+                <div class="col-sm-12">
+                    <label class="control-label" style="font-size:14px">
+                        Matricula:
+                    </label>
+                    <span class="form-group" style="font-size:14px">@CamposPesquisa.MATRICULA</span>
+                </div>
+            }
+
+            @if (CamposPesquisa.NOME != "")
+            {
+                <div class="col-sm-12">
+                    <label class="control-label" style="font-size:14px">
+                        Nome:
+                    </label>
+                    <span class="form-group" style="font-size:14px">@CamposPesquisa.NOME</span>
+                </div>
+            }
+
+            @if (CamposPesquisa.TEXTO_CARGO != "")
+            {
+                <div class="col-sm-12">
+                    <label class="control-label" style="font-size:14px">
+                        Cargo:
+                    </label>
+                    <span class="form-group" style="font-size:14px">@CamposPesquisa.TEXTO_CARGO</span>
+
+                </div>
+            }
+
+            @if (CamposPesquisa.TEXTO_UNIDADE != "")
+            {
+                <div class="col-sm-12">
+                    <label class="control-label" style="font-size:14px">
+                        Unidade:
+                    </label>
+                    <span class="form-group" style="font-size:14px">@CamposPesquisa.TEXTO_UNIDADE </span>
+                </div>
+            }
+            @if (CamposPesquisa.TEXTO_MOTIVO != "")
+            {
+                <div class="col-sm-12">
+                    <label class="control-label" style="font-size:14px">
+                        Motivo:
+                    </label>
+                    <span class="form-group" style="font-size:14px">@CamposPesquisa.TEXTO_MOTIVO </span>
+                </div>
+            }
+
+        </div>
+
+        <div class="row mt form-group">
+            <div class="col-xs-12">
+                <table class=" table-sm  dtr-inline table-bordered" width="100%">
+                    <thead style="text-align:center; font-weight:bold;font-size:small;">
+                        <tr>
+                            <td>
+                                SERVIDOR
+                            </td>
+                            <td>
+                                UNIDADE
+                            </td>
+                            <td>
+                                MOTIVO
+                            </td>
+                            <td>
+                                DATA INÍCIO
+                            </td>
+                            <td>
+                                DATA FIM
+                            </td>
+                            <td>
+                                DATA RECEBIMENTO
+                            </td>
+                            <td>
+                                OBSERVAÇÃO
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody style="text-align:center;font-size:11px">
+                        @foreach (var item in relatorioServidor.OrderBy(x => x.FUN_NOME).ToList())
+                        {
+                            <tr>
+                                <td class="fixed" style="width:22%; text-align: left">
+                                    @item.FUN_NOME
+                                </td>
+                                <td class="fixed" style="width:10%;">
+                                    @item.UND_NOME
+                                </td>
+                                <td class="fixed" style="width:12%;">
+                                    @item.MTVJUS_NOME
+                                </td>
+                                <td class="fixed" style="width:10%;">
+                                    @if (item.JUSPT_DATAINICIO != null)
+                                    {
+                                        @item.JUSPT_DATAINICIO.Value.ToShortDateString()
+                                    }
+                                </td>
+                                <td class="fixed" style="width:10%;">
+                                    @if (item.JUSPT_DATAFIM != null)
+                                    {
+                                        @item.JUSPT_DATAFIM.Value.ToShortDateString()
+                                    }
+                                </td>
+                                <td class="fixed" style="width:10%;">
+                                    @if (item.JUSPT_DATARECEBIMENTO != null)
+                                    {
+                                        @item.JUSPT_DATARECEBIMENTO.Value.ToShortDateString()
+                                    }
+                                </td>
+                                <td class="fixed" style="width:25%; text-align: left">
+                                    @item.JUSPT_OBSERVACAO
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+
+            </div>
+        </div>
+        <hr />
+        <div class="page-breaker"></div>
+    </div>
+
+
+
+
+
+
+
+
+    @*
+        @foreach(var item in relatorioServidor)
+        {
+            @item.FUN_MATRICULA
+            <br />
+            @item.FUN_NOME
+            <br />
+        }
+    *@
+</body>
+</html>
+

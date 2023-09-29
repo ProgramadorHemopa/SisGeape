@@ -1,0 +1,1466 @@
+﻿@model CMM.Projects.Apresentation.Models.FuncionarioModelView
+
+
+@{
+
+    ViewBag.Title = "Novo";
+    ViewData["TituloPagina"] = "Perfil";
+
+}
+<style>
+    #fileselector {
+        margin: 10px;
+    }
+
+    #upload-file-selector {
+        display: none;
+    }
+
+    .margin-correction {
+        margin-right: 10px;
+    }
+</style>
+<!--Bootstrap Datepicker-->
+<link href="~/assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css">
+
+@using (Html.BeginForm("Cadastro", "Funcionario", FormMethod.Post, new { @enctype = "multipart/form-data", @id = "formCad", @autocomplete = "off" }))
+{
+    @Html.AntiForgeryToken();
+
+
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.FUN_ID)
+    @Html.HiddenFor(model => model.FUN_FOTO)
+
+    <div class="card">
+        <div class="card-body">
+
+            <div class="row m-b-15">
+                <div class="col-lg-2 col-md-2  col-xs-2 col-xl-2">
+                    <div class="profile-card-4">
+                        <div class="user-fullimage">
+                            <img id="fotoservidor" src="data:image/jpg;base64,@(Convert.ToBase64String(Model.FUN_FOTO))" alt="user avatar" class="card-img-top">
+
+                        </div>
+                      
+                        <div class="card-body text-center">
+
+                            <div class="row">
+                                <div class="col p-2 display responsive">
+                                    <span id="fileselector">
+                                        <label for="upload-file-selector">
+                                            @Html.TextBoxFor(model => model.FOTO, htmlAttributes: new
+                                            {
+                                                @title = "Foto",
+                                                @type = "file",
+                                                @accept = "image/jpeg,image/pjpeg,image/png",
+                                                @onchange = "showMyImage(this)",
+                                                @name = "imageUpload",
+                                                @id = "upload-file-selector",
+                                                @class = "btn btn-outline-secondary btn btn-round waves-effect waves-light m-1 fa fa-camera"
+                                            })
+
+
+                                        </label>
+
+                                    </span>
+
+                                </div>
+                                @*<div class="col p-2">
+                                        <h5 class="mb-0 line-height-5">2.2k</h5>
+                                        <small class="mb-0 font-weight-bold">Followers</small>
+                                    </div>
+                                    <div class="col p-2">
+                                        <h5 class="mb-0 line-height-5">9.1k</h5>
+                                        <small class="mb-0 font-weight-bold">Views</small>
+                                    </div>*@
+                            </div>
+
+                            <hr>
+                            @if (Model.FUN_ID != 0)
+                            {
+                                <button type="button" class="btn btn-outline-primary shadow-primary btn-sm waves-effect waves-light m-1" data-toggle="dropdown">
+                                    <i class="fa fa-id-badge"></i> Crachá
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a href="javaScript:void();" onclick="abrirModal('@Url.Action("SolicitarCracha","Funcionario", new {@FUN_ID = ViewBag.FUN_ID })')" class="dropdown-item text-dark">Solicitar Crachá</a>
+                                    <a href="javaScript:void();" onclick="abrirModal('@Url.Action("ListCracha","Funcionario", new {@FUN_ID = ViewBag.FUN_ID })')" class="dropdown-item  text-dark">Listar Impressões Crachá</a>
+
+                                </div>
+                            }
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-lg-10 col-md-10 col-xs-10 col-lg-push-2 col-md-push-2 ">
+                    <ul class="nav nav-tabs nav-tabs-primary top-icon nav-justified">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#dados">
+                                <i class="icon-user"></i><span class="hidden-xs">
+                                    Info Pessoais
+                                </span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#docs"><i class="icon-docs"></i> <span class="hidden-xs">Documentos</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#end"><i class="icon-location-pin"></i> <span class="hidden-xs">Endereço</span></a>
+                        </li>
+                        @if (Model.FUN_ID != 0)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#depdt"><i class="icon-people"></i> <span class="hidden-xs">Dependentes</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#vinc"><i class="icon-layers"></i> <span class="hidden-xs">Vínculo</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#lot"><i class="icon-briefcase"></i> <span class="hidden-xs">Lotação</span></a>
+                            </li>
+
+                        }
+                        @*<li class="nav-item dropdown">
+
+                                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="javascript:void();"><i class="icon-settings"></i> <span class="hidden-xs"></span></a>
+                                    <div class="dropdown-menu">
+
+                                       <a class="dropdown-item" data-toggle="tab" href="ui-nav-tabs.html#tabe-3"><span class="hidden-sm">FUNÇÕES</span></a>
+                                        <a class="dropdown-item" href="javascript:void();">Benefícios</a>
+                                        <a class="dropdown-item" href="javascript:void();">Link 3</a>
+                                    </div>
+                            </li>*@
+                    </ul>
+
+
+
+                    <br />
+                    <div class="tab-content p-1">
+
+                        <div class="tab-pane active" id="dados">
+
+
+
+                            <div class="form-row">
+                                <div class="col-md-3 ">
+                                    @Html.LabelFor(model => model.FUN_MATRICULA, htmlAttributes: new { @class = "control-label" })
+                                    <label for="FUN_MATRICULA" class="text-danger"><span>*</span></label>
+                                    @Html.EditorFor(model => model.FUN_MATRICULA, new { htmlAttributes = new { @class = "form-control form-control-sm", @onkeyup = "this.value=this.value.replace(/[^a-zA-Z0-9]/g, '')" } })
+                                    @Html.ValidationMessageFor(model => model.FUN_MATRICULA, "", new { @class = "text-danger" })
+
+                                </div>
+                                <div class="form-group col-md-9">
+
+                                    @Html.LabelFor(model => model.FUN_NOME, htmlAttributes: new { @class = "control-label" })
+                                    <label for="FUN_NOME" class="text-danger"><span>*</span></label>
+
+                                    @Html.EditorFor(model => model.FUN_NOME, new { htmlAttributes = new { @class = "form-control form-control-sm", @autocomplete = "off" } })
+                                    @Html.ValidationMessageFor(model => model.FUN_NOME, "", new { @class = "text-danger" })
+
+                                </div>
+                            </div>
+
+                            <div class="form-row  has-feedback">
+                                <div class="form-group col-md-4">
+                                    @Html.LabelFor(model => model.FUN_DATANASCIMENTO, htmlAttributes: new { @class = "control-label" })
+                                    <label for="FUN_DATANASCIMENTO" class="text-danger"><span>*</span></label>
+
+                                    @Html.EditorFor(model => model.FUN_DATANASCIMENTO, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                    @Html.ValidationMessageFor(model => model.FUN_DATANASCIMENTO, "", new { @class = "text-danger" })
+
+                                </div>
+                                <div class="form-group col-md-4">
+                                    @Html.LabelFor(model => model.FUN_SEXO, htmlAttributes: new { @class = "control-label" })
+                                    <label for="FUN_SEXO" class="text-danger"><span>*</span></label>
+
+                                    @{
+                                        List<SelectListItem>
+                                            listaSexo = new List<SelectListItem>
+                                                ();
+
+                                        listaSexo.Add(new SelectListItem { Text = "Masculino", Value = "M" });
+                                        listaSexo.Add(new SelectListItem { Text = "Feminino", Value = "F" });
+
+
+                                    }
+                                    @Html.DropDownListFor(model => model.FUN_SEXO, listaSexo, "Selecione ", htmlAttributes: new { @class = "form-control form-control-sm", @required = "true" })
+                                    @Html.ValidationMessageFor(model => model.FUN_SEXO, "", new { @class = "text-danger" })
+
+                                    @Html.ValidationMessageFor(model => model.FUN_SEXO, "", new { @class = "text-danger" })
+
+                                </div>
+                                <div class="form-group col-md-4">
+
+                                    @{
+                                        List<SelectListItem>
+                                            ListEscola = new List<SelectListItem>
+                                                ();
+
+                                        ListEscola.Add(new SelectListItem { Text = "Fundamental Incompleto", Value = "1" });
+                                        ListEscola.Add(new SelectListItem { Text = "Fundamental", Value = "2" });
+                                        ListEscola.Add(new SelectListItem { Text = "Médio Incompleto", Value = "3" });
+                                        ListEscola.Add(new SelectListItem { Text = "Médio ", Value = "4" });
+                                        ListEscola.Add(new SelectListItem { Text = "Superior Incompleto", Value = "5" });
+                                        ListEscola.Add(new SelectListItem { Text = "Superior", Value = "6" });
+                                        ListEscola.Add(new SelectListItem { Text = "Mestrado", Value = "7" });
+                                        ListEscola.Add(new SelectListItem { Text = "Doutorado", Value = "8" });
+
+
+
+
+                                    }
+                                    @Html.LabelFor(model => model.FUN_ESCOLARIDADE, htmlAttributes: new { @class = "control-label" })
+
+                                    @Html.DropDownListFor(model => model.FUN_ESCOLARIDADE, ListEscola, " Selecione ", htmlAttributes: new { @class = "form-control form-control-sm" })
+                                    @Html.ValidationMessageFor(model => model.FUN_ESCOLARIDADE, "", new { @class = "text-danger" })
+
+
+                                </div>
+
+
+
+
+                            </div>
+                            <div class="form-row">
+
+                                <div class="form-group col-md-4">
+                                    @Html.LabelFor(model => model.FUN_ESTADOCIVIL, htmlAttributes: new { @class = "control-label" })
+                                    <label for="FUN_ESTADOCIVIL" class="text-danger"><span>*</span></label>
+
+                                    @{
+                                        List<SelectListItem>
+                                            ListEstadoCivil = new List<SelectListItem>
+                                                ();
+
+                                        ListEstadoCivil.Add(new SelectListItem { Text = "Não Informado", Value = "0" });
+                                        ListEstadoCivil.Add(new SelectListItem { Text = "Solteiro(a)", Value = "1" });
+                                        ListEstadoCivil.Add(new SelectListItem { Text = "Casado(a)", Value = "2" });
+                                        ListEstadoCivil.Add(new SelectListItem { Text = "Divorciado(a)", Value = "3" });
+                                        ListEstadoCivil.Add(new SelectListItem { Text = "Viúvo(a) ", Value = "4" });
+                                        ListEstadoCivil.Add(new SelectListItem { Text = "União Não Estável", Value = "5" });
+
+
+                                    }
+                                    @Html.DropDownListFor(model => model.FUN_ESTADOCIVIL, ListEstadoCivil, " Selecione ", htmlAttributes: new { @class = "form-control form-control-sm" })
+                                    @Html.ValidationMessageFor(model => model.FUN_ESTADOCIVIL, "", new { @class = "text-danger" })
+
+                                </div>
+                                <div class="form-group col-md-8">
+                                    @Html.LabelFor(model => model.FUN_CONJUGE, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.FUN_CONJUGE, new { htmlAttributes = new { @class = "form-control form-control-sm col-form-label" } })
+                                    @Html.ValidationMessageFor(model => model.FUN_CONJUGE, "", new { @class = "text-danger" })
+
+                                </div>
+
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-3">
+                                    @Html.LabelFor(model => model.FUN_CIDADENATAL, htmlAttributes: new { @class = "control-label" })
+
+                                    @Html.EditorFor(model => model.FUN_CIDADENATAL, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                    @Html.ValidationMessageFor(model => model.FUN_CIDADENATAL, "", new { @class = "text-danger" })
+
+                                </div>
+                                <div class="form-group col-md-3">
+                                    @Html.LabelFor(model => model.FUN_NACIONALIDADE, htmlAttributes: new { @class = "control-label" })
+
+                                    @Html.EditorFor(model => model.FUN_NACIONALIDADE, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                    @Html.ValidationMessageFor(model => model.FUN_NACIONALIDADE, "", new { @class = "text-danger" })
+
+                                </div>
+                                <div class="form-group col-md-3">
+                                    @Html.LabelFor(model => model.FUN_NECESSIDADE_ESPECIAL, htmlAttributes: new { @class = "control-label" })
+                                    @{
+                                        List<SelectListItem>
+                                            ListSN = new List<SelectListItem>
+                                                ();
+
+                                        ListSN.Add(new SelectListItem { Text = "Sim", Value = "1" });
+                                        ListSN.Add(new SelectListItem { Text = "Não", Value = "0" });
+
+                                    }
+                                    @Html.DropDownListFor(model => model.FUN_NECESSIDADE_ESPECIAL, ListSN, "Selecione ", htmlAttributes: new { @class = "form-control form-control-sm" })
+                                    @Html.ValidationMessageFor(model => model.FUN_NECESSIDADE_ESPECIAL, "", new { @class = "text-danger" })
+
+                                </div>
+                                <div class="form-group col-md-3">
+                                    @Html.LabelFor(model => model.FUN_TIPOSANGUINEO, htmlAttributes: new { @class = "control-label" })
+                                    <label for="FUN_TIPOSANGUINEO" class="text-danger"><span>*</span></label>
+
+                                    @{
+                                        List<SelectListItem>
+                                            ListTipoSanguineo = new List<SelectListItem>
+                                                ();
+                                        ListTipoSanguineo.Add(new SelectListItem { Text = "Não Informado", Value = "0" });
+                                        ListTipoSanguineo.Add(new SelectListItem { Text = "A-", Value = "1" });
+                                        ListTipoSanguineo.Add(new SelectListItem { Text = "A+", Value = "2" });
+                                        ListTipoSanguineo.Add(new SelectListItem { Text = "B-", Value = "3" });
+                                        ListTipoSanguineo.Add(new SelectListItem { Text = "B+", Value = "4" });
+                                        ListTipoSanguineo.Add(new SelectListItem { Text = "AB-", Value = "5" });
+                                        ListTipoSanguineo.Add(new SelectListItem { Text = "AB+", Value = "6" });
+                                        ListTipoSanguineo.Add(new SelectListItem { Text = "O-", Value = "7" });
+                                        ListTipoSanguineo.Add(new SelectListItem { Text = "O+", Value = "8" });
+
+
+
+
+                                    }
+
+
+                                    @Html.DropDownListFor(model => model.FUN_TIPOSANGUINEO, ListTipoSanguineo, "Selecione", htmlAttributes: new { @class = "form-control form-control-sm", @required = "true" })
+                                    @Html.ValidationMessageFor(model => model.FUN_TIPOSANGUINEO, "", new { @class = "text-danger" })
+
+                                </div>
+                            </div>
+
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    @Html.LabelFor(model => model.FUN_PAI, htmlAttributes: new { @class = "control-label" })
+
+                                    @Html.EditorFor(model => model.FUN_PAI, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                    @Html.ValidationMessageFor(model => model.FUN_PAI, "", new { @class = "text-danger" })
+
+                                </div>
+                                <div class="form-group col-md-6">
+                                    @Html.LabelFor(model => model.FUN_MAE, htmlAttributes: new { @class = "control-label" })
+                                    <label for="FUN_MAE" class="text-danger"><span>*</span></label>
+
+                                    @Html.EditorFor(model => model.FUN_MAE, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                    @Html.ValidationMessageFor(model => model.FUN_MAE, "", new { @class = "text-danger" })
+                                </div>
+
+                            </div>
+
+
+
+
+                            <div class="form-row">
+                                <div class="form-group col-md-3">
+                                    @Html.LabelFor(model => model.FUN_CELULAR, htmlAttributes: new { @class = "control-label" })
+
+                                    @Html.EditorFor(model => model.FUN_CELULAR, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                    @Html.ValidationMessageFor(model => model.FUN_CELULAR, "", new { @class = "text-danger" })
+
+                                </div>
+                                <div class="form-group col-md-3">
+                                    @Html.LabelFor(model => model.FUN_TELEFONE, htmlAttributes: new { @class = "control-label" })
+
+                                    @Html.EditorFor(model => model.FUN_TELEFONE, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                    @Html.ValidationMessageFor(model => model.FUN_TELEFONE, "", new { @class = "text-danger" })
+
+                                </div>
+                                <div class="form-group col-md-6">
+                                    @Html.LabelFor(model => model.FUN_EMAIL, htmlAttributes: new { @class = "control-label" })
+
+                                    @Html.EditorFor(model => model.FUN_EMAIL, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+
+
+                                    @Html.ValidationMessageFor(model => model.FUN_EMAIL, "", new { @class = "text-danger" })
+
+                                </div>
+
+
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    @Html.LabelFor(model => model.FUN_OBSERVACAO, htmlAttributes: new { @class = "control-label" })
+
+                                    @Html.TextAreaFor(model => model.FUN_OBSERVACAO, htmlAttributes: new { @class = "form-control form-control-sm", @rows = "3" })
+                                    @Html.ValidationMessageFor(model => model.FUN_OBSERVACAO, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+
+                        </div>
+
+
+
+
+                        <div class="tab-pane" id="docs">
+
+                            <div class="form-row">
+                                <div class="form-group col-md-4">
+                                    @Html.LabelFor(model => model.FUN_CPF, htmlAttributes: new { @class = "control-label" })
+                                    <label for="FUN_CPF" class="text-danger"><span>*</span></label>
+
+                                    @Html.EditorFor(model => model.FUN_CPF, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                    @Html.ValidationMessageFor(model => model.FUN_CPF, "", new { @class = "text-danger" })
+
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    @Html.LabelFor(model => model.FUN_PIS, htmlAttributes: new { @class = "control-label" })
+                                    <label for="FUN_PIS" class="text-danger"><span>*</span></label>
+
+                                    @Html.EditorFor(model => model.FUN_PIS, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                    @Html.ValidationMessageFor(model => model.FUN_PIS, "", new { @class = "text-danger" })
+
+                                </div>
+                                <div class="form-group col-md-4">
+                                    @Html.LabelFor(model => model.FUN_CNS, htmlAttributes: new { @class = "control-label" })
+
+                                    @Html.EditorFor(model => model.FUN_CNS, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                    @Html.ValidationMessageFor(model => model.FUN_CNS, "", new { @class = "text-danger" })
+
+                                </div>
+
+
+
+                            </div>
+
+
+                            <div class="form-row">
+
+                                <div class="form-group col-md-4">
+                                    @Html.LabelFor(model => model.BNC_ID, "BANCO", htmlAttributes: new { @class = "control-label" })
+
+                                    @Html.DropDownListFor(model => model.BNC_ID, null, "Selecione", htmlAttributes: new { @class = "form-control form-control-sm" })
+
+                                    @Html.ValidationMessageFor(model => model.BNC_ID, "", new { @class = "text-danger" })
+
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    @Html.LabelFor(model => model.FUN_AGENCIA, htmlAttributes: new { @class = "control-label" })
+
+                                    @Html.EditorFor(model => model.FUN_AGENCIA, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                    @Html.ValidationMessageFor(model => model.FUN_AGENCIA, "", new { @class = "text-danger" })
+
+                                </div>
+
+                                <div class="form-group col-md-4">
+                                    @Html.LabelFor(model => model.FUN_CONTACORRENTE, htmlAttributes: new { @class = "control-label" })
+
+                                    @Html.EditorFor(model => model.FUN_CONTACORRENTE, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                    @Html.ValidationMessageFor(model => model.FUN_CONTACORRENTE, "", new { @class = "text-danger" })
+
+                                </div>
+
+                            </div>
+                            <hr />
+                            <div class="form-row">
+
+
+                                <div class="form-group col-md-3">
+                                    @Html.LabelFor(model => model.FUN_RG, htmlAttributes: new { @class = "control-label" })
+
+                                    @Html.EditorFor(model => model.FUN_RG, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                    @Html.ValidationMessageFor(model => model.FUN_RG, "", new { @class = "text-danger" })
+
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    @Html.LabelFor(model => model.FUN_RGEMISSOR, htmlAttributes: new { @class = "control-label" })
+
+                                    @Html.EditorFor(model => model.FUN_RGEMISSOR, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                    @Html.ValidationMessageFor(model => model.FUN_RGEMISSOR, "", new { @class = "text-danger" })
+
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    @Html.LabelFor(model => model.FUN_RGESTADO, htmlAttributes: new { @class = "control-label" })
+
+                                    @Html.EditorFor(model => model.FUN_RGESTADO, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                    @Html.ValidationMessageFor(model => model.FUN_RGESTADO, "", new { @class = "text-danger" })
+
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    @Html.LabelFor(model => model.FUN_RGDATAEMISSAO, htmlAttributes: new { @class = "control-label" })
+
+                                    @Html.EditorFor(model => model.FUN_RGDATAEMISSAO, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                    @Html.ValidationMessageFor(model => model.FUN_RGDATAEMISSAO, "", new { @class = "text-danger" })
+
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="form-row">
+
+
+                                <div class="form-group col-md-3">
+                                    @Html.LabelFor(model => model.FUN_TITULOELEITOR, htmlAttributes: new { @class = "control-label" })
+
+                                    @Html.EditorFor(model => model.FUN_TITULOELEITOR, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                    @Html.ValidationMessageFor(model => model.FUN_TITULOELEITOR, "", new { @class = "text-danger" })
+
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    @Html.LabelFor(model => model.FUN_TITULOZONA, htmlAttributes: new { @class = "control-label" })
+
+                                    @Html.EditorFor(model => model.FUN_TITULOZONA, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                    @Html.ValidationMessageFor(model => model.FUN_TITULOZONA, "", new { @class = "text-danger" })
+
+                                </div>
+
+                                <div class="form-group col-md-3 col-sm-4">
+                                    @Html.LabelFor(model => model.FUN_TITULOSESSAO, htmlAttributes: new { @class = "control-label" })
+
+                                    @Html.EditorFor(model => model.FUN_TITULOSESSAO, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                    @Html.ValidationMessageFor(model => model.FUN_TITULOSESSAO, "", new { @class = "text-danger" })
+
+                                </div>
+
+                                <div class="form-group col-md-3">
+                                    @Html.LabelFor(model => model.FUN_TITULODATAEMISSAO, htmlAttributes: new { @class = "control-label" })
+
+                                    @Html.EditorFor(model => model.FUN_TITULODATAEMISSAO, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                    @Html.ValidationMessageFor(model => model.FUN_TITULODATAEMISSAO, "", new { @class = "text-danger" })
+
+                                </div>
+
+                            </div>
+                            <hr />
+                            <div class="form-row">
+
+                                <div class="form-group col-md-5">
+                                    @Html.LabelFor(model => model.FUN_CERTIFICADOMILITAR, htmlAttributes: new { @class = "control-label" })
+
+                                    @Html.EditorFor(model => model.FUN_CERTIFICADOMILITAR, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                    @Html.ValidationMessageFor(model => model.FUN_CERTIFICADOMILITAR, "", new { @class = "text-danger" })
+
+                                </div>
+
+
+                                <div class="form-group col-md-2">
+                                    @Html.LabelFor(model => model.FUN_CMSERIE, htmlAttributes: new { @class = "control-label" })
+                                    @Html.EditorFor(model => model.FUN_CMSERIE, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                    @Html.ValidationMessageFor(model => model.FUN_CMSERIE, "", new { @class = "text-danger" })
+
+                                </div>
+
+
+                                <div class="form-group col-md-5">
+                                    @Html.LabelFor(model => model.FUN_CMCORPORACAO, htmlAttributes: new { @class = "control-label" })
+                                    @{
+                                        List<SelectListItem> listaCorporacao = new List<SelectListItem>();
+
+                                        listaCorporacao.Add(new SelectListItem { Text = "Aeronáutica" });
+                                        listaCorporacao.Add(new SelectListItem { Text = "Exército" });
+                                        listaCorporacao.Add(new SelectListItem { Text = "Marinha" });
+
+                                    }
+                                    @Html.DropDownListFor(model => model.FUN_CMCORPORACAO, listaCorporacao, "Selecione", htmlAttributes: new { @class = "form-control form-control-sm" })
+                                    @Html.ValidationMessageFor(model => model.FUN_CMCORPORACAO, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    @Html.LabelFor(model => model.FUN_CTPS, htmlAttributes: new { @class = "control-label" })
+
+                                    @Html.EditorFor(model => model.FUN_CTPS, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                    @Html.ValidationMessageFor(model => model.FUN_CTPS, "", new { @class = "text-danger" })
+
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                    @Html.LabelFor(model => model.FUN_CTPSDATAEMISSAO, htmlAttributes: new { @class = "control-label" })
+
+                                    @Html.EditorFor(model => model.FUN_CTPSDATAEMISSAO, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                    @Html.ValidationMessageFor(model => model.FUN_CTPSDATAEMISSAO, "", new { @class = "text-danger" })
+
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-5 col-lg-5">
+                                    @Html.LabelFor(model => model.FUN_CNH, htmlAttributes: new { @class = "control-label " })
+
+                                    @Html.EditorFor(model => model.FUN_CNH, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                    @Html.ValidationMessageFor(model => model.FUN_CNH, "", new { @class = "text-danger" })
+
+                                </div>
+                                <div class="form-group col-md-4 col-lg-4">
+                                    @Html.LabelFor(model => model.FUN_CNHVALIDADE, htmlAttributes: new { @class = "control-label" })
+
+                                    @Html.EditorFor(model => model.FUN_CNHVALIDADE, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                    @Html.ValidationMessageFor(model => model.FUN_CNHVALIDADE, "", new { @class = "text-danger" })
+
+                                </div>
+
+                                <div class="form-group col-md-3 col-lg-3">
+                                    @Html.LabelFor(model => model.FUN_CNHCATEGORIA, htmlAttributes: new { @class = "control-label" })
+                                    @{
+                                        List<SelectListItem> listaCNH = new List<SelectListItem>();
+
+                                        listaCNH.Add(new SelectListItem { Text = "A" });
+                                        listaCNH.Add(new SelectListItem { Text = "B" });
+                                        listaCNH.Add(new SelectListItem { Text = "C" });
+                                        listaCNH.Add(new SelectListItem { Text = "D" });
+                                        listaCNH.Add(new SelectListItem { Text = "E" });
+                                        listaCNH.Add(new SelectListItem { Text = "AB" });
+                                        listaCNH.Add(new SelectListItem { Text = "AC" });
+                                        listaCNH.Add(new SelectListItem { Text = "AD" });
+                                        listaCNH.Add(new SelectListItem { Text = "AE" });
+                                    }
+                                    @Html.DropDownListFor(model => model.FUN_CNHCATEGORIA, listaCNH, "Selecione", htmlAttributes: new { @class = "form-control form-control-sm" })
+                                    @Html.ValidationMessageFor(model => model.FUN_CNHCATEGORIA, "", new { @class = "text-danger" })
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane" id="end">
+
+
+
+                            <div class="form-row">
+                                <div class="form-group col-md-4 col-lg-4">
+
+                                    @Html.LabelFor(model => model.FUN_CEP, htmlAttributes: new { @class = "control-label" })
+                                    <label for="FUN_CEP" class="text-danger"><span>*</span></label>
+
+                                    @Html.EditorFor(model => model.FUN_CEP, new { htmlAttributes = new { @class = "form-control form-control-sm", @autocomplete = false } })
+                                    @Html.ValidationMessageFor(model => model.FUN_CEP, "", new { @class = "text-danger" })
+
+                                </div>
+
+                                <div class="form-group col-md-8 col-lg-8">
+                                    @Html.LabelFor(model => model.FUN_ENDERECO, htmlAttributes: new { @class = "control-label" })
+
+                                    @Html.EditorFor(model => model.FUN_ENDERECO, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                    @Html.ValidationMessageFor(model => model.FUN_ENDERECO, "", new { @class = "text-danger" })
+
+                                </div>
+
+
+                            </div>
+
+
+                            <div class="form-row">
+                                <div class="form-group col-md-4 col-lg-4">
+                                    @Html.LabelFor(model => model.FUN_NUMEROEND, htmlAttributes: new { @class = "control-label" })
+
+                                    @Html.EditorFor(model => model.FUN_NUMEROEND, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                    @Html.ValidationMessageFor(model => model.FUN_NUMEROEND, "", new { @class = "text-danger" })
+                                </div>
+
+                                <div class="form-group col-md-4 col-lg-4">
+                                    @Html.LabelFor(model => model.FUN_BAIRRO, htmlAttributes: new { @class = "control-label" })
+
+                                    @Html.EditorFor(model => model.FUN_BAIRRO, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                    @Html.ValidationMessageFor(model => model.FUN_BAIRRO, "", new { @class = "text-danger" })
+
+                                </div>
+
+
+                                <div class="form-group col-md-4 col-lg-4">
+                                    @Html.LabelFor(model => model.FUN_CIDADE, htmlAttributes: new { @class = "control-label" })
+
+                                    @Html.EditorFor(model => model.FUN_CIDADE, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                    @Html.ValidationMessageFor(model => model.FUN_CIDADE, "", new { @class = "text-danger" })
+
+                                </div>
+
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    @Html.LabelFor(model => model.FUN_COMPLEMENTO, htmlAttributes: new { @class = "control-label" })
+
+                                    @Html.EditorFor(model => model.FUN_COMPLEMENTO, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                                    @Html.ValidationMessageFor(model => model.FUN_COMPLEMENTO, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                        </div>
+
+                        @if (Model.FUN_ID != 0)
+                        {
+                            <div class="tab-pane" id="depdt">
+
+
+                                @Html.Action("ListDependente", "FuncionarioDependente", new { id = ViewBag.FUN_ID })
+
+                            </div>
+
+
+                            <div class="tab-pane" id="vinc">
+
+
+                                @Html.Action("ListVinculo", "Vinculo", new { id = ViewBag.FUN_ID })
+
+                            </div>
+
+
+
+                            <div class="tab-pane" id="lot">
+
+                                @Html.Action("ListVinculoxUnidade", "VinculoxUnidade", new { fun_id = ViewBag.FUN_ID })
+
+                            </div>
+
+
+                        }
+
+                    </div>
+
+                    <hr />
+                    <div class="row no-print">
+                        <div class="col-lg-12">
+                            <div class="float-sm-right">
+                                <a href="@Request.UrlReferrer" class="btn btn-outline-secondary waves-effect waves-light sm-1"><i class="fa fa-reply-all"></i> Voltar</a>
+                                <a href="javaScript:void()" id="enviar" class="btn btn-gradient-scooter waves-effect waves-light sm-1"><i class="fa fa-check-square-o"></i> Salvar</a>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+}
+
+@if (Model.FUN_ID != 0)
+{<div class="row">
+        <div class="col-md-12 col-lg-12 col-xs-12">
+            <div id="accordion4">
+                <div class="card mb-2">
+                    <div class="card-header text-uppercase">
+                        <button class="btn btn-link shadow-none text-dark collapsed" data-toggle="collapse" data-target="#collapse-10" aria-expanded="true" aria-controls="collapse-10">
+                            Benefícios
+                        </button>
+                        <div class=" card-action">
+
+                            <a class="badge badge-pill btn-outline-primary btn-sm waves-effect waves-light sm-1" onclick=abrirModal('@Url.Action("AddUpdateBNFVNC", "BeneficioVinculo" , new { @id=0, @func=ViewBag.FUN_ID })')>
+                                <i class="fa fa-plus"></i>
+                                Adicionar
+                            </a>
+                        </div>
+                    </div>
+                    <div id="collapse-10" class="collapse" data-parent="#accordion4">
+                        <div class="card-body" id="divBeneficio">
+                            @Html.Action("_ListBeneficio", "BeneficioVinculo", new { id = ViewBag.FUN_ID })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-xs-12">
+            <div id="accordion1">
+                <div class="card mb-2">
+                    <div class=" card-header text-uppercase">
+                        <button class="btn btn-link shadow-none text-dark collapsed" data-toggle="collapse" data-target="#collapse-1" aria-expanded="false" aria-controls="collapse-1">
+                            Funções
+                        </button>
+                        <div class=" card-action">
+
+                            <a class="badge badge-pill btn-outline-primary btn-sm waves-effect waves-light sm-1" onclick=abrirModal('@Url.Action("AddUpdateFNCVNC", "FuncaoVinculo" , new { @id=0, @func=ViewBag.FUN_ID })')>
+                                <i class="fa fa-plus"></i>
+                                Adicionar
+                            </a>
+                        </div>
+                    </div>
+                    <div id="collapse-1" class="collapse" data-parent="#accordion1">
+                        <div class="card-body" id="divFuncao">
+                            @Html.Action("_ListFuncao", "FuncaoVinculo", new { id = ViewBag.FUN_ID })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-xs-12">
+            <div id="accordion5">
+                <div class="card mb-2">
+                    <div class="card-header text-uppercase">
+                        <button class="btn btn-link shadow-none text-dark collapsed" data-toggle="collapse" data-target="#collapse-3" aria-expanded="true" aria-controls="collapse-3">
+                            Férias
+                        </button>
+                        <div class=" card-action">
+
+                            <a class="badge badge-pill btn-outline-primary btn-sm waves-effect waves-light sm-1" onclick=abrirModal('@Url.Action("AddUpdateFerias", "Ferias" , new { @id=0, @func=ViewBag.FUN_ID })')>
+                                <i class="fa fa-plus"></i>
+                                Adicionar
+                            </a>
+                        </div>
+                    </div>
+                    <div id="collapse-3" class="collapse" data-parent="#accordion5">
+                        <div class="card-body" id="divFerias">
+                            @Html.Action("ListFerias", "Ferias", new { id = ViewBag.FUN_ID })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-md-12 col-lg-12 col-xs-12">
+            <div id="accordion3">
+                <div class="card mb-2">
+                    <div class="card-header text-uppercase">
+                        <button class="btn btn-link shadow-none text-dark collapsed" data-toggle="collapse" data-target="#collapse-2" aria-expanded="true" aria-controls="collapse-2">
+                            Justificativas de Ponto
+                        </button>
+                        <div class=" card-action">
+
+                            <a class="badge badge-pill btn-outline-primary btn-sm waves-effect waves-light sm-1" onclick=abrirModal('@Url.Action("AddUpdateJusFun", "Justificativa" , new {@func=ViewBag.FUN_ID })')>
+                                <i class="fa fa-plus"></i>
+                                Adicionar
+                            </a>
+                        </div>
+                    </div>
+                    <div id="collapse-2" class="collapse" data-parent="#accordion3">
+                        <div class="card-body" id="divJustificativa">
+                            @Html.Action("_ListJusFun", "Justificativa", new { func = ViewBag.FUN_ID })
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+}
+
+
+
+
+
+
+<link href="~/Scripts/Grid/DataTables-1.10.16/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<link href="~/Scripts/Grid/Responsive-2.2.1/css/responsive.bootstrap4.min.css" rel="stylesheet" />
+<script src="~/assets/js/popper.min.js"></script>
+
+@section scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/bundles/Grid")
+    <script src="~/Scripts/moment.min.js"></script>
+    <script src="~/Scripts/moment-with-locales.min.js"></script>
+    <script src="~/assets/plugins/jQuery-Mask-Plugin-master/dist/jquery.mask.min.js"></script>
+    <script src="~/Scripts/ccm.projects/Cadastro_mask.js"></script>
+
+
+    <!--Bootstrap Datepicker Js-->
+    <script src="~/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+
+    <script type="text/javascript">
+    var dataTable1;
+        var dataTableDep;
+        var dataTableVinc;
+        var dataTableFerias;
+        var dataTableFuncao;
+        var dataTableBeneficio;
+        var dataTableJustificativa;
+        var idFuncionario = @Html.Raw(Json.Encode(@ViewBag.FUN_ID));
+
+
+        //$('#FUN_DATANASCIMENTO').datepicker({
+        //    autoclose: true,
+        //    todayHighlight: true
+        //});
+
+
+        $.extend(true, $.fn.dataTable.defaults,
+            {
+        "searching": false,
+                "pagination": false
+            });
+
+
+
+
+        $('input').keypress(function (e) {
+            var code = null;
+            code = (e.keyCode ? e.keyCode : e.which);
+            return (code == 13) ? false : true;
+        });
+
+        $('#enviar').on('click', submeterFormulario);
+
+        function submeterFormulario(event) {
+
+            event.preventDefault()
+            $('#enviar').prop("disabled", true);
+            var data;
+            var contentType = "application/x-www-form-urlencoded";
+            var processData = true;
+           
+
+
+            if ($("#formCad").attr('enctype') == 'multipart/form-data') {
+
+                data = new FormData($("#formCad").get(0));  //seleciona form do html
+
+                contentType = false;
+                processData = false;
+            } else
+            {
+                data = $("#formCad").serialize();
+            }
+            $.ajax({
+                data: data,
+                type: $("#formCad").attr('method'),
+                url: $("#formCad").attr('action'),
+                contentType: contentType,
+                processData: processData,
+                success: Retorno
+            });
+
+
+        };
+        function Retorno(result) {
+
+            if (result.resultado == true) {
+                notificaoSucesso(result.msg);
+                idFuncionario = result.FUN_ID;
+                if (!result.edit) {
+
+                    var url = '@Url.Action("Cadastro", "Funcionario",new { id="_id"})';
+                    window.location.href = url.replace('_id', result.FUN_ID);
+                } 
+            }
+            else {
+
+                notificaoAlerta(result.msg);
+
+                $('#enviar').prop("disabled", false);
+                $('#minhaModal').modal('hide');
+
+            }
+        }
+
+        $('#FUN_CEP').keyup(function () {
+
+            if (this.value.length < 9) return;
+
+            $.ajax({
+                data: { "cep": $('#FUN_CEP').val() },
+                type: 'GET',
+                url: '@Url.Action("BuscarCep", "Funcionario")',
+                success: function (result) {
+
+                    if (result.resultado == true) {
+
+                        $('#FUN_BAIRRO').val(result.bairro);
+                        $('#FUN_ENDERECO').val(result.endereco);
+                        $('#FUN_COMPLEMENTO').val(result.complemento);
+                        $('#FUN_CIDADE').val(result.cidade);
+
+                    }
+                    else {
+
+                        notificaoAlerta(result.msg);
+
+                    }
+                }
+            });
+        });
+
+
+        function VerificaCracha()
+        {
+
+            $.ajax({
+                data: { "FUN_ID" : idFuncionario },
+                type: 'GET',
+                url: '@Url.Action("ValidaCracha", "Funcionario")',
+                contentType: "application/json; charset=utf-8",
+                processData: true,
+                success: function (result) {
+
+                    if (result.resultado == true) {
+
+
+                        var url = '@Url.Action("GetCracha", "Funcionario",new {FUN_ID = "_id" })';
+                        url = url.replace('_id', idFuncionario);
+                        window.open(url, "_blank");
+
+                    }
+                    else {
+
+                        notificaoAlerta(result.msg);
+
+                    }
+                }
+            });
+
+
+        }
+
+        function LiberaItensTabs() {
+
+            if (parseInt(idFuncionario) > 0)
+            {
+                dataTableJustificativa = $('#grdJustificativa').DataTable({
+                "processing": "true",
+                "responsive": "true",
+                "serverSide": "true",
+                "ajax": {
+
+                    "url": "@Url.Action("ListarJustificativa", "Justificativa")" + "/" + idFuncionario,
+                    "type": "POST",
+                    "datatype": "json"
+                },
+                "columns":
+                    [
+
+                        { "data": "MTVJUS_NOME" },
+                        { "data": "CID_NOME" },
+                        {
+                            "data": "JUSPT_DATAINICIO", "render": function (data, type, full, meta) {
+                                return moment(data).format('DD/MM/YYYY')
+                            }, width: 20
+                        },
+                        {
+                            "data": "JUSPT_DATAFIM", "render": function (data, type, full, meta) {
+                                if (data !== null) {
+                                    return moment(data).format('DD/MM/YYYY')
+                                } else
+                                    return "";
+                            }
+                        },
+                        {
+                            "data": "JUSPT_DATARECEBIMENTO", "render": function (data, type, full, meta) {
+                                if (data !== null) {
+                                    return moment(data).format('DD/MM/YYYY')
+                                } else
+                                    return "";
+                            }
+                        },
+
+                        { "data": "VNC_NOME" },
+                        { "data": "JUSPT_OBSERVACAO" },
+                        {
+                            "data": "JUSPT_ID",
+                            "render": function (data) {
+                                return "<a class='badge badge-pill btn-outline-primary btn-sm waves-effect waves-light sm-1' data-toggle='tooltip' data-placement='top' title='Editar'onclick=abrirModal('@Url.Action("AddUpdateJusFun", "Justificativa")?id=" + data + "')>"
+                                    + "<i class='fa fa-edit'></i></a><a class=' badge badge-pill btn-outline-danger btn-sm waves-effect waves-light m-1 ' data-toggle='tooltip' data-placement='top' title='Excluir' onclick=abrirModal('@Url.Action("Delete", "Justificativa")/" + data + "') >" +
+                                    "<i class='fa fa-trash'></i></a>";
+                            },
+                            "orderable": false,
+                            "searchable": false, "width": "40px"
+
+                        }
+                    ],
+                "order":
+                    [2, "asc"]
+                , "dom": '<"toolbar">frtip',
+                "deferRender": true
+            });
+
+                  dataTableFuncao = $('#grdFuncao').DataTable({
+                "processing": "true",
+                "responsive": "true",
+                "serverSide": "true",
+                "ajax": {
+
+                    "url": "@Url.Action("_ListFuncaoFuncionario", "FuncaoVinculo")" + "/" + idFuncionario,
+                    "type": "POST",
+                    "datatype": "json"
+                },
+                "columns":
+                    [
+
+                        { "data": "VNC_NOME" },
+                        { "data": "FNC_NOME" },
+                        {
+                            "data": "FNCVNC_DATAINICIO", "render": function (data, type, full, meta) {
+                                return moment(data).format('DD/MM/YYYY')
+                            }, width: 20
+                        },
+                        {
+                            "data": "FNCVNC_DATAFIM", "render": function (data, type, full, meta) {
+                                if (data !== null) {
+                                    return moment(data).format('DD/MM/YYYY')
+                                } else
+                                    return "";
+                            }
+                        },
+
+                        { "data": "FNCVNC_NUMPORTARIA" },
+                        {
+                            "data": "FNCVNC_DATAPORTARIA", "render": function (data, type, full, meta) {
+                                if (data !== null) {
+                                    return moment(data).format('DD/MM/YYYY')
+                                } else
+                                    return "";
+                            }
+                        },
+                        {
+                            "data": "FNCVNC_ID",
+                            "render": function (data) {
+                                return "<a class='badge badge-pill btn-outline-primary btn-sm waves-effect waves-light sm-1' data-toggle='tooltip' data-placement='top' title='Editar'onclick=abrirModal('@Url.Action("AddUpdateFNCVNC", "FuncaoVinculo")?id=" + data + "')>"
+                                    + "<i class='fa fa-edit'></i></a><a class=' badge badge-pill btn-outline-danger btn-sm waves-effect waves-light m-1 ' data-toggle='tooltip' data-placement='top' title='Excluir' onclick=abrirModal('@Url.Action("Delete", "FuncaoVinculo")/" + data + "') >" +
+                                    "<i class='fa fa-trash'></i></a>";
+                            },
+                            "orderable": false,
+                            "searchable": false, "width": "40px"
+
+                        }
+                    ],
+                "order":
+                    [2, "asc"]
+                , "dom": '<"toolbar">frtip',
+                "deferRender": true
+            });
+
+
+
+                dataTableBeneficio = $('#grdBeneficio').DataTable({
+                "processing": "true",
+                "responsive": "true",
+                "serverSide": "true",
+                "ajax": {
+
+                    "url": "@Url.Action("_ListFuncaoFuncionario", "BeneficioVinculo")" + "/" + idFuncionario,
+                    "type": "POST",
+                    "datatype": "json"
+                },
+                "columns":
+                    [
+                        { "data": "BNFVNC_ID" },
+
+                        { "data": "VNC_NOME" },
+                        { "data": "BNF_NOME" },
+                        {
+                            "data": "BNFVNC_DATAINICIO", "render": function (data, type, full, meta) {
+                                return moment(data).format('DD/MM/YYYY')
+                            }, width: 20
+                        },
+                        {
+                            "data": "BNFVNC_DATAFIM", "render": function (data, type, full, meta) {
+                                if (data !== null) {
+                                    return moment(data).format('DD/MM/YYYY')
+                                } else
+                                    return "";
+                            }
+                        },
+
+                        { "data": "BNFVNC_NUMPORTARIA" },
+                        {
+                            "data": "BNFVNC_DATAPORTARIA", "render": function (data, type, full, meta) {
+                                if (data !== null) {
+                                    return moment(data).format('DD/MM/YYYY')
+                                } else
+                                    return "";
+                            }
+                        },
+                        {
+                            "data": "BNFVNC_ID",
+                            "render": function (data) {
+                                return "<a class='badge badge-pill btn-outline-primary btn-sm waves-effect waves-light sm-1' data-toggle='tooltip' data-placement='top' title='Editar'onclick=abrirModal('@Url.Action("AddUpdateBNFVNC", "BeneficioVinculo")?id=" + data + "')>"
+                                    + "<i class='fa fa-edit'></i></a><a class=' badge badge-pill btn-outline-danger btn-sm waves-effect waves-light m-1 ' data-toggle='tooltip' data-placement='top' title='Excluir' onclick=abrirModal('@Url.Action("Delete", "BeneficioVinculo")/" + data + "') >" +
+                                    "<i class='fa fa-trash'></i></a>";
+                            },
+                            "orderable": false,
+                            "searchable": false, "width": "40px"
+
+                        }
+                    ],
+                "order":
+                    [2, "asc"]
+                , "dom": '<"toolbar">frtip',
+                "deferRender": true
+            });
+
+                dataTableDep = $('#grdDependente').DataTable({
+                    "processing": "true",
+                    "serverSide": "true",
+                    "ajax": {
+
+                        "url": "@Url.Action("GetDependente", "FuncionarioDependente")" + "/" + idFuncionario,
+                        "type": "POST",
+                        "datatype": "json"
+                    },
+                    "columns":
+                        [
+
+                            { "data": "FUNDEP_CPF", width: 50 },
+                            { "data": "FUNDEP_NOME" },
+                            {
+                                "data": "FUNDEP_TIPO", "render": function (data) {
+                                    switch (data) {
+                                        case 1: return "Pai";
+                                            break;
+                                        case 2: return "Mãe";
+                                            break;
+                                        case 3: return "Filho(a)";
+                                            break;
+                                        case 4: return "Avô(ó)";
+                                            break;
+                                        case 5: return "Enteado(a)";
+                                            break;
+                                        default:
+                                            return "";
+                                            break;
+                                    }}},
+                            {
+                                "data": "FUNDEP_DATANASCIMENTO", "render": function (data, type, full, meta) {
+                                    return moment(data).format('DD/MM/YYYY')
+                                }, width: 20
+                            },
+                            {
+                                "data": "FUNDEP_ID",
+                                "render": function (data) {
+                                    ;    return "<a class='badge badge-pill btn-outline-primary btn-sm waves-effect waves-light sm-1' data-toggle='tooltip' data-placement='top' title='Editar'onclick=abrirModal('@Url.Action("AddUpdateDependente", "FuncionarioDependente")/?id=" + data + "')>"
+                                        + "<i class='fa fa-edit fa-sm'></i></a>    <a class=' badge badge-pill btn-outline-danger btn-sm waves-effect waves-light m-1 ' data-toggle='tooltip' data-placement='top' title='Excluir' onclick=abrirModal('@Url.Action("Delete", "FuncionarioDependente")/" + data + "') >" +
+                                        "<i class='fa fa-trash'></i></a>";
+                                },
+                                "orderable": false,
+                                "searchable": false, "width": "40px"
+
+                            }
+                        ],
+                    "order":
+                        [0, "asc"]
+                    , "dom": '<"toolbar">frtip',
+                    "deferRender": true
+                });
+
+
+                 dataTableVinc = $('#grdVinculo').DataTable({
+                     "processing": "true",
+                     "responsive": "true",
+                    "serverSide": "true",
+                    "ajax": {
+
+                        "url": "@Url.Action("GetVinculo", "Vinculo")" + "/" + idFuncionario,
+                        "type": "POST",
+                        "datatype": "json"
+                    },
+                    "columns":
+                        [
+
+                            { "data": "VNC_ID" },
+                            { "data": "VNC_QTD" },
+                            {
+                                "data": "VNC_ADMISSAO", "render": function (data, type, full, meta) {
+                                    return moment(data).format('DD/MM/YYYY')
+                                }
+                            },
+                            {
+                                "data": "VNC_DEMISSAO", "render": function (data, type, full, meta) {
+                                    if (data !== null) {
+                                        return moment(data).format('DD/MM/YYYY')
+                                    } else
+                                        return "";
+
+                                },
+                            },
+                            {
+                                "data": "CRG_NOME", "width": "200px" },
+                            { "data": "VNC_TIPO" },
+                            { "data": "VNC_SITUACAO" },
+                            { "data": "VNC_CARGAHORARIA" },
+
+                            { "data": "VNC_CONCURSO" },
+                            {
+                                "data": "VNC_ID",
+                                "render": function (data) {
+                                    return "<a class='badge badge-pill btn-outline-primary btn-sm waves-effect waves-light sm-1' data-toggle='tooltip' data-placement='top' title='Editar'onclick=abrirModal('@Url.Action("AddUpdateVinculo", "Vinculo")/?id=" + data + "')>"
+                                        + "<i class='fa fa-edit fa-sm'></i></a>    <a class=' badge badge-pill btn-outline-danger btn-sm waves-effect waves-light m-1 ' data-toggle='tooltip' data-placement='top' title='Excluir' onclick=abrirModal('@Url.Action("Delete", "Vinculo")/" + data + "') >" +
+                                        "<i class='fa fa-trash'></i></a>";
+                                },
+                                "orderable": false,
+                                "searchable": false, "width": "40px"
+
+                            }
+                        ],
+                    "order":
+                        [1, "asc"]
+                    , "dom": '<"toolbar">frtip',
+                    "deferRender": true
+                });
+
+
+
+                dataTableLotacao = $('#grdVinculoxUnidade').DataTable({
+                    "processing": "true",
+                    "responsive": "true",
+                    "serverSide": "true",
+                    "ajax": {
+
+                        "url": "@Url.Action("GetLotacao_Funcionario", "VinculoxUnidade")" + "/" + idFuncionario,
+                        "type": "POST",
+                        "datatype": "json"
+                    },
+                    "columns":
+                        [
+
+                            { "data": "VNC_ID"},
+                            { "data": "UND_NOME" },
+                            {
+                                "data": "VNCU_DATAINICIO", "render": function (data, type, full, meta) {
+                                    return moment(data).format('DD/MM/YYYY')
+                                }, width: 20
+                            },
+                            {
+                                "data": "VNCU_DATAFIM", "render": function (data, type, full, meta) {
+                                    if (data !== null) {
+                                        return moment(data).format('DD/MM/YYYY')
+                                    } else
+                                        return "";
+                                }, width: 20
+                            },
+
+                            { "data": "VNCU_ATRIBUICAO" },
+                            {
+                                "data": "VNCU_ID",
+                                "render": function (data) {
+                                    return "<a class='badge badge-pill btn-outline-primary btn-sm waves-effect waves-light sm-1' data-toggle='tooltip' data-placement='top' title='Editar'onclick=abrirModal('@Url.Action("AddUpdateVncUnd", "VinculoxUnidade")?id=" + data + "')>"
+                                        + "<i class='fa fa-edit'></i></a><a class=' badge badge-pill btn-outline-danger btn-sm waves-effect waves-light m-1 ' data-toggle='tooltip' data-placement='top' title='Excluir' onclick=abrirModal('@Url.Action("Delete", "VinculoxUnidade")/" + data + "') >" +
+                                        "<i class='fa fa-trash'></i></a>";
+                                },
+                                "orderable": false,
+                                "searchable": false, "width": "40px"
+
+                            }
+                        ],
+                    "order":
+                        [2, "asc"]
+                    , "dom": '<"toolbar">frtip',
+                    "deferRender": true
+                });
+
+
+                dataTableFerias = $('#grdFerias').DataTable({
+                    "responsive": "true",
+                    "autoWidth": false,
+                "processing": "true",
+                            "serverSide": "true",
+
+                      "ajax": {
+                          "url": "@Url.Action("ListarFerias_Funcionario", "Ferias")"+ "/" + idFuncionario ,
+                    "type": "POST",
+                    "datatype": "json"
+                },
+                "columns":
+                [
+                    { "data": "FRS_ID"},
+                        { "data": "VNC_NOME"},
+                        { "data": "FRS_PERIODOAQUISITIVO" },
+                        {
+                            "data": "FRS_DATA_INICIOGOZO", "render": function (data, type, full, meta) {
+                                if (data !== null) {
+                                    return moment(data).format('DD/MM/YYYY')
+                                } else
+                                    return "";
+
+                            },
+                        },
+                        {
+                            "data": "FRS_DATA_FIMGOZO", "render": function (data, type, full, meta) {
+                                if (data !== null) {
+                                    return moment(data).format('DD/MM/YYYY')
+                                } else
+                                    return "";
+
+                            },
+                        },
+                        {
+                            "data": "FRS_DATA_RETORNO", "render": function (data, type, full, meta) {
+                                if (data !== null) {
+                                    return moment(data).format('DD/MM/YYYY')
+                                } else
+                                    return "";
+
+                            },
+                        },
+                        {
+                            "data": "FRS_DATAPORTARIA", "render": function (data, type, full, meta) {
+                                if (data !== null) {
+                                    return moment(data).format('DD/MM/YYYY')
+                                } else
+                                    return "";
+
+                            },
+                        },
+                        { "data": "FRS_NUMPORTARIA" },
+                        { "data": "FRS_OBSERVACAO" },
+
+                    {
+                        "data": "FRS_ID",
+                        "render": function(data) {
+                            return "<a class='badge badge-pill btn-outline-success btn-sm waves-effect waves-light sm-1' data-toggle='tooltip' data-placement='top' title='Emitir Comunicado' target='_blank' href='@Url.Action("ComunicadoFerias", "Ferias")/" +
+                                data +
+                                "'>" +
+                                "<i class='fa fa-print fa-sm'></i>Emitir Comunicado</a>" + "<a class='badge badge-pill btn-outline-primary btn-sm waves-effect waves-light sm-1' data-toggle='tooltip' data-placement='top' title='Editar'onclick=abrirModal('@Url.Action("AddUpdateFerias","Ferias")/" +
+                                data +
+                                "') >" +
+                                "<i class='fa fa-edit fa-sm'></i> Editar</a><br/><a class=' badge badge-pill btn-outline-danger btn-sm waves-effect waves-light m-1 ' data-toggle='tooltip' data-placement='top' title='Excluir' onclick=abrirModal('@Url.Action("Delete","Ferias")/" +
+                                data +
+                                "') >" +
+                                "<i class='fa fa-trash'></i> Excluir</a>";
+                        },
+                        "orderable": false,
+                        "searchable": false, "width": "40px"
+
+                    }
+                ],
+                "order":
+                    [4, "desc"]
+                ,"dom":
+                    "Bfrtip", "deferRender": true
+            });
+            }
+
+        };
+
+
+        $(document).ready(function () {
+
+            moment.locale('pt-br');
+
+            $(function () {
+                $('#pills-tab li:first-child a').tab('show')
+            });
+            LiberaItensTabs();
+
+
+
+        });
+        function showMyImage(fileInput) {
+            var files = fileInput.files;
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+                var imageType = /image.*/;
+                if (!file.type.match(imageType)) {
+                    continue;
+                }
+                var img = document.getElementById("fotoservidor");
+                img.file = file;
+                var reader = new FileReader();
+                reader.onload = (function (aImg) {
+                    return function (e) {
+                        aImg.src = e.target.result;
+                    };
+                })(img);
+                reader.readAsDataURL(file);
+            }
+        };
+
+        $('#imageUpload').change(function () {
+            readImgUrlAndPreview(this);
+            function readImgUrlAndPreview(input) {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $('#fotoservidor').attr('src', e.target.result);
+                    }
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        });
+
+    </script>
+
+}
+

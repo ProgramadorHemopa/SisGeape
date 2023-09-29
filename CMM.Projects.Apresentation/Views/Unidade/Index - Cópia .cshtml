@@ -1,0 +1,177 @@
+﻿@model IEnumerable<CMM.Projects.Apresentation.Models.UnidadeModelView>
+
+@{
+    ViewBag.Title = "Consultar Unidades";
+    ViewData["TituloPagina"] = "Consulta Unidades";
+
+
+}
+
+<div class="row">
+    <div class="col-lg-12 col-xl-12 col-md-12">
+
+        <div class="card">
+            <div class="card-body">
+                <a class=" btn btn-sm btn-primary waves-effect waves-light text-white m-1" style="margin-left:15px" onclick=abrirModal('@Url.Action("AddUpdateUnidade","Unidade")')><i class="fa fa-plus"></i> Nova Unidade</a>
+
+
+
+                <br />
+
+                <table class="table display responsive table-striped table-bordered dt-responsive nowrap dataTable no-wrap" cellspacing="0" width="100%" id="grdMain">
+                    <thead class="text-center">
+                        <tr>
+
+
+
+                            <th>
+                                @Html.DisplayNameFor(model => model.UND_SIGLA)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.UND_NOME)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.UND_NIVEL)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.UND_PAI)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.UND_DATAINICIO)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.UND_DATAFIM)
+                            </th>
+
+                            <th>
+                                @Html.DisplayNameFor(model => model.UND_RAMAL)
+                            </th>
+
+
+                            <th>
+                                @Html.DisplayNameFor(model => model.UND_COMPETENCIA)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.UND_DIRETORIO)
+                            </th>
+                            <th>
+                                Ações
+                            </th>
+                        </tr>
+                    </thead>
+
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<link href="~/Scripts/Grid/DataTables-1.10.16/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<link href="~/Scripts/Grid/Responsive-2.2.1/css/responsive.bootstrap4.min.css" rel="stylesheet" />
+
+
+@section scripts{
+
+    @Scripts.Render("~/bundles/Grid")
+    <script src="~/Scripts/moment.min.js"></script>
+    <script src="~/Scripts/moment-with-locales.min.js"></script>
+    <script type="text/javascript">
+        var dataTable;
+
+
+        $(document).ready(function() {
+            dataTable = $('#grdMain').DataTable({
+                "responsive":"true",
+                "processing": "true",
+                "serverSide": "true",
+                "ajax": {
+                    "url": "@Url.Action("ListarUnidade")",
+                    "type": "POST",
+                    "datatype": "json"
+                },
+                "columns":
+                [
+
+                    { "data": "UND_SIGLA", "name": "SIGLA" },
+                    { "data": "UND_NOME", "name": "SIGLA" },
+                        {
+                            "data": "UND_NIVEL", "render": function (data) {
+                                if (data == '1')
+                                    return 'Presi';
+                                else if (data == '2')
+                                    return 'Diretoria';
+                                else if (data == '3')
+                                    return 'Coordenação';
+                                else if (data == '4')
+                                    return 'Gerência';
+                                else if (data == '5')
+                                    return 'Assessoria';
+                                else return '';
+                            }
+                        },
+                    { "data": "UND_PAI_NOME", "orderable": false },
+                    {
+                        "data": "UND_DATAINICIO", "render": function (data, type, full, meta) {
+                            if (data !== null) {
+                                return moment(data).format('DD/MM/YYYY')
+                            } else
+                                return "";
+
+                        },
+                    },
+                    {
+                        "data": "UND_DATAFIM", "render": function (data, type, full, meta) {
+                            if (data !== null) {
+                                return moment(data).format('DD/MM/YYYY')
+                            } else
+                                return "";
+
+                        },
+                    },
+
+                        {
+                            "data": "UND_RAMAL"
+                        },
+
+                        {
+                            "data": "UND_COMPETENCIA"
+                        },
+                        {
+                            "data": "UND_DIRETORIO"
+                        },
+                    {
+                        "data": "UND_ID",
+                        "render": function(data) {
+                            return "<a class='badge badge-pill btn-outline-primary btn-sm waves-effect waves-light sm-1' data-toggle='tooltip' data-placement='top' title='Editar'onclick=abrirModal('@Url.Action("AddUpdateUnidade","Unidade")/" +
+                                data +
+                                "')>" +
+                                "<i class='fa fa-edit fa-sm'></i>Editar</a>" +
+                                "<a class='badge badge-pill btn-outline-primary btn-sm waves-effect waves-light sm-1' data-toggle='tooltip' data-placement='top' title='Detalhes' OnClick=abrirModal('@Url.Action("Details","Unidade")/" +
+                            data +
+                                "')>" + "<i class='fa fa-list-alt fa-sm'></i>  Detalhes</a>"
+
+                            + "<a class=' badge badge-pill btn-outline-danger btn-sm waves-effect waves-light m-1 ' data-toggle='tooltip' data-placement='top' title='Excluir' onclick=abrirModal('@Url.Action("Delete","Unidade")/" +
+                                data +
+                                "') >" +
+                                "<i class='fa fa-trash'></i>Excluir</a>";
+                        },
+                        "orderable": false,
+                        "searchable": false, "width": "40px"
+
+
+
+                    }
+                ],
+                "order":
+                    [0, "asc"]
+                ,"dom":
+                    "Bfrtip"
+                , "deferRender": true
+            });
+        });
+
+
+    </script>
+}
+

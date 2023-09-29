@@ -1,0 +1,41 @@
+﻿@model CMM.Projects.Apresentation.Models.ConselhoModelView
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+
+                <div>
+                    <h4>Detalhes Conselho - Nº @Model.CON_ID</h4>
+                    <hr />
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.CRG_ID)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.CRG_NOME)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.CON_NOME)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.CON_NOME)
+                        </dd>
+
+                    </dl>
+                </div>
+                <p>
+                    @Html.ActionLink("Editar", "Cadastro", new { id = Model.CON_ID }, new { @class = "btn-sm btn-info" })
+                    @Html.ActionLink("Voltar", "Index", null, new { @class = "btn-sm btn-light" })
+                </p>
+            </div>
+        </div>
+    </div>
+</div>

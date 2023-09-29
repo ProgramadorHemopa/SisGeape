@@ -1,0 +1,192 @@
+﻿@model CMM.Projects.Apresentation.Models.ConselhoClasseVinculoModelView
+
+
+@{
+    ViewData["TituloPagina"] = TempData["Titulo"];
+}
+<div class="row m-b-15">
+    <div class="col-sm-3">
+        <div class="card m-b-20">
+            <div class="card-body">
+
+
+
+
+                <div class="col-12">
+                    <div class="profile-card-4">
+                        <div class="user-fullimage">
+                            <img id="fotoservidor" src="data:image/jpg;base64,@(Convert.ToBase64String(Model.FUN_FOTO))" alt="user avatar" class="card-img-top">
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <hr>
+
+            <div class="col-sm-12">
+                <dl class="dl-horizontal">
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.MATRICULA)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.MATRICULA)
+                    </dd>
+
+
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.NOME)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.NOME)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.CARGO)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.CARGO)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.UNIDADE)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.UNIDADE)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.TIPO)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.TIPO)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.SITUACAO)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.SITUACAO)
+                    </dd>
+
+                </dl>
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <div class="col-sm-9">
+        <div class="card">
+            <div class="card-body">
+                @Html.ActionLink("Voltar", "Index", null, new { @class = "btn-sm btn-light waves-light waves-effect" })
+                <a class=" btn btn-sm btn-primary waves-effect waves-light text-white m-1" style="margin-left:15px" onclick=abrirModal('@Url.Action("CadastroConCla","ConselhoClasse", new { cargo=Model.CRG_ID, vnc=Model.VNC_ID })')><i class="fa fa-plus"></i> Registrar Conselho</a>
+
+                <div id="datatable-buttons_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                    <div class="row-sm-12">
+                        <table class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline collapsed" id="datatable">
+                            <thead>
+                                <tr>
+
+                                    <th>
+                                        ANO
+                                    </th>
+                                    <th>
+                                        CONSELHO
+                                    </th>
+                                    <th>
+                                        DATA RECEBIMENTO
+                                    </th>
+                                    <th>
+                                        DATA QUITAÇÃO
+                                    </th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (TempData["ListConselhoVinculo"] != null)
+                                {
+                                    foreach (var item in (List<CMM.Projects.Apresentation.Models.ConselhoClasseModelView>)TempData["ListConselhoVinculo"])
+                                    {
+
+                                                <tr>
+
+
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.CONCLA_REFANO)
+                                                </td>
+
+
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.CONSELHO)
+                                                </td>
+
+
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.CONCLA_DATARECEBIMENTO)
+                                                </td>
+
+
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.CONCLA_DATAQUITACAO)
+                                                </td>
+
+
+                                                <td>
+
+
+                                                    <a class='btn btn-sm btn-outline-primary waves-effect waves-light sm-1' onclick=abrirModal('@Url.Action("CadastroConCla", new { id=item.CONCLA_ID, cargo=Model.CRG_ID })')>Editar </a>|
+                                    <a class='btn btn-sm btn-outline-primary waves-effect waves-light sm-1' onclick=abrirModal('@Url.Action("Delete", new { id=item.CONCLA_ID})')>Excluir </a>
+
+
+                                    @*  @Html.ActionLink("Detalhes", "Details", new { id = item.CON_ID}, new { @class = "btn-sm btn-outline-primary" }) |
+                            @Html.ActionLink("Excluir", "Delete", new { id = item.CON_ID}, new { @class = "btn-sm btn-outline-primary" })*@
+                                </td>
+                            </tr>
+            }
+        }
+
+                        </tbody>
+
+
+                    </table>
+                </div>
+            </div>
+            </div>
+    </div>
+</div>
+</div>
+
+@section scripts{
+    @Scripts.Render("~/bundles/Grid")
+    <script src="~/assets/plugins/jQuery-Mask-Plugin-master/dist/jquery.mask.min.js"></script>
+
+    <script type="text/javascript">
+        var dataTable;
+        $(document).ready(function () {
+
+
+            $("#datatable").dataTable({
+                "autoWidth": false,
+                "dom":
+                    "Bfrtip"
+            });
+
+            $('#CONCLA_REFANO').mask('9999');
+
+        });
+
+
+
+    </script>
+}

@@ -1,0 +1,96 @@
+﻿@model CMM.Projects.Apresentation.Models.FeriasModelView
+
+<div class="modal-header">
+    <h4>Você tem certeza que deseja excluir este registro?</h4>
+    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+</div>
+
+<div class="row">
+    <div class="modal-body">
+        <dl class="dl-horizontal">
+            <dt>
+                VÍNCULO
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.VNC_NOME)
+
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FRS_PERIODOAQUISITIVO)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FRS_PERIODOAQUISITIVO)
+
+            </dd>
+
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FRS_DATA_INICIOGOZO)
+            </dt>
+
+            <dd>
+                @if (Model.FRS_DATA_INICIOGOZO.HasValue)
+                {
+                    @Model.FRS_DATA_INICIOGOZO.Value.ToString("dd/MM/yyyy")
+                }
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FRS_DATA_RETORNO)
+            </dt>
+
+            <dd>
+                @if (Model.FRS_DATA_RETORNO.HasValue)
+                {
+                    @Model.FRS_DATA_RETORNO.Value.ToString("dd/MM/yyyy")
+                }
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.FRS_NUMPORTARIA)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FRS_NUMPORTARIA)
+
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.FRS_DATAPORTARIA)
+            </dt>
+
+            <dd>
+                @if (Model.FRS_DATAPORTARIA.HasValue)
+                {
+                    @Model.FRS_DATAPORTARIA.Value.ToString("dd/MM/yyyy")
+                }
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.FRS_OBSERVACAO)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FRS_OBSERVACAO)
+
+            </dd>
+        </dl>
+    </div>
+</div>
+    @using (Html.BeginForm("Delete", "Ferias", FormMethod.Post, new { id = "formCrud" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="modal-footer">
+            <a data-dismiss="modal" class="btn btn-sm btn-outline-secondary">Voltar</a>
+            <input type="button" value="Excluir" class="btn btn-outline-danger" />
+        </div>
+    }
+
+
+
+
+
+
+@Scripts.Render("~/bundles/jqueryval")
+<script src="~/Scripts/ccm.projects/EnviaFormCad.js"></script>

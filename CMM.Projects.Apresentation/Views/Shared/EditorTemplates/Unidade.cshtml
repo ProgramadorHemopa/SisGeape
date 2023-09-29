@@ -1,0 +1,75 @@
+﻿@model CCM.Projects.SisGeape2.Models.unidade
+
+
+<div class="form-horizontal">
+
+    <hr />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    <div class="form-group">
+    
+        @Html.LabelFor(model => model.UND_CODIGO, htmlAttributes: new { @class = "control-label col-md-1" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.UND_CODIGO, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.UND_CODIGO, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.UND_SIGLA, htmlAttributes: new { @class = "control-label col-md-1" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.UND_SIGLA, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.UND_SIGLA, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.UND_NOME, htmlAttributes: new { @class = "control-label col-md-1" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.UND_NOME, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.UND_NOME, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+
+        @{
+            List<SelectListItem> ListaNivel = new List<SelectListItem>();
+            ListaNivel.Add(new SelectListItem
+            {
+                Text = "Diretoria",
+                Value = "2"
+            });
+            ListaNivel.Add(new SelectListItem
+            {
+                Text = "Coordenação",
+                Value = "3"
+            });
+            ListaNivel.Add(new SelectListItem
+            {
+                Text = "Gerência",
+                Value = "4"
+            });
+            ListaNivel.Add(new SelectListItem
+            {
+                Text = "Assessoria",
+                Value = "5"
+            });
+        }
+
+        @Html.LabelFor(model => model.UND_NIVEL, htmlAttributes: new { @class = "control-label col-md-1" })
+        <div class="col-md-10">
+            @Html.DropDownListFor(model => model.UND_NIVEL, ListaNivel, "Selecione", htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.UND_NIVEL, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.UND_DIRETORIO, htmlAttributes: new { @class = "control-label col-md-1" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.UND_DIRETORIO, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.UND_DIRETORIO, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+
+
+</div>

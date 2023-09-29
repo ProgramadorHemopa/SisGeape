@@ -1,0 +1,78 @@
+﻿@model CMM.Projects.Apresentation.Models.FuncionarioSolicitarCrachaModelView
+
+
+<div class="modal-header">
+    <h3 class="modal-title"><span class="fa fa-edit"></span> @ViewBag.Title</h3>
+
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+
+</div>
+@using (Html.BeginForm("SolicitarCracha", "Funcionario", FormMethod.Post, new { @id = "formBeneficio", @autocomplete = "off" }))
+{
+    <div class="modal-body">
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.FUNCRC_ID)
+            @Html.HiddenFor(model => model.FUNCRC_SITUACAO)
+            @Html.HiddenFor(model => model.FUNCRC_DATASOLICITACAO)
+
+
+            <div class="row">
+                <div class="form-group col-md-9 col-sm-9 col-lg-9 col-xs-*">
+                    @Html.LabelFor(model => model.FUNCRC_TIPO, htmlAttributes: new { @class = "control-label" })
+                    @Html.DropDownListFor(model => model.FUNCRC_TIPO, null, "Selecione", htmlAttributes: new { @class = "form-control form-control-sm" })
+                    @Html.ValidationMessageFor(model => model.FUNCRC_TIPO, "", new { @class = "text-danger" })
+                </div>
+
+
+                <div class="form-group col-md-3 col-sm-3 col-lg-3 col-xs-3">
+                    @Html.LabelFor(model => model.FUNCRC_DATASOLICITACAO, htmlAttributes: new { @class = "control-label" })<br />
+                    @if (Model.FUNCRC_DATASOLICITACAO.HasValue)
+                    {
+                        @Model.FUNCRC_DATASOLICITACAO.Value.ToString("dd/MM/yyyy")
+                    }
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="form-group col-md-12 col-sm-12 col-lg-12 col-xs-12">
+                    @Html.LabelFor(model => model.VNC_ID, htmlAttributes: new { @class = "control-label" })
+                    @Html.DropDownListFor(model => model.VNC_ID, null, "Selecione", htmlAttributes: new { @class = "form-control form-control-sm" })
+                    @Html.ValidationMessageFor(model => model.VNC_ID, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+
+
+            <div class="row">
+                <div class="form-group col-md-12 col-sm-12 col-lg-12 col-xs-12">
+                    @Html.LabelFor(model => model.FUNCRC_OBSERVACAO, htmlAttributes: new { @class = "control-label" })
+                    @Html.EditorFor(model => model.FUNCRC_OBSERVACAO, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                    @Html.ValidationMessageFor(model => model.FUNCRC_OBSERVACAO, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </div>
+    <div class="modal-footer">
+        <a data-dismiss="modal" class="btn btn-sm btn-outline-secondary">Voltar</a>
+        <input type="submit" value="Salvar" class="btn btn-secondary" />
+    </div>
+}
+
+
+
+@Scripts.Render("~/bundles/jqueryval")
+<script src="~/Scripts/ccm.projects/Cadastro_Beneficio.js"></script>
+<script type="text/javascript">
+    function atualizarGrid() {
+        $('#minhaModal').modal('hide');
+    };
+
+</script>
+

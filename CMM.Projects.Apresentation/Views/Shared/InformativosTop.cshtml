@@ -1,0 +1,141 @@
+﻿<header class="topbar-nav">
+    <nav class="navbar navbar-expand fixed-top gradient-scooter">
+        <ul class="navbar-nav mr-auto align-items-center">
+            <li class="nav-item">
+                <a class="nav-link toggle-menu" href="javascript:void();">
+                    <i class="icon-menu menu-icon"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                @*<div class="brand-logo">
+                        <a href="index.html">
+                            <img src="~/Imagem/LogoHemopa.png" class="logo-icon" alt="logo icon">
+                            <h5 class="logo-text">Fundação Hemopa</h5>
+                        </a>
+                    </div>*@
+            </li>
+        </ul>
+
+        <ul class="navbar-nav align-items-center right-nav-link">
+
+
+
+
+            @*<li class="nav-item dropdown-lg">
+                    <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown" href="javascript:void();">
+                        <i class="icon-bell"></i><span class="badge badge-danger badge-up">@ViewBag.Count</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                              Você possui X alertas!
+                                <span class="badge badge-primary">10</span>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="javaScript:void();">
+                                    <div class="media">
+                                        <i class="icon-people fa-2x mr-3 text-info"></i>
+                                        <div class="media-body">
+                                            <h6 class="mt-0 msg-title">New Registered Users</h6>
+                                            <p class="msg-info">Lorem ipsum dolor sit amet...</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="javaScript:void();">
+                                    <div class="media">
+                                        <i class="icon-cup fa-2x mr-3 text-warning"></i>
+                                        <div class="media-body">
+                                            <h6 class="mt-0 msg-title">New Received Orders</h6>
+                                            <p class="msg-info">Lorem ipsum dolor sit amet...</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="list-group-item">
+                                <a href="javaScript:void();">
+                                    <div class="media">
+                                        <i class="icon-bell fa-2x mr-3 text-danger"></i>
+                                        <div class="media-body">
+                                            <h6 class="mt-0 msg-title">New Updates</h6>
+                                            <p class="msg-info">Lorem ipsum dolor sit amet...</p>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                            <li class="list-group-item"><a href="javaScript:void();">See All Notifications</a></li>
+                        </ul>
+                    </div>
+                </li>*@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            @*<li class="nav-item language">
+                    <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown" href="index.html#"><i class="flag-icon flag-icon-gb"></i></a>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li class="dropdown-item"> <i class="flag-icon flag-icon-gb mr-2"></i> English</li>
+                        <li class="dropdown-item"> <i class="flag-icon flag-icon-fr mr-2"></i> French</li>
+                        <li class="dropdown-item"> <i class="flag-icon flag-icon-cn mr-2"></i> Chinese</li>
+                        <li class="dropdown-item"> <i class="flag-icon flag-icon-de mr-2"></i> German</li>
+                    </ul>
+                </li>*@
+            <li class="nav-item">
+                <a class="nav-link dropdown-toggle dropdown-toggle-nocaret waves-effect" data-toggle="dropdown" href="index.html#">
+                    <i class="icon-user"></i><span class="user-profile"></span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right">
+                    <li class="dropdown-item user-details">
+                        <div class="media">
+                            <div class="avatar"><img class="align-self-start mr-2" src="~/Imagem/LogoHemopa.png" alt="user avatar"></div>
+                            <div class="media-body">
+                                <h6 class="mt-2 user-title">@HttpContext.Current.User.Identity.Name</h6>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="dropdown-divider"></li>
+                    @*<li class="dropdown-item"><i class="icon-wallet mr-2"></i> Perfil</li>*@
+                    <li class="dropdown-divider"></li>
+
+                    <li class="dropdown-item">
+                        <a href="@Url.Action("Logout","Usuario")" class="text-dark">
+
+                            <i class="icon-power mr-2">     Sair</i>
+                        </a>
+                    </li>
+
+                    @*@using (Html.BeginForm("Logout", "Usuario", FormMethod.Post, new { id = "logoutForm" }))
+                        {
+                            <li class="dropdown-item">
+                                <a href="javaScript:void();" class="text-dark" style="font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif" onclick="javascript:document.getElementById('logoutForm').submit()">
+                                    <div class="media">
+
+                                        <i class="icon-power mr-2">     Sair</i>
+                                    </div>
+                                </a>
+                            </li>
+                        }*@
+
+
+
+
+                </ul>
+            </li>
+        </ul>
+
+
+    </nav>
+</header>
+

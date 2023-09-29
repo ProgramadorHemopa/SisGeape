@@ -1,0 +1,55 @@
+﻿@model IEnumerable<CMM.Projects.Apresentation.Models.VinculoModelView>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = null;
+}
+
+
+<table class="table table-sm dataTable" cellspacing="0" width="100%" id="grdVinculo">
+
+    <thead class="text-center">
+        <tr>
+            <th>
+                ID
+            </th>
+             <th>
+                @Html.DisplayNameFor(model => model.VNC_QTD)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VNC_ADMISSAO)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VNC_DEMISSAO)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CRG_ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VNCTP_ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VNCST_ID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VNC_CARGAHORARIA)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.VNC_CONCURSO)
+            </th>
+            <th>
+                Ações
+            </th>
+        </tr>
+    </thead>
+</table>
+
+<br />
+<br />
+
+<a class=" btn btn-sm btn-primary waves-effect waves-light text-white m-1" style="margin-left:15px" onclick=abrirModal('@Url.Action("AddUpdateVinculo", "Vinculo" , new { @id=0,@func =@ViewBag.FUN_ID})')>
+    <i class="fa fa-plus"></i> Novo Vínculo
+</a>
+
+

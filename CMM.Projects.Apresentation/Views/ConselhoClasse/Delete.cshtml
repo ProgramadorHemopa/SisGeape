@@ -1,0 +1,65 @@
+﻿@model CMM.Projects.Apresentation.Models.ConselhoClasseModelView
+
+<div class="modal-header">
+    <h4>Você tem certeza que deseja excluir este registro?</h4>
+    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+</div>
+
+<div class="modal-body">
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CONCLA_REFANO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CONCLA_REFANO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CON_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CONSELHO)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CONCLA_DATARECEBIMENTO)
+        </dt>
+
+        <dd>
+            @if (Model.CONCLA_DATARECEBIMENTO != null)
+            {
+                @Model.CONCLA_DATARECEBIMENTO.AsDateTime().ToShortDateString()
+            }
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.CONCLA_DATAQUITACAO)
+        </dt>
+
+        <dd>
+            @if (Model.CONCLA_DATAQUITACAO != null)
+            {
+                @Model.CONCLA_DATAQUITACAO.AsDateTime().ToShortDateString()
+            }
+        </dd>
+
+
+
+
+    </dl>
+</div>
+<div class="modal-footer">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="button" data-dismiss="modal" value="Voltar" class="btn btn-sm btn-default  waves-effect waves-light sm-1" />
+            <input type="submit" value="Excluir" class="btn btn-sm btn-danger" />
+
+        </div>
+    }
+
+
+</div>

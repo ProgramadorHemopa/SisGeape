@@ -1,0 +1,58 @@
+﻿@model CMM.Projects.Apresentation.Models.FuncaoModelView
+
+
+<div class="modal-header">
+    <h3 class="modal-title"><span class="fa fa-edit"></span> @ViewBag.Title</h3>
+
+    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+
+</div>
+<div class="modal-body">
+
+    @using (Html.BeginForm("AddUpdateFuncao", "Funcao", FormMethod.Post, new { id = "formCrud" }))
+    {
+        @Html.AntiForgeryToken()
+
+
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.FNC_ID)
+
+        <div class="row">
+            <div class="form-group col-md-12 col-lg-12">
+                @Html.LabelFor(model => model.FNC_NOME, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.FNC_NOME, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                @Html.ValidationMessageFor(model => model.FNC_NOME, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="form-group col-md-6 col-lg-6 ">
+                @Html.LabelFor(model => model.FNC_QUANTIDADE, htmlAttributes: new { @class = "control-label" })
+                @Html.EditorFor(model => model.FNC_QUANTIDADE, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                @Html.ValidationMessageFor(model => model.FNC_QUANTIDADE, "", new { @class = "text-danger" })
+            </div>
+
+
+            <div class="form-group col-md-6 col-lg-6">
+                @Html.LabelFor(model => model.REFFNC_ID, htmlAttributes: new { @class = "control-label" })
+                @Html.DropDownListFor(model => model.REFFNC_ID, (SelectList)ViewBag.Ref, "Selecione", htmlAttributes: new { @class = "form-control form-control-sm" })
+                @Html.ValidationMessageFor(model => model.REFFNC_ID, "", new { @class = "text-danger" })
+
+            </div>
+
+        </div>
+
+
+    }
+</div>
+
+
+<div class="modal-footer">
+    <a data-dismiss="modal" class="btn btn-sm btn-outline-secondary">Voltar</a>
+    <input type="button" value="Salvar" class="btn btn-secondary" />
+</div>
+
+
+@Scripts.Render("~/bundles/jqueryval")
+<script src="~/Scripts/ccm.projects/EnviaForm.js"></script>

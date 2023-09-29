@@ -1,0 +1,166 @@
+﻿@model CMM.Projects.Apresentation.Models.FuncionarioCartaoPontoModelView
+
+@{
+    ViewData["TituloPagina"] = "Cartão Ponto";
+}
+
+
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-2">
+                <div class="profile-card-1">
+                    <div class="card">
+                        <div class="user-fullimage">
+
+                            <img id="fotoservidor" src="data:image/jpg;base64,@(Convert.ToBase64String(Model.FUN_FOTO))" alt="user avatar" class="card-img-top">
+
+                        </div>
+
+
+
+                    </div>
+                </div>
+                <dl class="dl-horizontal">
+                    <dt>
+                        @Html.DisplayNameFor(model => model.MATRICULA)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.MATRICULA)
+                    </dd>
+
+                    <dt>
+                        @Html.DisplayNameFor(model => model.NOME)
+                    </dt>
+
+                    <dd>
+                        @Html.DisplayFor(model => model.NOME)
+                    </dd>
+
+                </dl>
+
+            </div>
+            <div class="col-9 col-lg-push-3">
+
+
+                @using (Html.BeginForm("GerarCartaoPonto", "Funcionario", FormMethod.Post, new { @id = "formPesquisa", @autocomplete = "off" }))
+                {
+                    <div class="row">
+
+                        <div class="form-group col-md-12">
+                            @Html.Label("VÍNCULO", htmlAttributes: new { @class = "" })
+                            @Html.DropDownList("VINCULO", (SelectList)ViewBag.VNC_ID, htmlAttributes: new { @class = "form-control form-control-sm", @id = "Vinculo" })
+
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+
+
+                        <div class="form-group col-md-6">
+                            @Html.Label("INICIO", htmlAttributes: new { @class = "" })
+                            @Html.Editor("INICIO", new { htmlAttributes = new { @class = "form-control form-control-sm", @id = "INICIO", @required = "true" } })
+
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            @Html.Label("FIM", htmlAttributes: new { @class = "" })
+                            @Html.Editor("FIM", new { htmlAttributes = new { @class = "form-control form-control-sm", @id = "FIM", @required = "true" } })
+
+
+                        </div>
+
+                    </div>
+
+
+
+
+                }
+
+
+
+
+
+
+            </div>
+
+        </div>
+        <hr />
+        <div class="float-sm-right">
+            <a href="@Request.UrlReferrer" class="btn btn-outline-secondary waves-effect waves-light sm-1"><i class="fa fa-reply-all"></i> Voltar</a>
+            <button type="submit" id="enviar" class="btn btn-gradient-scooter waves-effect waves-light sm-1"><i class="fa fa-check-square-o"></i> Pesquisar</button>
+
+        </div>
+    </div>
+</div>
+
+
+
+<div class="row-sm-12">
+        <div class="card">
+            <div class="card-body">
+                <div id="details" style="display:none">
+                    <div class="row">
+                        <div class="col-lg-12 col-md-12  col-xs-12 col-xl-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row" id="tab-details">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+<link href="~/assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css">
+
+<script src="~/assets/js/popper.min.js"></script>
+@section scripts{
+    <script src="~/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#INICIO').datepicker({
+                autoclose: true,
+                todayHighlight: true
+            });
+            $('#FIM').datepicker({
+                autoclose: true,
+                todayHighlight: true
+            });
+        });
+
+        $('#formPesquisa').submit(function (event) {
+            event.preventDefault()
+            var data = $("#formPesquisa").serialize();
+            var contentType = "application/x-www-form-urlencoded";
+            var processData = true;
+
+            $.ajax({
+                data: data,
+                type: $("#formPesquisa").attr('method'),
+                url: $("#formPesquisa").attr('action'),
+                contentType: contentType,
+                processData: processData,
+                success: function (data) {
+                    $('#tab-details').html(data);
+                    document.getElementById("details").style.display = 'block';
+
+                },
+                error: function (data) {
+                    notificaoAlerta("Ocorreu um problema com a sua solicitação. <br/>");
+
+                },
+            });
+        });
+    </script>
+}
+

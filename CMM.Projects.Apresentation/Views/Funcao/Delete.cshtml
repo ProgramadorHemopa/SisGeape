@@ -1,0 +1,64 @@
+﻿@model CMM.Projects.Apresentation.Models.FuncaoModelView
+
+
+
+<div class="modal-header">
+    <h4>Você tem certeza que deseja excluir este registro?</h4>
+    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+</div>
+
+<div class="row">
+
+    <div class="modal-body">
+        <dl class="dl-horizontal">
+
+            <dt>
+                @Html.DisplayNameFor(model => model.FNC_ID)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FNC_ID)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.FNC_NOME)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FNC_NOME)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.FNC_QUANTIDADE)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FNC_QUANTIDADE)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.REFFNC_ID)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.REF_NOME)
+            </dd>
+
+        </dl>
+
+    </div>
+</div>
+    @using (Html.BeginForm("Delete", "Funcao", FormMethod.Post, new { id = "formCrud" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="modal-footer">
+            <a data-dismiss="modal" class="btn btn-sm btn-outline-secondary">Voltar</a>
+            <input type="button" value="Excluir" class="btn btn-outline-danger" />
+        </div>
+    }
+
+
+
+
+
+
+<script src="~/Scripts/ccm.projects/EnviaForm.js"></script>
+@Scripts.Render("~/bundles/jqueryval")

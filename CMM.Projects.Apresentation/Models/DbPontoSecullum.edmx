@@ -1,0 +1,579 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PontoSecullum4Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="batidas">
+          <Key>
+            <PropertyRef Name="data" />
+            <PropertyRef Name="funcionario_id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="data" Type="smalldatetime" Nullable="false" />
+          <Property Name="funcionario_id" Type="int" Nullable="false" />
+          <Property Name="entrada1" Type="varchar" MaxLength="10" />
+          <Property Name="saida1" Type="varchar" MaxLength="10" />
+          <Property Name="entrada2" Type="varchar" MaxLength="10" />
+          <Property Name="saida2" Type="varchar" MaxLength="10" />
+          <Property Name="entrada3" Type="varchar" MaxLength="10" />
+          <Property Name="saida3" Type="varchar" MaxLength="10" />
+          <Property Name="entrada4" Type="varchar" MaxLength="10" />
+          <Property Name="saida4" Type="varchar" MaxLength="10" />
+          <Property Name="entrada5" Type="varchar" MaxLength="10" />
+          <Property Name="saida5" Type="varchar" MaxLength="10" />
+          <Property Name="ajuste" Type="varchar" MaxLength="6" />
+          <Property Name="abono2" Type="varchar" MaxLength="5" />
+          <Property Name="abono3" Type="varchar" MaxLength="5" />
+          <Property Name="abono4" Type="varchar" MaxLength="5" />
+          <Property Name="reserva_refeicao" Type="bit" Nullable="false" />
+          <Property Name="obs" Type="varchar" MaxLength="50" />
+          <Property Name="mem_entrada1" Type="varchar" MaxLength="5" />
+          <Property Name="mem_saida1" Type="varchar" MaxLength="5" />
+          <Property Name="mem_entrada2" Type="varchar" MaxLength="5" />
+          <Property Name="mem_saida2" Type="varchar" MaxLength="5" />
+          <Property Name="mem_entrada3" Type="varchar" MaxLength="5" />
+          <Property Name="mem_saida3" Type="varchar" MaxLength="5" />
+          <Property Name="mem_entrada4" Type="varchar" MaxLength="5" />
+          <Property Name="mem_saida4" Type="varchar" MaxLength="5" />
+          <Property Name="mem_entrada5" Type="varchar" MaxLength="5" />
+          <Property Name="mem_saida5" Type="varchar" MaxLength="5" />
+          <Property Name="auto_entrada1" Type="bit" Nullable="false" />
+          <Property Name="auto_saida1" Type="bit" Nullable="false" />
+          <Property Name="auto_entrada2" Type="bit" Nullable="false" />
+          <Property Name="auto_saida2" Type="bit" Nullable="false" />
+          <Property Name="auto_entrada3" Type="bit" Nullable="false" />
+          <Property Name="auto_saida3" Type="bit" Nullable="false" />
+          <Property Name="auto_entrada4" Type="bit" Nullable="false" />
+          <Property Name="auto_saida4" Type="bit" Nullable="false" />
+          <Property Name="auto_entrada5" Type="bit" Nullable="false" />
+          <Property Name="auto_saida5" Type="bit" Nullable="false" />
+          <Property Name="compensado" Type="bit" Nullable="false" />
+          <Property Name="almoco_livre" Type="bit" Nullable="false" />
+          <Property Name="neutro" Type="bit" Nullable="false" />
+          <Property Name="nbanco" Type="bit" Nullable="false" />
+          <Property Name="t_extra" Type="tinyint" />
+          <Property Name="t_falta" Type="tinyint" />
+          <Property Name="bac_entrada1" Type="varchar" MaxLength="5" />
+          <Property Name="bac_saida1" Type="varchar" MaxLength="5" />
+          <Property Name="bac_entrada2" Type="varchar" MaxLength="5" />
+          <Property Name="bac_saida2" Type="varchar" MaxLength="5" />
+          <Property Name="bac_entrada3" Type="varchar" MaxLength="5" />
+          <Property Name="bac_saida3" Type="varchar" MaxLength="5" />
+          <Property Name="bac_entrada4" Type="varchar" MaxLength="5" />
+          <Property Name="bac_saida4" Type="varchar" MaxLength="5" />
+          <Property Name="bac_entrada5" Type="varchar" MaxLength="5" />
+          <Property Name="bac_saida5" Type="varchar" MaxLength="5" />
+          <Property Name="acrescimo" Type="varchar" MaxLength="6" />
+          <Property Name="somar_t" Type="bit" Nullable="false" />
+          <Property Name="horario_num" Type="int" />
+          <Property Name="equip_entrada1" Type="int" />
+          <Property Name="equip_saida1" Type="int" />
+          <Property Name="equip_entrada2" Type="int" />
+          <Property Name="equip_saida2" Type="int" />
+          <Property Name="equip_entrada3" Type="int" />
+          <Property Name="equip_saida3" Type="int" />
+          <Property Name="equip_entrada4" Type="int" />
+          <Property Name="equip_saida4" Type="int" />
+          <Property Name="equip_entrada5" Type="int" />
+          <Property Name="equip_saida5" Type="int" />
+          <Property Name="extra_especial_id" Type="int" />
+          <Property Name="folga" Type="bit" Nullable="false" />
+          <Property Name="fdados_entrada1" Type="int" />
+          <Property Name="fdados_saida1" Type="int" />
+          <Property Name="fdados_entrada2" Type="int" />
+          <Property Name="fdados_saida2" Type="int" />
+          <Property Name="fdados_entrada3" Type="int" />
+          <Property Name="fdados_saida3" Type="int" />
+          <Property Name="fdados_entrada4" Type="int" />
+          <Property Name="fdados_saida4" Type="int" />
+          <Property Name="fdados_entrada5" Type="int" />
+          <Property Name="fdados_saida5" Type="int" />
+          <Property Name="dsr_especial" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="funcionarios">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="n_folha" Type="varchar" MaxLength="22" />
+          <Property Name="nome" Type="varchar" MaxLength="100" />
+          <Property Name="n_identificador" Type="varchar" MaxLength="20" />
+          <Property Name="carteira" Type="varchar" MaxLength="50" />
+          <Property Name="empresa_id" Type="int" />
+          <Property Name="horario_num" Type="int" />
+          <Property Name="estado" Type="int" />
+          <Property Name="funcao_id" Type="int" />
+          <Property Name="departamento_id" Type="int" />
+          <Property Name="admissao" Type="smalldatetime" />
+          <Property Name="demissao" Type="smalldatetime" />
+          <Property Name="nao_digital" Type="bit" Nullable="false" />
+          <Property Name="afast_data_ini" Type="smalldatetime" />
+          <Property Name="afast_data_fim" Type="smalldatetime" />
+          <Property Name="afast_motivo" Type="varchar" MaxLength="100" />
+          <Property Name="afast_justificativa_id" Type="int" />
+          <Property Name="invisivel" Type="bit" Nullable="false" />
+          <Property Name="escala_id" Type="int" />
+          <Property Name="escala_mensal" Type="bit" Nullable="false" />
+          <Property Name="t_horario" Type="varchar" MaxLength="50" />
+          <Property Name="senha_equipamento" Type="int" />
+          <Property Name="filtro1_id" Type="int" />
+          <Property Name="filtro2_id" Type="int" />
+          <Property Name="obs" Type="varchar" MaxLength="255" />
+          <Property Name="xcampo1" Type="varchar" MaxLength="50" />
+          <Property Name="alt2_horario_num" Type="int" />
+          <Property Name="alt3_horario_num" Type="int" />
+          <Property Name="alt4_horario_num" Type="int" />
+          <Property Name="endereco" Type="varchar" MaxLength="100" />
+          <Property Name="bairro" Type="varchar" MaxLength="30" />
+          <Property Name="cidade" Type="varchar" MaxLength="50" />
+          <Property Name="uf" Type="varchar" MaxLength="2" />
+          <Property Name="cep" Type="varchar" MaxLength="9" />
+          <Property Name="telefone" Type="varchar" MaxLength="20" />
+          <Property Name="celular" Type="varchar" MaxLength="20" />
+          <Property Name="email" Type="varchar" MaxLength="255" />
+          <Property Name="rg" Type="varchar" MaxLength="255" />
+          <Property Name="expedicao" Type="smalldatetime" />
+          <Property Name="ssp" Type="varchar" MaxLength="2" />
+          <Property Name="cpf" Type="varchar" MaxLength="20" />
+          <Property Name="mae" Type="varchar" MaxLength="100" />
+          <Property Name="pai" Type="varchar" MaxLength="100" />
+          <Property Name="nascimento" Type="smalldatetime" />
+          <Property Name="sexo_masculino" Type="bit" Nullable="false" />
+          <Property Name="estado_civil_id" Type="int" />
+          <Property Name="nacionalidade" Type="varchar" MaxLength="50" />
+          <Property Name="naturalidade" Type="varchar" MaxLength="50" />
+          <Property Name="web_senha" Type="varchar" MaxLength="10" />
+          <Property Name="web_nao_altera" Type="bit" Nullable="false" />
+          <Property Name="web_bloqueado" Type="bit" Nullable="false" />
+          <Property Name="alt_usuario_id" Type="int" />
+          <Property Name="alt_data" Type="smalldatetime" />
+          <Property Name="master" Type="bit" Nullable="false" />
+          <Property Name="n_provisorio" Type="varchar" MaxLength="20" />
+          <Property Name="provisorio_data_ini" Type="smalldatetime" />
+          <Property Name="provisorio_data_fim" Type="smalldatetime" />
+          <Property Name="cidade_empresa_id" Type="int" />
+          <Property Name="estrutura_id" Type="int" />
+          <Property Name="assinatura_eletronica" Type="varchar" MaxLength="50" />
+          <Property Name="integracao_id" Type="int" />
+          <Property Name="bh_inicio" Type="smalldatetime" />
+          <Property Name="centro_custos" Type="varchar" MaxLength="255" />
+          <Property Name="nivel_id" Type="int" />
+          <Property Name="web_auto_aceitar" Type="bit" Nullable="false" />
+          <Property Name="n_pis" Type="varchar" MaxLength="20" />
+          <Property Name="web_solicitacoes" Type="bit" Nullable="false" />
+          <Property Name="data_alteracao_portaria" Type="smalldatetime" />
+          <Property Name="web_data_fechamento" Type="smalldatetime" />
+          <Property Name="especial_insight_sinha" Type="smallint" />
+          <Property Name="motivo_demissao_id" Type="int" />
+          <Property Name="web_somente_visto" Type="bit" Nullable="false" />
+          <Property Name="web_nao_incluir_manual" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_batidas_funcionarios">
+          <End Role="funcionarios" Type="Self.funcionarios" Multiplicity="1" />
+          <End Role="batidas" Type="Self.batidas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="funcionarios">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="batidas">
+              <PropertyRef Name="funcionario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PontoSecullum4ModelStoreContainer">
+          <EntitySet Name="batidas" EntityType="Self.batidas" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="funcionarios" EntityType="Self.funcionarios" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_batidas_funcionarios" Association="Self.FK_batidas_funcionarios">
+            <End Role="funcionarios" EntitySet="funcionarios" />
+            <End Role="batidas" EntitySet="batidas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PontoSecullum4Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="batidas">
+          <Key>
+            <PropertyRef Name="data" />
+            <PropertyRef Name="funcionario_id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="data" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="funcionario_id" Type="Int32" Nullable="false" />
+          <Property Name="entrada1" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="saida1" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="entrada2" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="saida2" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="entrada3" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="saida3" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="entrada4" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="saida4" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="entrada5" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="saida5" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="ajuste" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="abono2" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="abono3" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="abono4" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="reserva_refeicao" Type="Boolean" Nullable="false" />
+          <Property Name="obs" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="mem_entrada1" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="mem_saida1" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="mem_entrada2" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="mem_saida2" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="mem_entrada3" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="mem_saida3" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="mem_entrada4" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="mem_saida4" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="mem_entrada5" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="mem_saida5" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="auto_entrada1" Type="Boolean" Nullable="false" />
+          <Property Name="auto_saida1" Type="Boolean" Nullable="false" />
+          <Property Name="auto_entrada2" Type="Boolean" Nullable="false" />
+          <Property Name="auto_saida2" Type="Boolean" Nullable="false" />
+          <Property Name="auto_entrada3" Type="Boolean" Nullable="false" />
+          <Property Name="auto_saida3" Type="Boolean" Nullable="false" />
+          <Property Name="auto_entrada4" Type="Boolean" Nullable="false" />
+          <Property Name="auto_saida4" Type="Boolean" Nullable="false" />
+          <Property Name="auto_entrada5" Type="Boolean" Nullable="false" />
+          <Property Name="auto_saida5" Type="Boolean" Nullable="false" />
+          <Property Name="compensado" Type="Boolean" Nullable="false" />
+          <Property Name="almoco_livre" Type="Boolean" Nullable="false" />
+          <Property Name="neutro" Type="Boolean" Nullable="false" />
+          <Property Name="nbanco" Type="Boolean" Nullable="false" />
+          <Property Name="t_extra" Type="Byte" />
+          <Property Name="t_falta" Type="Byte" />
+          <Property Name="bac_entrada1" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="bac_saida1" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="bac_entrada2" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="bac_saida2" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="bac_entrada3" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="bac_saida3" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="bac_entrada4" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="bac_saida4" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="bac_entrada5" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="bac_saida5" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="acrescimo" Type="String" MaxLength="6" FixedLength="false" Unicode="false" />
+          <Property Name="somar_t" Type="Boolean" Nullable="false" />
+          <Property Name="horario_num" Type="Int32" />
+          <Property Name="equip_entrada1" Type="Int32" />
+          <Property Name="equip_saida1" Type="Int32" />
+          <Property Name="equip_entrada2" Type="Int32" />
+          <Property Name="equip_saida2" Type="Int32" />
+          <Property Name="equip_entrada3" Type="Int32" />
+          <Property Name="equip_saida3" Type="Int32" />
+          <Property Name="equip_entrada4" Type="Int32" />
+          <Property Name="equip_saida4" Type="Int32" />
+          <Property Name="equip_entrada5" Type="Int32" />
+          <Property Name="equip_saida5" Type="Int32" />
+          <Property Name="extra_especial_id" Type="Int32" />
+          <Property Name="folga" Type="Boolean" Nullable="false" />
+          <Property Name="fdados_entrada1" Type="Int32" />
+          <Property Name="fdados_saida1" Type="Int32" />
+          <Property Name="fdados_entrada2" Type="Int32" />
+          <Property Name="fdados_saida2" Type="Int32" />
+          <Property Name="fdados_entrada3" Type="Int32" />
+          <Property Name="fdados_saida3" Type="Int32" />
+          <Property Name="fdados_entrada4" Type="Int32" />
+          <Property Name="fdados_saida4" Type="Int32" />
+          <Property Name="fdados_entrada5" Type="Int32" />
+          <Property Name="fdados_saida5" Type="Int32" />
+          <Property Name="dsr_especial" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="funcionarios" Relationship="Self.FK_batidas_funcionarios" FromRole="batidas" ToRole="funcionarios" />
+        </EntityType>
+        <EntityType Name="funcionarios">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="n_folha" Type="String" MaxLength="22" FixedLength="false" Unicode="false" />
+          <Property Name="nome" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="n_identificador" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="carteira" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="empresa_id" Type="Int32" />
+          <Property Name="horario_num" Type="Int32" />
+          <Property Name="estado" Type="Int32" />
+          <Property Name="funcao_id" Type="Int32" />
+          <Property Name="departamento_id" Type="Int32" />
+          <Property Name="admissao" Type="DateTime" Precision="0" />
+          <Property Name="demissao" Type="DateTime" Precision="0" />
+          <Property Name="nao_digital" Type="Boolean" Nullable="false" />
+          <Property Name="afast_data_ini" Type="DateTime" Precision="0" />
+          <Property Name="afast_data_fim" Type="DateTime" Precision="0" />
+          <Property Name="afast_motivo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="afast_justificativa_id" Type="Int32" />
+          <Property Name="invisivel" Type="Boolean" Nullable="false" />
+          <Property Name="escala_id" Type="Int32" />
+          <Property Name="escala_mensal" Type="Boolean" Nullable="false" />
+          <Property Name="t_horario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="senha_equipamento" Type="Int32" />
+          <Property Name="filtro1_id" Type="Int32" />
+          <Property Name="filtro2_id" Type="Int32" />
+          <Property Name="obs" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="xcampo1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="alt2_horario_num" Type="Int32" />
+          <Property Name="alt3_horario_num" Type="Int32" />
+          <Property Name="alt4_horario_num" Type="Int32" />
+          <Property Name="endereco" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="bairro" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="cidade" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="uf" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="cep" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="telefone" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="celular" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="email" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="rg" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="expedicao" Type="DateTime" Precision="0" />
+          <Property Name="ssp" Type="String" MaxLength="2" FixedLength="false" Unicode="false" />
+          <Property Name="cpf" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="mae" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="pai" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="nascimento" Type="DateTime" Precision="0" />
+          <Property Name="sexo_masculino" Type="Boolean" Nullable="false" />
+          <Property Name="estado_civil_id" Type="Int32" />
+          <Property Name="nacionalidade" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="naturalidade" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="web_senha" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="web_nao_altera" Type="Boolean" Nullable="false" />
+          <Property Name="web_bloqueado" Type="Boolean" Nullable="false" />
+          <Property Name="alt_usuario_id" Type="Int32" />
+          <Property Name="alt_data" Type="DateTime" Precision="0" />
+          <Property Name="master" Type="Boolean" Nullable="false" />
+          <Property Name="n_provisorio" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="provisorio_data_ini" Type="DateTime" Precision="0" />
+          <Property Name="provisorio_data_fim" Type="DateTime" Precision="0" />
+          <Property Name="cidade_empresa_id" Type="Int32" />
+          <Property Name="estrutura_id" Type="Int32" />
+          <Property Name="assinatura_eletronica" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="integracao_id" Type="Int32" />
+          <Property Name="bh_inicio" Type="DateTime" Precision="0" />
+          <Property Name="centro_custos" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="nivel_id" Type="Int32" />
+          <Property Name="web_auto_aceitar" Type="Boolean" Nullable="false" />
+          <Property Name="n_pis" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="web_solicitacoes" Type="Boolean" Nullable="false" />
+          <Property Name="data_alteracao_portaria" Type="DateTime" Precision="0" />
+          <Property Name="web_data_fechamento" Type="DateTime" Precision="0" />
+          <Property Name="especial_insight_sinha" Type="Int16" />
+          <Property Name="motivo_demissao_id" Type="Int32" />
+          <Property Name="web_somente_visto" Type="Boolean" Nullable="false" />
+          <Property Name="web_nao_incluir_manual" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="batidas" Relationship="Self.FK_batidas_funcionarios" FromRole="funcionarios" ToRole="batidas" />
+        </EntityType>
+        <Association Name="FK_batidas_funcionarios">
+          <End Role="funcionarios" Type="Self.funcionarios" Multiplicity="1" />
+          <End Role="batidas" Type="Self.batidas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="funcionarios">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="batidas">
+              <PropertyRef Name="funcionario_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PontoSecullum4Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="batidas" EntityType="Self.batidas" />
+          <EntitySet Name="funcionarios" EntityType="Self.funcionarios" />
+          <AssociationSet Name="FK_batidas_funcionarios" Association="Self.FK_batidas_funcionarios">
+            <End Role="funcionarios" EntitySet="funcionarios" />
+            <End Role="batidas" EntitySet="batidas" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PontoSecullum4ModelStoreContainer" CdmEntityContainer="PontoSecullum4Entities">
+          <EntitySetMapping Name="batidas">
+            <EntityTypeMapping TypeName="PontoSecullum4Model.batidas">
+              <MappingFragment StoreEntitySet="batidas">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="data" ColumnName="data" />
+                <ScalarProperty Name="funcionario_id" ColumnName="funcionario_id" />
+                <ScalarProperty Name="entrada1" ColumnName="entrada1" />
+                <ScalarProperty Name="saida1" ColumnName="saida1" />
+                <ScalarProperty Name="entrada2" ColumnName="entrada2" />
+                <ScalarProperty Name="saida2" ColumnName="saida2" />
+                <ScalarProperty Name="entrada3" ColumnName="entrada3" />
+                <ScalarProperty Name="saida3" ColumnName="saida3" />
+                <ScalarProperty Name="entrada4" ColumnName="entrada4" />
+                <ScalarProperty Name="saida4" ColumnName="saida4" />
+                <ScalarProperty Name="entrada5" ColumnName="entrada5" />
+                <ScalarProperty Name="saida5" ColumnName="saida5" />
+                <ScalarProperty Name="ajuste" ColumnName="ajuste" />
+                <ScalarProperty Name="abono2" ColumnName="abono2" />
+                <ScalarProperty Name="abono3" ColumnName="abono3" />
+                <ScalarProperty Name="abono4" ColumnName="abono4" />
+                <ScalarProperty Name="reserva_refeicao" ColumnName="reserva_refeicao" />
+                <ScalarProperty Name="obs" ColumnName="obs" />
+                <ScalarProperty Name="mem_entrada1" ColumnName="mem_entrada1" />
+                <ScalarProperty Name="mem_saida1" ColumnName="mem_saida1" />
+                <ScalarProperty Name="mem_entrada2" ColumnName="mem_entrada2" />
+                <ScalarProperty Name="mem_saida2" ColumnName="mem_saida2" />
+                <ScalarProperty Name="mem_entrada3" ColumnName="mem_entrada3" />
+                <ScalarProperty Name="mem_saida3" ColumnName="mem_saida3" />
+                <ScalarProperty Name="mem_entrada4" ColumnName="mem_entrada4" />
+                <ScalarProperty Name="mem_saida4" ColumnName="mem_saida4" />
+                <ScalarProperty Name="mem_entrada5" ColumnName="mem_entrada5" />
+                <ScalarProperty Name="mem_saida5" ColumnName="mem_saida5" />
+                <ScalarProperty Name="auto_entrada1" ColumnName="auto_entrada1" />
+                <ScalarProperty Name="auto_saida1" ColumnName="auto_saida1" />
+                <ScalarProperty Name="auto_entrada2" ColumnName="auto_entrada2" />
+                <ScalarProperty Name="auto_saida2" ColumnName="auto_saida2" />
+                <ScalarProperty Name="auto_entrada3" ColumnName="auto_entrada3" />
+                <ScalarProperty Name="auto_saida3" ColumnName="auto_saida3" />
+                <ScalarProperty Name="auto_entrada4" ColumnName="auto_entrada4" />
+                <ScalarProperty Name="auto_saida4" ColumnName="auto_saida4" />
+                <ScalarProperty Name="auto_entrada5" ColumnName="auto_entrada5" />
+                <ScalarProperty Name="auto_saida5" ColumnName="auto_saida5" />
+                <ScalarProperty Name="compensado" ColumnName="compensado" />
+                <ScalarProperty Name="almoco_livre" ColumnName="almoco_livre" />
+                <ScalarProperty Name="neutro" ColumnName="neutro" />
+                <ScalarProperty Name="nbanco" ColumnName="nbanco" />
+                <ScalarProperty Name="t_extra" ColumnName="t_extra" />
+                <ScalarProperty Name="t_falta" ColumnName="t_falta" />
+                <ScalarProperty Name="bac_entrada1" ColumnName="bac_entrada1" />
+                <ScalarProperty Name="bac_saida1" ColumnName="bac_saida1" />
+                <ScalarProperty Name="bac_entrada2" ColumnName="bac_entrada2" />
+                <ScalarProperty Name="bac_saida2" ColumnName="bac_saida2" />
+                <ScalarProperty Name="bac_entrada3" ColumnName="bac_entrada3" />
+                <ScalarProperty Name="bac_saida3" ColumnName="bac_saida3" />
+                <ScalarProperty Name="bac_entrada4" ColumnName="bac_entrada4" />
+                <ScalarProperty Name="bac_saida4" ColumnName="bac_saida4" />
+                <ScalarProperty Name="bac_entrada5" ColumnName="bac_entrada5" />
+                <ScalarProperty Name="bac_saida5" ColumnName="bac_saida5" />
+                <ScalarProperty Name="acrescimo" ColumnName="acrescimo" />
+                <ScalarProperty Name="somar_t" ColumnName="somar_t" />
+                <ScalarProperty Name="horario_num" ColumnName="horario_num" />
+                <ScalarProperty Name="equip_entrada1" ColumnName="equip_entrada1" />
+                <ScalarProperty Name="equip_saida1" ColumnName="equip_saida1" />
+                <ScalarProperty Name="equip_entrada2" ColumnName="equip_entrada2" />
+                <ScalarProperty Name="equip_saida2" ColumnName="equip_saida2" />
+                <ScalarProperty Name="equip_entrada3" ColumnName="equip_entrada3" />
+                <ScalarProperty Name="equip_saida3" ColumnName="equip_saida3" />
+                <ScalarProperty Name="equip_entrada4" ColumnName="equip_entrada4" />
+                <ScalarProperty Name="equip_saida4" ColumnName="equip_saida4" />
+                <ScalarProperty Name="equip_entrada5" ColumnName="equip_entrada5" />
+                <ScalarProperty Name="equip_saida5" ColumnName="equip_saida5" />
+                <ScalarProperty Name="extra_especial_id" ColumnName="extra_especial_id" />
+                <ScalarProperty Name="folga" ColumnName="folga" />
+                <ScalarProperty Name="fdados_entrada1" ColumnName="fdados_entrada1" />
+                <ScalarProperty Name="fdados_saida1" ColumnName="fdados_saida1" />
+                <ScalarProperty Name="fdados_entrada2" ColumnName="fdados_entrada2" />
+                <ScalarProperty Name="fdados_saida2" ColumnName="fdados_saida2" />
+                <ScalarProperty Name="fdados_entrada3" ColumnName="fdados_entrada3" />
+                <ScalarProperty Name="fdados_saida3" ColumnName="fdados_saida3" />
+                <ScalarProperty Name="fdados_entrada4" ColumnName="fdados_entrada4" />
+                <ScalarProperty Name="fdados_saida4" ColumnName="fdados_saida4" />
+                <ScalarProperty Name="fdados_entrada5" ColumnName="fdados_entrada5" />
+                <ScalarProperty Name="fdados_saida5" ColumnName="fdados_saida5" />
+                <ScalarProperty Name="dsr_especial" ColumnName="dsr_especial" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="funcionarios">
+            <EntityTypeMapping TypeName="PontoSecullum4Model.funcionarios">
+              <MappingFragment StoreEntitySet="funcionarios">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="n_folha" ColumnName="n_folha" />
+                <ScalarProperty Name="nome" ColumnName="nome" />
+                <ScalarProperty Name="n_identificador" ColumnName="n_identificador" />
+                <ScalarProperty Name="carteira" ColumnName="carteira" />
+                <ScalarProperty Name="empresa_id" ColumnName="empresa_id" />
+                <ScalarProperty Name="horario_num" ColumnName="horario_num" />
+                <ScalarProperty Name="estado" ColumnName="estado" />
+                <ScalarProperty Name="funcao_id" ColumnName="funcao_id" />
+                <ScalarProperty Name="departamento_id" ColumnName="departamento_id" />
+                <ScalarProperty Name="admissao" ColumnName="admissao" />
+                <ScalarProperty Name="demissao" ColumnName="demissao" />
+                <ScalarProperty Name="nao_digital" ColumnName="nao_digital" />
+                <ScalarProperty Name="afast_data_ini" ColumnName="afast_data_ini" />
+                <ScalarProperty Name="afast_data_fim" ColumnName="afast_data_fim" />
+                <ScalarProperty Name="afast_motivo" ColumnName="afast_motivo" />
+                <ScalarProperty Name="afast_justificativa_id" ColumnName="afast_justificativa_id" />
+                <ScalarProperty Name="invisivel" ColumnName="invisivel" />
+                <ScalarProperty Name="escala_id" ColumnName="escala_id" />
+                <ScalarProperty Name="escala_mensal" ColumnName="escala_mensal" />
+                <ScalarProperty Name="t_horario" ColumnName="t_horario" />
+                <ScalarProperty Name="senha_equipamento" ColumnName="senha_equipamento" />
+                <ScalarProperty Name="filtro1_id" ColumnName="filtro1_id" />
+                <ScalarProperty Name="filtro2_id" ColumnName="filtro2_id" />
+                <ScalarProperty Name="obs" ColumnName="obs" />
+                <ScalarProperty Name="xcampo1" ColumnName="xcampo1" />
+                <ScalarProperty Name="alt2_horario_num" ColumnName="alt2_horario_num" />
+                <ScalarProperty Name="alt3_horario_num" ColumnName="alt3_horario_num" />
+                <ScalarProperty Name="alt4_horario_num" ColumnName="alt4_horario_num" />
+                <ScalarProperty Name="endereco" ColumnName="endereco" />
+                <ScalarProperty Name="bairro" ColumnName="bairro" />
+                <ScalarProperty Name="cidade" ColumnName="cidade" />
+                <ScalarProperty Name="uf" ColumnName="uf" />
+                <ScalarProperty Name="cep" ColumnName="cep" />
+                <ScalarProperty Name="telefone" ColumnName="telefone" />
+                <ScalarProperty Name="celular" ColumnName="celular" />
+                <ScalarProperty Name="email" ColumnName="email" />
+                <ScalarProperty Name="rg" ColumnName="rg" />
+                <ScalarProperty Name="expedicao" ColumnName="expedicao" />
+                <ScalarProperty Name="ssp" ColumnName="ssp" />
+                <ScalarProperty Name="cpf" ColumnName="cpf" />
+                <ScalarProperty Name="mae" ColumnName="mae" />
+                <ScalarProperty Name="pai" ColumnName="pai" />
+                <ScalarProperty Name="nascimento" ColumnName="nascimento" />
+                <ScalarProperty Name="sexo_masculino" ColumnName="sexo_masculino" />
+                <ScalarProperty Name="estado_civil_id" ColumnName="estado_civil_id" />
+                <ScalarProperty Name="nacionalidade" ColumnName="nacionalidade" />
+                <ScalarProperty Name="naturalidade" ColumnName="naturalidade" />
+                <ScalarProperty Name="web_senha" ColumnName="web_senha" />
+                <ScalarProperty Name="web_nao_altera" ColumnName="web_nao_altera" />
+                <ScalarProperty Name="web_bloqueado" ColumnName="web_bloqueado" />
+                <ScalarProperty Name="alt_usuario_id" ColumnName="alt_usuario_id" />
+                <ScalarProperty Name="alt_data" ColumnName="alt_data" />
+                <ScalarProperty Name="master" ColumnName="master" />
+                <ScalarProperty Name="n_provisorio" ColumnName="n_provisorio" />
+                <ScalarProperty Name="provisorio_data_ini" ColumnName="provisorio_data_ini" />
+                <ScalarProperty Name="provisorio_data_fim" ColumnName="provisorio_data_fim" />
+                <ScalarProperty Name="cidade_empresa_id" ColumnName="cidade_empresa_id" />
+                <ScalarProperty Name="estrutura_id" ColumnName="estrutura_id" />
+                <ScalarProperty Name="assinatura_eletronica" ColumnName="assinatura_eletronica" />
+                <ScalarProperty Name="integracao_id" ColumnName="integracao_id" />
+                <ScalarProperty Name="bh_inicio" ColumnName="bh_inicio" />
+                <ScalarProperty Name="centro_custos" ColumnName="centro_custos" />
+                <ScalarProperty Name="nivel_id" ColumnName="nivel_id" />
+                <ScalarProperty Name="web_auto_aceitar" ColumnName="web_auto_aceitar" />
+                <ScalarProperty Name="n_pis" ColumnName="n_pis" />
+                <ScalarProperty Name="web_solicitacoes" ColumnName="web_solicitacoes" />
+                <ScalarProperty Name="data_alteracao_portaria" ColumnName="data_alteracao_portaria" />
+                <ScalarProperty Name="web_data_fechamento" ColumnName="web_data_fechamento" />
+                <ScalarProperty Name="especial_insight_sinha" ColumnName="especial_insight_sinha" />
+                <ScalarProperty Name="motivo_demissao_id" ColumnName="motivo_demissao_id" />
+                <ScalarProperty Name="web_somente_visto" ColumnName="web_somente_visto" />
+                <ScalarProperty Name="web_nao_incluir_manual" ColumnName="web_nao_incluir_manual" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

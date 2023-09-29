@@ -1,0 +1,126 @@
+﻿@model CMM.Projects.Apresentation.Models.UnidadeModelView
+
+@{
+    ViewBag.Title = "Excluir Unidade";
+    ViewData["TituloPagina"] = "Excluir Unidade";
+
+}
+
+
+<div class="modal-header">
+    <h4>Você tem certeza que deseja excluir este registro?</h4>
+    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
+</div>
+
+
+<div class="modal-body">
+    <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UND_ID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UND_ID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UND_CODIGO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UND_CODIGO)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UND_SIGLA)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UND_SIGLA)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UND_NOME)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UND_NOME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UND_DATAINICIO)
+        </dt>
+
+        <dd>
+            @if (Model.UND_DATAINICIO.HasValue)
+            {
+                @Model.UND_DATAINICIO.Value.ToString("dd/MM/yyyy")
+            }
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UND_DATAFIM)
+        </dt>
+
+        <dd>
+            @if (Model.UND_DATAFIM.HasValue)
+            {
+                @Model.UND_DATAFIM.Value.ToString("dd/MM/yyyy")
+            }
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UND_PAI)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UND_PAI_NOME)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UND_NIVEL)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Nivel)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.UND_DIRETORIO)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.UND_DIRETORIO)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.UND_COMPETENCIA)
+        </dt>
+
+        <dd>
+            @if (Model.UND_COMPETENCIA != null)
+            {
+                @Html.Raw(Model.UND_COMPETENCIA.Replace(Environment.NewLine, "<br/>"))
+            }
+        </dd>
+
+    </dl>
+
+</div>
+
+
+
+@using (Html.BeginForm("Delete", "Unidade", FormMethod.Post, new { id = "formCrud" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="modal-footer">
+        <a data-dismiss="modal" class="btn btn-sm btn-outline-secondary">Voltar</a>
+        <input type="button" value="Excluir" class="btn btn-outline-danger" />
+    </div>
+}
+
+
+
+
+<script src="~/Scripts/ccm.projects/EnviaForm.js"></script>
+@Scripts.Render("~/bundles/jqueryval")
+

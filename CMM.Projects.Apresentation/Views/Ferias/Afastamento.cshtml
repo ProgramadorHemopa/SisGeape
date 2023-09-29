@@ -1,0 +1,192 @@
+﻿@model IEnumerable<CMM.Projects.Apresentation.Models.FeriasModelView>
+@{
+    ViewData["TituloPagina"] = "Relatório de Servidores em Férias";
+
+
+}
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">
+                FILTROS
+            </div>
+            <div class="card-body">
+
+
+                @using (Html.BeginForm("InterfacePesquisa", "Ferias", FormMethod.Post, new { @autocomplete = "off" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            @Html.Label("DATA INICIO", htmlAttributes: new { @class = "" })
+                            @Html.Editor("dataInicio", new { htmlAttributes = new { @class = "form-control form-control-sm dataFerias", @id = "INICIO", @required = true } })
+                        </div>
+                        <div class="form-group col-md-6">
+                            @Html.Label("DATA FIM", htmlAttributes: new { @class = "" })
+                            @Html.Editor("dataFim", new { htmlAttributes = new { @class = "form-control form-control-sm dataFerias", @id = "FIM", @required = true } })
+                        </div>
+                    </div>
+                    <hr />
+                    <div class="pull-right m-t-15">
+                        <button type="submit" class="btn btn-sm btn-secondary d-md-inline "><i class="fa fa-search"></i> Pesquisar</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+@if (TempData["ListResult"] != null)
+{
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card">
+                <div class="card-body">
+                    <div class="row-sm-12">
+
+                        <div id="datatable-buttons_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer">
+                            <table class="table table-striped table-bordered dt-responsive nowrap dataTable no-footer dtr-inline collapsed" id="datatable">
+                                <thead style="align-items:center">
+                                    <tr>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.VNC_ID)
+                                        </th>
+                                        <th>
+                                            MATRICULA
+                                        </th>
+                                        <th>
+                                            SERVIDOR
+                                        </th>
+                                        <th>
+                                            UNIDADE
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.FRS_PERIODOAQUISITIVO)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.FRS_DATA_INICIOGOZO)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.FRS_DATA_FIMGOZO)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.FRS_DATA_RETORNO)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.FRS_DATAPORTARIA)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.FRS_NUMPORTARIA)
+                                        </th>
+                                        <th>
+                                            @Html.DisplayNameFor(model => model.FRS_OBSERVACAO)
+                                        </th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in (List<CMM.Projects.Apresentation.Models.FeriasModelView>)TempData["ListResult"])
+                                    {
+                                        <tr>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.VNC_ID)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.MATRICULA)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.FUN_NOME)
+                                            </td>
+                                            <td style="font-size:x-small">
+                                                @Html.DisplayFor(modelItem => item.UNIDADE)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.FRS_PERIODOAQUISITIVO)
+                                            </td>
+                                            <td>
+                                                @if (item.FRS_DATA_INICIOGOZO.HasValue)
+                                                {
+                                                    @item.FRS_DATA_INICIOGOZO.Value.ToString("dd/MM/yyyy");
+                                                }
+                                            </td>
+                                            <td>
+                                                @if (item.FRS_DATA_FIMGOZO.HasValue)
+                                                {
+                                                    @item.FRS_DATA_FIMGOZO.Value.ToString("dd/MM/yyyy");
+                                                }
+                                            </td>
+                                            <td>
+                                                @if (item.FRS_DATA_RETORNO.HasValue)
+                                                {
+                                                    @item.FRS_DATA_RETORNO.Value.ToString("dd/MM/yyyy");
+                                                }
+                                            </td>
+                                            <td>
+                                                @if (item.FRS_DATAPORTARIA.HasValue)
+                                                {
+                                                    @item.FRS_DATAPORTARIA.Value.ToString("dd/MM/yyyy");
+                                                }
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.FRS_NUMPORTARIA)
+                                            </td>
+                                            <td>
+                                                @Html.DisplayFor(modelItem => item.FRS_OBSERVACAO)
+                                            </td>
+                                            <td>
+                                                @Html.ActionLink("Visualizar Cadastro", "Cadastro", "Funcionario", new { id = item.FUN_ID }, new { @class = "btn-sm btn-outline-primary", @target = "_blank" })
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                            @*<div class="float-sm-left">
+                                    <button type="button" class="btn btn-link btn-round m-1 waves-effect waves-light m-1"><i class="fa fa-print mr-1"></i> Imprimir Relatório</button>
+                                </div>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<link href="~/assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker.min.css" rel="stylesheet" type="text/css">
+@section scripts{
+    @Scripts.Render("~/bundles/Grid")
+
+    <script src="~/Scripts/moment.min.js"></script>
+    <script src="~/Scripts/Grid/datetime-moment.js"></script>
+    <script src="~/assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+    <script src="~/assets/js/popper.min.js"></script>
+    <script type="text/javascript">
+        var dataTable;
+        $(document).ready(function () {
+
+            $('#INICIO').val('@TempData["Inicio"]');
+            $('#FIM').val('@TempData["Fim"]');
+
+            $('#INICIO').datepicker({
+                autoclose: true,
+                todayHighlight: true
+            });
+
+            $('#FIM').datepicker({
+                autoclose: true,
+                todayHighlight: true
+            });
+
+            $.fn.dataTable.moment('DD/MM/YYYY');
+
+            $("#datatable").dataTable({
+                "autoWidth": false,
+                "order":
+                    [5, "asc"],
+                "dom": '<"toolbar">frtip'
+            });
+
+
+        });
+
+
+
+    </script>
+}

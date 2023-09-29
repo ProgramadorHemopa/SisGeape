@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="dsCracha" targetNamespace="http://tempuri.org/dsCracha.xsd" xmlns:mstns="http://tempuri.org/dsCracha.xsd" xmlns="http://tempuri.org/dsCracha.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections />
+        <Tables />
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="dsCracha" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="dsCracha" msprop:Generator_UserDSName="dsCracha">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="cracha" msprop:Generator_TableClassName="crachaDataTable" msprop:Generator_TableVarName="tablecracha" msprop:Generator_TablePropName="cracha" msprop:Generator_RowDeletingName="crachaRowDeleting" msprop:Generator_RowChangingName="crachaRowChanging" msprop:Generator_RowEvHandlerName="crachaRowChangeEventHandler" msprop:Generator_RowDeletedName="crachaRowDeleted" msprop:Generator_UserTableName="cracha" msprop:Generator_RowChangedName="crachaRowChanged" msprop:Generator_RowEvArgName="crachaRowChangeEvent" msprop:Generator_RowClassName="crachaRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="FUN_NOME" msprop:Generator_ColumnVarNameInTable="columnFUN_NOME" msprop:Generator_ColumnPropNameInRow="FUN_NOME" msprop:Generator_ColumnPropNameInTable="FUN_NOMEColumn" msprop:Generator_UserColumnName="FUN_NOME" type="xs:string" minOccurs="0" />
+              <xs:element name="CRG_NOME" msprop:Generator_ColumnVarNameInTable="columnCRG_NOME" msprop:Generator_ColumnPropNameInRow="CRG_NOME" msprop:Generator_ColumnPropNameInTable="CRG_NOMEColumn" msprop:Generator_UserColumnName="CRG_NOME" type="xs:string" minOccurs="0" />
+              <xs:element name="FUN_TIPOSANGUINEO" msprop:Generator_ColumnVarNameInTable="columnFUN_TIPOSANGUINEO" msprop:Generator_ColumnPropNameInRow="FUN_TIPOSANGUINEO" msprop:Generator_ColumnPropNameInTable="FUN_TIPOSANGUINEOColumn" msprop:Generator_UserColumnName="FUN_TIPOSANGUINEO" type="xs:string" minOccurs="0" />
+              <xs:element name="FUN_MATRICULA" msprop:Generator_ColumnVarNameInTable="columnFUN_MATRICULA" msprop:Generator_ColumnPropNameInRow="FUN_MATRICULA" msprop:Generator_ColumnPropNameInTable="FUN_MATRICULAColumn" msprop:Generator_UserColumnName="FUN_MATRICULA" type="xs:string" minOccurs="0" />
+              <xs:element name="FUNFT_ARQUIVO" msprop:Generator_ColumnVarNameInTable="columnFUNFT_ARQUIVO" msprop:Generator_ColumnPropNameInRow="FUNFT_ARQUIVO" msprop:Generator_ColumnPropNameInTable="FUNFT_ARQUIVOColumn" msprop:Generator_UserColumnName="FUNFT_ARQUIVO" type="xs:string" minOccurs="0" />
+              <xs:element name="FUN_CODIGOBARRA" msprop:Generator_ColumnVarNameInTable="columnFUN_CODIGOBARRA" msprop:Generator_ColumnPropNameInRow="FUN_CODIGOBARRA" msprop:Generator_ColumnPropNameInTable="FUN_CODIGOBARRAColumn" msprop:Generator_UserColumnName="FUN_CODIGOBARRA" type="xs:string" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

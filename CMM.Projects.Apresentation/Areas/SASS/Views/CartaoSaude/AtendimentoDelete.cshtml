@@ -1,0 +1,185 @@
+﻿@model CMM.Projects.Apresentation.Areas.SASS.Models.ConsultaModelView
+@using CMM.Projects.Apresentation.Utils
+
+
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-body">
+
+                <h4>Você tem certeza que deseja excluir este registro?</h4>
+                <div>
+
+                    <hr />
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.FUN_ID)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.FUN_NOME)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.CON_DATA)
+                        </dt>
+
+                        <dd>
+                            @Model.CON_DATA.Value.ToString("dd/MM/yyyy")
+                        </dd>
+
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.CON_PESO)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.CON_PESO)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.CON_ALTURA)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.CON_ALTURA)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.CON_IMC)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.CON_IMC)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.CON_ANTIHBS)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.CON_ANTIHBS)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.CON_PRESSAOARTERIALMAX)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.CON_PRESSAOARTERIALMAX)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.CON_PRESSAOARTERIALMIN)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.CON_PRESSAOARTERIALMIN)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.CON_GLICEMIA)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.CON_GLICEMIA)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.CON_COLESTEROLTOTAL)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.CON_COLESTEROLTOTAL)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.CON_TRIGLICERIDEOS)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.CON_TRIGLICERIDEOS)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.CON_HDL)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.CON_HDL)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.CON_LDL)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.CON_LDL)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.CON_ACIDOURICO)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.CON_ACIDOURICO)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.CON_CIRCUNFERENCIAABDOMINAL)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.CON_CIRCUNFERENCIAABDOMINAL)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.CON_RESPATENDIMENTO)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.CON_RESPATENDIMENTO)
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.AntiHBS)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.AntiHBS)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.CON_TIPO)
+                        </dt>
+
+                        <dd>
+                            @Model.CON_TIPO.Descricao()
+                        </dd>
+
+                        <dt>
+                            @Html.DisplayNameFor(model => model.CON_OBSERVACAO)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.CON_OBSERVACAO)
+                        </dd>
+                    </dl>
+                    <hr />
+
+                    @using (Html.BeginForm(FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+
+                    <div class="form-actions pull-right">
+                        @Html.ActionLink("Voltar", "Index", null, new { @class = "btn-sm btn-light waves-light waves-effect" })
+                        <input type="submit" value="Excluir" class="btn btn-sm btn-danger" />
+
+                    </div>
+
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
