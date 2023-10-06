@@ -30,7 +30,6 @@
 
 
 
-
 <div class="row m-b-15" id="Admissional" style="display:none;">
     <div class="col-sm-12">
         <div class="card">
@@ -290,6 +289,18 @@
                             @Html.ValidationMessageFor(model => model.CON_ANTIHBS, "", new { @class = "error" })
 
                         </div>
+
+
+                        @* TIPO DO SANGUE
+
+                            <div class="col-lg-4 col-sm-12 col-xl-4">
+                                @Html.LabelFor(model => model.FUN_TIPOSANGUINEO, htmlAttributes: new { @class = "control-label" })
+                                @Html.EditorFor(model => model.FUN_TIPOSANGUINEO, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+
+                                @Html.EditorFor(model => model.TIPAGEM, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        *@
+
                         <div class="col-lg-4 col-sm-12 col-xl-4">
 
                             @Html.LabelFor(model => model.CON_CIRCUNFERENCIAABDOMINAL, htmlAttributes: new { @class = "control-label " })

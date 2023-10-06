@@ -229,7 +229,7 @@
                                                 @Html.DisplayFor(modelItem => item.CON_GLICEMIA)
                                                 @if (item.CON_GLICEMIA != null)
                                                 {
-                                                    if (item.CON_GLICEMIA.Value > 99)
+                                                    if (item.CON_GLICEMIA.Value > 100)
                                                     {
                                                         <b><span class="fa fa-lg fa-frown-o text-danger"></span></b>
                                                     }
@@ -243,7 +243,7 @@
                                                 @Html.DisplayFor(modelItem => item.CON_PRESSAOARTERIALMAX)
                                                 @if (item.CON_PRESSAOARTERIALMAX != null)
                                                 {
-                                                    if (item.CON_PRESSAOARTERIALMAX.Value >= 130)
+                                                    if (item.CON_PRESSAOARTERIALMAX.Value >= 140)
                                                     {
                                                         <b><span class="fa fa-lg fa-frown-o text-danger"></span></b>
                                                     }
@@ -258,7 +258,7 @@
                                                 @if (item.CON_PRESSAOARTERIALMIN != null)
                                                 {
 
-                                                    if (item.CON_PRESSAOARTERIALMIN.Value >= 85)
+                                                    if (item.CON_PRESSAOARTERIALMIN.Value >= 90)
                                                     {
                                                         <b><span class="fa fa-lg fa-frown-o text-danger"></span></b>
                                                     }
@@ -271,6 +271,18 @@
 
                                             <td>
                                                 @Html.DisplayFor(modelItem => item.CON_COLESTEROLTOTAL)
+                                                @if (item.CON_COLESTEROLTOTAL != null)
+                                                {
+
+                                                    if (item.CON_COLESTEROLTOTAL.Value >= 200)
+                                                    {
+                                                        <b><span class="fa fa-lg fa-frown-o text-danger"></span></b>
+                                                    }
+                                                    else
+                                                    {
+                                                        <b><span class="fa fa-lg fa-smile-o text-success "></span></b>
+                                                    }
+                                                }
                                             </td>
                                             <td>
                                                 @Html.DisplayFor(modelItem => item.CON_TRIGLICERIDEOS)
@@ -291,35 +303,41 @@
 
                                                 @if (item.CON_HDL != null)
                                                 {
-                                                    if (Model.FUN_SEXO == "M" && item.CON_HDL < 40)
+                                                    if ((Model.FUN_SEXO == "M" && item.CON_HDL >= 60) || (Model.FUN_SEXO == "F" && item.CON_HDL >= 60))
                                                     {
-                                                        <b><span class="fa fa-lg fa-frown-o text-danger"></span></b>
-                                                    }
-                                                    else if (Model.FUN_SEXO == "F" && item.CON_HDL < 50)
-                                                    {
-                                                        <b><span class="fa fa-lg fa-frown-o text-danger"></span></b>
-
+                                                        <b><span class="fa fa-lg fa-smile-o text-success"></span></b>
                                                     }
                                                     else
                                                     {
-                                                        <b><span class="fa fa-lg fa-smile-o text-success "></span></b>
-
+                                                        <b><span class="fa fa-lg fa-frown-o text-danger"></span></b>
                                                     }
                                                 }
                                             </td>
                                             <td>
                                                 @Html.DisplayFor(modelItem => item.CON_LDL)
+                                                @if (item.CON_LDL != null)
+                                                {
+
+                                                    if (item.CON_LDL.Value >= 130)
+                                                    {
+                                                        <b><span class="fa fa-lg fa-frown-o text-danger"></span></b>
+                                                    }
+                                                    else
+                                                    {
+                                                        <b><span class="fa fa-lg fa-smile-o text-success "></span></b>
+                                                    }
+                                                }
                                             </td>
                                             <td>
                                                 @Html.DisplayFor(modelItem => item.CON_CIRCUNFERENCIAABDOMINAL)
 
                                                 @if (item.CON_HDL != null)
                                                 {
-                                                    if (Model.FUN_SEXO == "M" && item.CON_CIRCUNFERENCIAABDOMINAL > 0 && item.CON_CIRCUNFERENCIAABDOMINAL >= 90)
+                                                    if (Model.FUN_SEXO == "M" && item.CON_CIRCUNFERENCIAABDOMINAL > 0 && item.CON_CIRCUNFERENCIAABDOMINAL >= 102)
                                                     {
                                                         <b><span class="fa fa-lg fa-frown-o text-danger"></span></b>
                                                     }
-                                                    else if (Model.FUN_SEXO == "F" && item.CON_CIRCUNFERENCIAABDOMINAL > 0 && item.CON_CIRCUNFERENCIAABDOMINAL >= 80)
+                                                    else if (Model.FUN_SEXO == "F" && item.CON_CIRCUNFERENCIAABDOMINAL > 0 && item.CON_CIRCUNFERENCIAABDOMINAL >= 88)
                                                     {
                                                         <b><span class="fa fa-lg fa-frown-o text-danger"></span></b>
 
@@ -332,7 +350,7 @@
                                                 }
                                             </td>
                                             <td>
-                                                @Html.ActionLink("Editar", "Atendimento", new { id = item.CON_ID }, new { @class = " btn-sm btn-outline-primary" }) 
+                                                @Html.ActionLink("Editar", "Atendimento", new { id = item.CON_ID }, new { @class = " btn-sm btn-outline-primary" })
                                                 @Html.ActionLink("Detalhes", "AtendimentoDetails", new { id = item.CON_ID }, new { @class = " btn-sm btn-outline-primary" })
                                                 @Html.ActionLink("Excluir", "AtendimentoDelete", new { id = item.CON_ID }, new { @class = " btn-sm btn-outline-primary" })
                                             </td>

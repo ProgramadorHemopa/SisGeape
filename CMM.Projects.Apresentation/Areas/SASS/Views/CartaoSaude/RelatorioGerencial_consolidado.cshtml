@@ -41,7 +41,7 @@
         <img src="~/Imagem/cabecalho.png" style="width:100%; height:120px;align-items:center" />
 
         <h2 style="TEXT-ALIGN:center; font-weight:bold" id="txtheader">
-            Relatório Gerencial do Cartão Saúde
+            Relatório Consolidado do Cartão Saúde
         </h2>
     </div>
 
@@ -52,8 +52,16 @@
 
             <div class="col-xs-12">
                 <h2 style="font-weight:bold">ANO: @TempData["Ano"] </h2>
-                <p style="font-size: 18px;"> Total de Atendimento: @list.Count()</p>
+                <p style="font-size: 18px;"> Total de Atendimentos: @list.Count()</p>
             </div>
+
+            <tr>
+                <td>Distribuição por Sexo (declarado):</td>
+                <br />
+                <td>
+                    Masculino: @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "M")<br />
+                    Feminino : @list.Count(x => x.Funcionario.FUN_SEXO.ToUpper() == "F")
+                </td>
 
         </div>
 
@@ -140,8 +148,8 @@
                             <td style="text-align:left">
                                 PRESSÃO ARTERIAL ALTERADA
                             </td>
-                            <td>@list.Count(x => x.CON_PRESSAOARTERIALMAX >= 130 || x.CON_PRESSAOARTERIALMIN <= 85)</td>
-                            <td>@list.Count(x => x.CON_PRESSAOARTERIALMAX < 130 && x.CON_PRESSAOARTERIALMIN > 85)</td>
+                            <td>@list.Count(x => x.CON_PRESSAOARTERIALMAX >= 140 || x.CON_PRESSAOARTERIALMIN <= 90)</td>
+                            <td>@list.Count(x => x.CON_PRESSAOARTERIALMAX < 140 && x.CON_PRESSAOARTERIALMIN > 90)</td>
                             <td>@list.Count(x => x.CON_PRESSAOARTERIALMAX == null || x.CON_PRESSAOARTERIALMIN == null || x.CON_PRESSAOARTERIALMAX == 0 || x.CON_PRESSAOARTERIALMIN == 0)</td>
                             <td>
                                 @TempData["%Pressao"]%
@@ -151,8 +159,8 @@
                             <td style="text-align:left">
                                 GLICEMIA ALTERADA
                             </td>
-                            <td>@list.Count(x => x.CON_GLICEMIA > 99)</td>
-                            <td>@list.Count(x => x.CON_GLICEMIA <= 99)</td>
+                            <td>@list.Count(x => x.CON_GLICEMIA > 100)</td>
+                            <td>@list.Count(x => x.CON_GLICEMIA > 0 && x.CON_GLICEMIA <= 100)</td>
                             <td>@list.Count(x => x.CON_GLICEMIA == null || x.CON_GLICEMIA == 0)</td>
 
                             <td>
@@ -164,7 +172,7 @@
                                 COLESTEROL TOTAL ALTERADO
                             </td>
                             <td>@list.Count(x => x.CON_COLESTEROLTOTAL >= 200)</td>
-                            <td>@list.Count(x => x.CON_COLESTEROLTOTAL < 200)</td>
+                            <td>@list.Count(x => x.CON_COLESTEROLTOTAL > 0 && x.CON_COLESTEROLTOTAL < 200)</td>
                             <td>@list.Count(x => x.CON_COLESTEROLTOTAL == null || x.CON_COLESTEROLTOTAL == 0)</td>
                             <td>@TempData["%Colesterol"]%</td>
                         </tr>
@@ -172,8 +180,8 @@
                             <td style="text-align:left">
                                 HDL ALTERADO
                             </td>
-                            <td>@list.Count(x => (x.Funcionario.FUN_SEXO.ToUpper() == "M" && x.CON_HDL < 40) || (x.Funcionario.FUN_SEXO.ToUpper() == "F" && x.CON_HDL < 50))</td>
-                            <td>@list.Count(x => (x.Funcionario.FUN_SEXO.ToUpper() == "M" && x.CON_HDL > 40) || (x.Funcionario.FUN_SEXO.ToUpper() == "F" && x.CON_HDL > 50))</td>
+                            <td>@list.Count(x => (x.Funcionario.FUN_SEXO.ToUpper() == "M" && x.CON_HDL > 0 && x.CON_HDL < 60) || (x.Funcionario.FUN_SEXO.ToUpper() == "F" && x.CON_HDL > 0 && x.CON_HDL < 60))</td>
+                            <td>@list.Count(x => (x.Funcionario.FUN_SEXO.ToUpper() == "M" && x.CON_HDL >= 60) || (x.Funcionario.FUN_SEXO.ToUpper() == "F" && x.CON_HDL >= 60))</td>
                             <td>@list.Count(x => x.CON_HDL == null || x.CON_HDL == 0)</td>
                             <td>
                                 @TempData["%HDL"]%
@@ -185,7 +193,7 @@
                                 TRIGLICÉRIDEOS ALTERADO
                             </td>
                             <td>@list.Count(x => x.CON_TRIGLICERIDEOS >= 150)</td>
-                            <td>@list.Count(x => x.CON_TRIGLICERIDEOS < 150)</td>
+                            <td>@list.Count(x => x.CON_TRIGLICERIDEOS > 0 && x.CON_TRIGLICERIDEOS < 150)</td>
                             <td>@list.Count(x => x.CON_TRIGLICERIDEOS == null || x.CON_TRIGLICERIDEOS == 0)</td>
                             <td>
                                 @TempData["%Triglicerideos"]%
@@ -445,117 +453,127 @@
             </table>
         </div>
         <br />
-        <div class="col-sm-12">
-            <h3 style="font-weight:bold">IMC - Detalhado </h3>
-        </div>
-        <hr />
-        <div class="row">
+
+        @*
+
+            <div class="col-sm-12">
+                <h3 style="font-weight:bold">IMC - Detalhado </h3>
+            </div>
+            <hr />
+            <div class="row">
 
 
 
-            <div class="col-xs-7">
+                <div class="col-xs-7">
 
-                <div id="canvas-holder" style="width:500px; height: 500px;">
-                    <canvas id="charGlicemia" width="800" height="800"></canvas>
-                </div>
-                <script>
+                    <div id="canvas-holder" style="width:500px; height: 500px;">
+                        <canvas id="charGlicemia" width="800" height="800"></canvas>
+                    </div>
+                    <script>
 
-                        var ctx = document.getElementById("charGlicemia").getContext("2d");
-                        // draw bar chart
-                        window.myBar = new Chart(ctx, {
-                            type: "pie",
-                            data: {
-                                labels: ["Abaixo do Ideal", "Normal", "Sobrepeso", " Obesidade Grau I", " Obesidade Grau II", " Obesidade Grau III"],
+                            var ctx = document.getElementById("charGlicemia").getContext("2d");
+                            // draw bar chart
+                            window.myBar = new Chart(ctx, {
+                                type: "pie",
+                                data: {
+                                    labels: ["Abaixo do Ideal", "Normal", "Sobrepeso", " Obesidade Grau I", " Obesidade Grau II", " Obesidade Grau III"],
 
-                                datasets: [
-                                    {
-                                        labels: ["Abaixo do Ideal", "Normal", "Sobrepeso", " Obesidade Grau I", " Obesidade Grau II", " Obesidade Grau III"],
-                                        data: [@list.Count(x=>x.CON_IMC<18.5), @list.Count(x => x.CON_IMC >= 18.5 && x.CON_IMC<=24.9),@list.Count(x => x.CON_IMC >=25 && x.CON_IMC<=29.9), @list.Count(x => x.CON_IMC >=30 && x.CON_IMC<35),@list.Count(x => x.CON_IMC >= 35 && x.CON_IMC<40),@list.Count(x => x.CON_IMC >=40)],
-                                        backgroundColor: ["rgb(255, 99, 132)",
-                                            "rgb(94, 162, 235)",
-                                            "rgb(255, 205, 86)",
-                                            '#F4A460',
-                                            '#DA70D6',
-                                            '#3CB371',]
-                                        , borderWidth: 1
+                                    datasets: [
+                                        {
+                                            labels: ["Abaixo do Ideal", "Normal", "Sobrepeso", " Obesidade Grau I", " Obesidade Grau II", " Obesidade Grau III"],
+                                            data: [@list.Count(x=>x.CON_IMC<18.5), @list.Count(x => x.CON_IMC >= 18.5 && x.CON_IMC<=24.9),@list.Count(x => x.CON_IMC >=25 && x.CON_IMC<=29.9), @list.Count(x => x.CON_IMC >=30 && x.CON_IMC<35),@list.Count(x => x.CON_IMC >= 35 && x.CON_IMC<40),@list.Count(x => x.CON_IMC >=40)],
+                                            backgroundColor: ["rgb(255, 99, 132)",
+                                                "rgb(94, 162, 235)",
+                                                "rgb(255, 205, 86)",
+                                                '#F4A460',
+                                                '#DA70D6',
+                                                '#3CB371',]
+                                            , borderWidth: 1
 
-                                    }
-                                ]
-                            },
-                            options:
-                            {
-                                events: false,
-                                animation: {
-                                    duration: 020,
-                                    easing: "easeInOutElastic",
-                                    onComplete: function () {
-                                        var ctx = this.chart.ctx;
-                                        ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontFamily, 'normal', Chart.defaults.global.defaultFontFamily);
-                                        ctx.textAlign = 'center';
-                                        ctx.textBaseline = 'bottom';
+                                        }
+                                    ]
+                                },
+                                options:
+                                {
+                                    events: false,
+                                    animation: {
+                                        duration: 020,
+                                        easing: "easeInOutElastic",
+                                        onComplete: function () {
+                                            var ctx = this.chart.ctx;
+                                            ctx.font = Chart.helpers.fontString(Chart.defaults.global.defaultFontFamily, 'normal', Chart.defaults.global.defaultFontFamily);
+                                            ctx.textAlign = 'center';
+                                            ctx.textBaseline = 'bottom';
 
-                                        this.data.datasets.forEach(function (dataset) {
+                                            this.data.datasets.forEach(function (dataset) {
 
-                                            for (var i = 0; i < dataset.data.length; i++) {
-                                                var model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model,
-                                                    total = dataset._meta[Object.keys(dataset._meta)[0]].total,
-                                                    mid_radius = model.innerRadius + (model.outerRadius - model.innerRadius) / 2,
-                                                    start_angle = model.startAngle,
-                                                    end_angle = model.endAngle,
-                                                    mid_angle = start_angle + (end_angle - start_angle) / 2;
+                                                for (var i = 0; i < dataset.data.length; i++) {
+                                                    var model = dataset._meta[Object.keys(dataset._meta)[0]].data[i]._model,
+                                                        total = dataset._meta[Object.keys(dataset._meta)[0]].total,
+                                                        mid_radius = model.innerRadius + (model.outerRadius - model.innerRadius) / 2,
+                                                        start_angle = model.startAngle,
+                                                        end_angle = model.endAngle,
+                                                        mid_angle = start_angle + (end_angle - start_angle) / 2;
 
-                                                var x = mid_radius * Math.cos(mid_angle);
-                                                var y = mid_radius * Math.sin(mid_angle);
+                                                    var x = mid_radius * Math.cos(mid_angle);
+                                                    var y = mid_radius * Math.sin(mid_angle);
 
-                                                ctx.fillStyle = '#000000';
-                                                if (i == 3) { // Darker text color for lighter background
                                                     ctx.fillStyle = '#000000';
-                                                }
+                                                    if (i == 3) { // Darker text color for lighter background
+                                                        ctx.fillStyle = '#000000';
+                                                    }
 
-                                                var val = Math.round(dataset.data[i] / total * 100)
+                                                    var val = Math.round(dataset.data[i] / total * 100)
 
-                                                if (Math.round(val) !== val)
-                                                    val = (dataset.data[i] / total * 100).toFixed(1);
+                                                    if (Math.round(val) !== val)
+                                                        val = (dataset.data[i] / total * 100).toFixed(1);
 
-                                                var percent = val + "%";
+                                                    var percent = val + "%";
 
-                                                if (val != 0) {
-                                                    // Display percent in another line, line break doesn't work for fillText
-                                                    ctx.fillText(percent , model.x + x, model.y + y + 15);
+                                                    if (val != 0) {
+                                                        // Display percent in another line, line break doesn't work for fillText
+                                                        ctx.fillText(percent , model.x + x, model.y + y + 15);
 
-                                                    if (val > 5) {
-                                                        ctx.fillText(dataset.labels[i], model.x + x, model.y + y);
+                                                        if (val > 5) {
+                                                            ctx.fillText(dataset.labels[i], model.x + x, model.y + y);
+                                                        }
                                                     }
                                                 }
-                                            }
-                                        });
+                                            });
+                                        }
                                     }
                                 }
-                            }
-                        });
-                </script>
-            </div>
-            <div class="col-xs-5">
-                <div class="row">
+                            });
+                    </script>
+                </div>
 
-                    <div class="col-xs-12">
+        *@
 
-                        <div class="card text-dark border border-dark">
-                            <div class="card-header bg-dark text-white"><span class="fa fa-warning"></span> Valores de Referencia</div>
-                            <div class="card-body">
-                                <p class="card-text"><b>Abaixo de 18,5</b>    - Abaixo do peso ideal </p>
-                                <p class="card-text"><b>Entre 18,5 e 24,9</b> - Peso ideal        </p>
-                                <p class="card-text"><b>Entre 25 e 29,9</b>   - Sobrepeso           </p>
-                                <p class="card-text"><b>Entre 30 e 34,9</b>   - Obesidade grau I    </p>
-                                <p class="card-text"><b>Entre 35 e 39,9</b>   - Obesidade grau II   </p>
-                                <p class="card-text"><b>Acima de 40</b>       - Obesidade grau III      </p>
+        <div class="col-xs-5">
+            <div class="row">
 
-                            </div>
+                <div class="col-xs-12">
+
+                    <div class="card text-dark border border-dark">
+                        <div class="card-header bg-dark text-white"><span class="fa fa-warning"></span> Valores de Referencia</div>
+                        <div class="card-body">
+                            <p class="card-text"><b>Abaixo de 18,5</b>    - Abaixo do peso ideal </p>
+                            <p class="card-text"><b>Entre 18,5 e 24,9</b> - Peso ideal        </p>
+                            <p class="card-text"><b>Entre 25 e 29,9</b>   - Sobrepeso           </p>
+                            <p class="card-text"><b>Entre 30 e 34,9</b>   - Obesidade grau I    </p>
+                            <p class="card-text"><b>Entre 35 e 39,9</b>   - Obesidade grau II   </p>
+                            <p class="card-text"><b>Acima de 40</b>       - Obesidade grau III      </p>
+
                         </div>
                     </div>
                 </div>
-                <br />
-                @*<div class="row">
+            </div>
+            <br />
+
+
+
+
+            @*<div class="row">
                     <div class="col-xs-12">
 
                         <table class="table table-bordered table-striped table-hover table-bordered ">
@@ -590,27 +608,27 @@
                         </table>
                     </div>
                 </div>*@
-            </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         </div>
 
-        <script src="~/assets/js/bootstrap.min.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+    <script src="~/assets/js/bootstrap.min.js"></script>
 </body>
 </html>
