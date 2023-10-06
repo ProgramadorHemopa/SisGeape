@@ -12,7 +12,8 @@
     <meta name="viewport" content="width=device-width" />
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <link rel="icon" href="@Url.Content("~/icone-hemopa1.ico")" />
+    @*<link rel="icon" href="@Url.Content("/icone-hemopa1.ico")" />*@
+    <link rel="icon" href="@Url.Content("//10.95.3.66/SisGeape/icone-hemopa1.ico")" />
     <title>Relatório de Servidores</title>
     <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
     <script src="~/assets/js/jquery.min.js"></script>
@@ -46,7 +47,7 @@
         <hr />
         <div class="row">
             <label class="control-label" style="font-size:15px; font-weight:bold">
-                Servidor por:
+                @* Servidor por: *@
             </label>
             <br />
         </div>
@@ -128,21 +129,38 @@
                                 DATA RECEBIMENTO
                             </td>
                             <td>
+                                QTD DIAS
+                            </td>
+                            <td>
                                 OBSERVAÇÃO
                             </td>
                         </tr>
                     </thead>
                     <tbody style="text-align:center;font-size:11px">
+                        @{int contador = 0;}
                         @foreach (var item in relatorioServidor.OrderBy(x => x.FUN_NOME).ToList())
                         {
+
                             <tr>
-                                <td class="fixed" style="width:22%; text-align: left">
-                                    @item.FUN_NOME
+                                <td class="fixed" style="width:20%; text-align: left">
+                                    @{
+                                        contador++;
+                                        if (contador < 10)
+                                        {
+                                            var nome = "0" + contador + "- " + item.FUN_NOME;
+                                            @nome
+                                        }
+                                        else
+                                        {
+                                            var nome = contador + "- " + item.FUN_NOME;
+                                            @nome
+                                        }
+                                    }
                                 </td>
                                 <td class="fixed" style="width:10%;">
                                     @item.UND_NOME
                                 </td>
-                                <td class="fixed" style="width:12%;">
+                                <td class="fixed" style="width:14%;">
                                     @item.MTVJUS_NOME
                                 </td>
                                 <td class="fixed" style="width:10%;">
@@ -163,7 +181,15 @@
                                         @item.JUSPT_DATARECEBIMENTO.Value.ToShortDateString()
                                     }
                                 </td>
-                                <td class="fixed" style="width:25%; text-align: left">
+                                <td class="fixed" style="width:5%;">
+                                    @if (item.JUSPT_DATAINICIO != null && item.JUSPT_DATAFIM != null)
+                                    {
+                                        var diferenca = item.JUSPT_DATAFIM.Value - item.JUSPT_DATAINICIO.Value;
+                                        var periodo = diferenca.Days + 1;
+                                        @periodo
+                                    }
+                                </td>
+                                <td class="fixed" style="width:14%; text-align: left">
                                     @item.JUSPT_OBSERVACAO
                                 </td>
                             </tr>

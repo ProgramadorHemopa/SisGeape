@@ -7,10 +7,10 @@
         </a>
     </div>
     <ul class="sidebar-menu do-nicescrol">
-        <li class="sidebar-header">MENU PRINCIPAL</li>
+        @*<li class="sidebar-header">MENU PRINCIPAL</li>*@
         <li>
             <a href="@Url.Action("Index", "Home")" class="waves-effect">
-                <i class="icon-home"></i> <span>Painel de Controle</span>
+                <i class="icon-home"></i> <span>Home</span>
             </a>
         </li>
 
@@ -103,13 +103,11 @@
                 </li>
 
                 <!----->
-
-
                 @*<li>
-                    <a href="@Url.Action("RelatorioServidor", "Funcionario")">
-                        <i class="fa fa-circle-o"></i>Relatorio de Servidores
-                    </a>
-                </li>*@
+                        <a href="@Url.Action("RelatorioServidor", "Funcionario")">
+                            <i class="fa fa-circle-o"></i>Relatorio de Servidores
+                        </a>
+                    </li>*@
 
                 @if ((HttpContext.Current.User as CMM.Projects.Apresentation.InfraAuthentication.MyPrincipal).IsInRole("ADMIN"))
                 {
@@ -155,14 +153,9 @@
                  </ul>
 
              </li>*@
-        <li>
-            <a href="@Url.Action("Index", "Unidade")" class="waves-effect">
-                <i class="fa fa-gears"></i> <span>Unidades</span>
-            </a>
-        </li>
     </ul>
     <ul class="sidebar-menu do-nicescrol">
-        <li class="sidebar-header">CADASTROS BÁSICOS</li>
+        <li class="sidebar-header">CADASTROS:</li>
 
         <li>
             <a href="@Url.Action("Index", "Banco")" class="waves-effect">
@@ -198,7 +191,7 @@
         </li>
         <li>
             <a href="javaScript:void()" class="waves-effect">
-                <i class="fa fa-inbox"></i> <span>Funções</span><i class="fa fa-angle-left pull-right"></i>
+                <i class="fa fa-eye"></i> <span>Funções</span><i class="fa fa-angle-left pull-right"></i>
             </a><ul class="sidebar-submenu">
                 <li>
                     <a href="@Url.Action("Index", "Funcao")">
@@ -211,6 +204,11 @@
                     </a>
                 </li>
             </ul>
+        </li>
+        <li>
+            <a href="@Url.Action("Index", "Unidade")" class="waves-effect">
+                <i class="fa fa-desktop"></i> <span>Unidades</span>
+            </a>
         </li>
         <li>
             <a href="javaScript:void();" class="waves-effect">
@@ -289,7 +287,7 @@
     {
 
         <ul class="sidebar-menu do-nicescrol">
-            <li class="sidebar-header">CONFIGURAÇÕES</li>
+            <li class="sidebar-header">CONFIGURAÇÕES:</li>
             <li>
                 <a href="javaScript:void();" class="waves-effect">
                     <i class="fa fa-user"></i>

@@ -1,6 +1,5 @@
 ﻿@model CMM.Projects.Apresentation.Models.JustificativaPontoModelView
 
-
 <div class="modal-header">
     <h3 class="modal-title"><span class="fa fa-edit"></span> @ViewBag.Title</h3>
 
@@ -22,11 +21,11 @@
 
             <div class="row">
                 <div class="form-group col-md-9 col-sm-9 col-lg-9 col-xs-9">
-
                     @Html.LabelFor(model => model.VNC_ID, htmlAttributes: new { @class = "control-label" })
-                    @Html.DropDownListFor(model => model.VNC_ID, null, "Selecione", htmlAttributes: new { @class = "form-control form-control-sm" })
+                    @Html.DropDownListFor(model => model.VNC_ID, null, "Selecione", htmlAttributes: new { @class = "form-control form-control-sm", id = "vnc" })
                     @Html.ValidationMessageFor(model => model.VNC_ID, "", new { @class = "text-danger" })
                 </div>
+
                 <div class="form-group col-md-3 col-sm-3 col-lg-3 col-xs-3">
                     @Html.LabelFor(model => model.JUSPT_DATARECEBIMENTO, htmlAttributes: new { @class = "control-label" })<br />
                     @if (Model.JUSPT_DATARECEBIMENTO.HasValue)
@@ -48,39 +47,30 @@
                     @Html.DropDownListFor(model => model.CID_ID, (SelectList)ViewBag.CIDJUS_ID, "Selecione", htmlAttributes: new { @class = "form-control form-control-sm" })
                     @Html.ValidationMessageFor(model => model.CID_ID, "", new { @class = "text-danger" })
                 </div>
-
             </div>
-
 
             <div class="row">
                 <div class="form-group col-md-6 col-sm-6 col-lg-6 col-xs-6">
-
                     @Html.LabelFor(model => model.JUSPT_DATAINICIO, htmlAttributes: new { @class = "control-label" })
-                    @Html.EditorFor(model => model.JUSPT_DATAINICIO, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                    @Html.EditorFor(model => model.JUSPT_DATAINICIO, new { htmlAttributes = new { @class = "form-control form-control-sm", id = "dataInicio" } })
                     @Html.ValidationMessageFor(model => model.JUSPT_DATAINICIO, "", new { @class = "text-danger" })
                 </div>
 
                 <div class="form-group col-md-6 col-sm-6 col-lg-6 col-xs-6">
                     @Html.LabelFor(model => model.JUSPT_DATAFIM, htmlAttributes: new { @class = "control-label" })
-                    @Html.EditorFor(model => model.JUSPT_DATAFIM, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                    @Html.EditorFor(model => model.JUSPT_DATAFIM, new { htmlAttributes = new { @class = "form-control form-control-sm", id = "dataFim" } })
                     @Html.ValidationMessageFor(model => model.JUSPT_DATAFIM, "", new { @class = "text-danger" })
                 </div>
             </div>
 
-            <div class="row">
 
+            <div class="row">
                 <div class="form-group col-md-12 col-sm-12 col-lg-12 col-xs-12" id="divmtv">
                     @Html.LabelFor(model => model.JUSPT_OBSERVACAO, htmlAttributes: new { @class = "control-label" })
-                    @Html.EditorFor(model => model.JUSPT_OBSERVACAO, new { htmlAttributes = new { @class = "form-control form-control-sm" } })
+                    @Html.EditorFor(model => model.JUSPT_OBSERVACAO, new { htmlAttributes = new { @class = "form-control form-control-sm", id = "observacao" } })
                     @Html.ValidationMessageFor(model => model.JUSPT_OBSERVACAO, "", new { @class = "text-danger" })
                 </div>
             </div>
-
-
-
-
-
-
         </div>
     </div>
     <div class="modal-footer">
@@ -98,9 +88,6 @@
         dataTableJustificativa.ajax.reload();
         $('#minhaModal').modal('hide');
     };
-
-
-
     $(document).ready(function () {
         if ($('#MTVJUS_ID').val() == '6') {
             $('#divmtv').removeClass('col-md-12 col-sm-12 col-lg-12 col-xs-12');
@@ -114,17 +101,55 @@
                 $('#divmtv').addClass('col-md-6 col-sm-6 col-lg-6 col-xs-6');
                 $("#divcid").show();
 
+                /*alert('Observar Limite de Datas para Perícia: \n\n  Efetivo ou Não Estável: +20 dias = Perícia SEPLAD \n  Temporário: +16 dias = Perícia INSS \n  Estagiário: +16 dias = Perícia INSS');*/
 
+                /*$("#JUSPT_OBSERVACAO").val('Observar Limite de Datas para Perícia: \n Efetivo ou Não Estável: +20 dias = Perícia SEPLAD \n Temporário: +16 dias = Perícia INSS \n Estagiário: +16 dias = Perícia INSS');*/
+
+                // Função para calcular a diferença entre as duas datas
+                function calcularDiferencaDatas() {
+                    //var vnc = new char(document.getElementById('vnc').value);
+                    var dataInicio = new Date(document.getElementById('dataInicio').value);
+                    var dataFim = new Date(document.getElementById('dataFim').value);
+
+                    // Calcula a diferença em milissegundos
+                    var diferenca = dataFim - dataInicio;
+
+                    // Converte a diferença para dias
+                    var dias = diferenca / (1000 * 60 * 60 * 24) + 1;
+
+                    // Exibe a diferença no campo observação
+                    if (dias >= 20) {
+                        document.getElementById('observacao').value = ' ' + dias + ' Dias de Atestado \n Atenção: se Efetivo ou Não Estável = Perícia SEPLAD \n Se Temporário ou Estagiário = Perícia INSS (A partir de 16 dias)';
+                    }
+                    else
+                        if (dias >= 16) {
+                            document.getElementById('observacao').value = ' ' + dias + ' Dias de Atestado \n Atenção: se Temporário ou Estagiário = Perícia INSS';
+                        }
+                        else
+                            if (dias < 1) {
+                                document.getElementById('observacao').value = ' ERRO nas Datas. Selecionar Novamente!';
+                            }
+                            else
+                                if (dias == 1) {
+                                    document.getElementById('observacao').value = ' ' + dias + ' Dia de Atestado';
+                                }
+                                else {
+                                    document.getElementById('observacao').value = ' ' + dias + ' Dias de Atestado';
+                                }
+                }
+
+                // Add ouvinte de eventos para os campos de data
+                document.getElementById('dataInicio').addEventListener('change', calcularDiferencaDatas);
+                document.getElementById('dataFim').addEventListener('change', calcularDiferencaDatas);
+                document.getElementById('vnc').addEventListener('change', verificaVinculo);
             }
             else {
                 $("#CIDJUS_ID").val('');
                 $('#divmtv').removeClass('col-md-6 col-sm-6 col-lg-6 col-xs-6');
                 $('#divmtv').addClass('col-md-12 col-sm-12 col-lg-12 col-xs-12');
                 $("#divcid").hide();
-
             }
         });
-
-
     });
+
 </script>

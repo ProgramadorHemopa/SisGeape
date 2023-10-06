@@ -1,10 +1,11 @@
-﻿@{
-    ViewData["TituloPagina"] = "Painel de Controle";
-}
-<link href="~/assets/plugins/c3/css/c3.min.css" rel="stylesheet" />
-<hr />
-<div class="row mt-1">
+﻿@*@{
+            ViewData["TituloPagina"] = "Home";
+       }
+    <hr />*@
 
+<link href="~/assets/plugins/c3/css/c3.min.css" rel="stylesheet" />
+
+<div class="row mt-1">
     <div class="col-lg-12 col-sm-2">
         <ol class="breadcrumb">
             <li class="breadcrumb-item active">@ViewBag.Saudacao</li>
@@ -39,7 +40,7 @@
                     </div>
                 </div>
             </a>
-        </div>  
+        </div>
     }
 
 
@@ -153,30 +154,7 @@
         </div>
     </div>
 </div>
-<div class="row mt-1 justify-content-center align-content-center">
-    <!-- 
-        Divisão pra ficha de competencias
-     -->   
-    <div class="col-12 col-lg-6 col-xl-3">
-        <div class="card bg-pattern-primary">
-            <a href="@Url.Action("FichaCompetencia", "Funcionario")">
-
-                <div class="card-body">
-                    <div class="media">
-                        <div class="media-body text-center">
-                            <div class="text-uppercase mt-3">
-                                <h5 class="text-white">Ficha de Competência</h5>
-                            </div>
-                        </div>
-                        <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
-                            <i class="fa fa-clipboard text-white"></i>
-                        </div>
-                    </div>
-                </div>
-
-            </a>    
-        </div>
-    </div>
+<div class="row mt-1">
     <div class="col-12 col-lg-6 col-xl-3">
         <div class="card bg-pattern-primary">
             <a href="@Url.Action("Consulta","Funcionario")">
@@ -192,8 +170,8 @@
                             <i class="fa fa-users text-white"></i>
                         </div>
                     </div>
-                </div>
 
+                </div>
             </a>
         </div>
     </div>
@@ -212,8 +190,8 @@
                             <i class="icon-calendar text-white"></i>
                         </div>
                     </div>
-                </div>
 
+                </div>
             </a>
         </div>
     </div>
@@ -229,7 +207,7 @@
                             </div>
                         </div>
                         <div class="align-self-center w-circle-icon rounded-circle bg-contrast">
-                            <i class="fa fa-gears text-white"></i>
+                            <i class="fa fa-desktop text-white"></i>
                         </div>
                     </div>
 
@@ -263,47 +241,47 @@
 
 @section scripts{
 
- @*   c3 Charts*@
+    @*   c3 Charts*@
     @*<script src="~/assets/plugins/d3/d3.min.js"></script>
-    <script src="~/assets/plugins/c3/js/c3.min.js"></script>
-    <script type="text/javascript">
+        <script src="~/assets/plugins/c3/js/c3.min.js"></script>
+        <script type="text/javascript">
 
 
-        $(document).ready(function () {
+            $(document).ready(function () {
 
-            var jsonDataBeneficio = @Html.Raw(ViewBag.DataBeneficio);
-            var data = {};
-            var count = [];
-            jsonDataBeneficio.forEach(function (e) {
-                count.push(e.BENEFICIO);
-                data[e.BENEFICIO] = e.QUANTIDADE;
-            })
+                var jsonDataBeneficio = @Html.Raw(ViewBag.DataBeneficio);
+                var data = {};
+                var count = [];
+                jsonDataBeneficio.forEach(function (e) {
+                    count.push(e.BENEFICIO);
+                    data[e.BENEFICIO] = e.QUANTIDADE;
+                })
 
-            var c3PieChart = c3.generate({
-                bindto: '#c3-pie-chart',
-                data: {
-                    json: [data],
-                    keys: {
-                        value: count,
+                var c3PieChart = c3.generate({
+                    bindto: '#c3-pie-chart',
+                    data: {
+                        json: [data],
+                        keys: {
+                            value: count,
+                        },
+                        type: 'pie'
                     },
-                    type: 'pie'
-                },
-                tooltip: {
-                    format: {
-                        value: function (value, ratio, id) {
-                            var commaFormat = d3.format(",");
-                            var dotFormat = function (num) {
-                                return commaFormat(num).replace(/,/g, ".");
-                            };
-                            return dotFormat(value);
+                    tooltip: {
+                        format: {
+                            value: function (value, ratio, id) {
+                                var commaFormat = d3.format(",");
+                                var dotFormat = function (num) {
+                                    return commaFormat(num).replace(/,/g, ".");
+                                };
+                                return dotFormat(value);
+                            }
                         }
                     }
-                }
+                });
+
+
             });
 
 
-        });
-
-
-    </script>*@
+        </script>*@
 }
